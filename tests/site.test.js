@@ -59,7 +59,9 @@ const PAGES=[['index.html','Project DigiÉire'],
        'footer disclaimer dropped');
     const cta=d.querySelector('.nav a.nav-cta');
     ok(cta && cta.getAttribute('target')==='_blank' && /noopener/.test(cta.getAttribute('rel')||''),
-       'Explore the data opens a new page');
+       'the Analysis app link opens a new page');
+    ok(cta && cta.textContent.trim()==='Analysis app','nav CTA reads "Analysis app"',
+       cta&&cta.textContent.trim());
     if (p==='index.html') {
       ok(d.querySelectorAll('.cards .card').length===0,'section cards dropped');
       ok(!/Start anywhere|The project, in five parts/.test(d.body.textContent),'"start anywhere" block dropped');
