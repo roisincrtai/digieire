@@ -86,10 +86,12 @@ const PAGES=[['index.html','Project DigiÉire'],
       ok(!/Working with/.test(d.body.textContent),'"Working with" dropped');
       ok(secs[1].querySelectorAll('.ack-item').length===4,'four acknowledgements',
          secs[1].querySelectorAll('.ack-item').length);
-      ok(ack && /MeluXina/.test(ack.textContent) && /High-End Computing/.test(ack.textContent)
+      ok(ack && /Luxembourg MeluXina/.test(ack.textContent) && /High-End Computing/.test(ack.textContent)
          && /School of Computer Science/.test(ack.textContent),
          'acknowledges the compute providers');
       const mx=[...d.querySelectorAll('.ack-item a')].find(a=>/MeluXina/.test(a.textContent));
+      ok(mx && mx.textContent.trim()==='Luxembourg MeluXina','link text is the full name',
+         mx&&mx.textContent.trim());
       ok(mx && mx.getAttribute('href')==='https://www.luxprovide.lu/meluxina/'
          && mx.getAttribute('target')==='_blank','MeluXina links out in a new page',
          mx&&mx.getAttribute('href'));
