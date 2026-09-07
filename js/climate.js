@@ -196,9 +196,4 @@
                     yLabel: 'events / year' });
   }
 
-  // ---- caveats -----------------------------------------------------------
-  var cav = elt('ul', 'caveat-list');
-  (IE.caveats || []).forEach(function (c) { cav.appendChild(elt('li', null, c)); });
-  if (IE.wet_day_note) cav.appendChild(elt('li', null, IE.wet_day_note));
-  host.appendChild(cav);
 })();
