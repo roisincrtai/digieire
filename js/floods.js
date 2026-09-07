@@ -70,7 +70,7 @@
     [s.n_since_2000.toLocaleString(), 'dated since 2000', 'of ' + s.n_dated.toLocaleString() + ' dated'],
     [String((D.stats.top_catchments[0] || ['—'])[0]), 'busiest catchment',
      ((D.stats.top_catchments[0] || ['', 0])[1]) + ' events'],
-    [String(topCounty[0]), 'most recorded events by county/city',
+    [String(topCounty[0]), 'most recorded events',
      topCounty[1].toLocaleString() + ' events']
   ].forEach(function (k) {
     var c = elt('div', 'kpi');
