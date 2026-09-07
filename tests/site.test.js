@@ -100,7 +100,7 @@ const PAGES=[['index.html','Project DigiÉire'],
     }
     if (p.includes('irish-floods')) {
       ok(d.querySelectorAll('#floods-dash svg.dash-map circle').length>6000,'flood map drawn');
-      ok(d.querySelectorAll('#floods-dash .kpi').length===4,'flood KPIs');
+      ok(d.querySelectorAll('#floods-dash .kpi').length===5,'flood KPIs');
       ok(d.querySelectorAll('#floods-dash svg.dash-map .dash-cty path.cty').length===34,
          'all 34 county outlines drawn',d.querySelectorAll('#floods-dash .dash-cty path.cty').length);
       const tables=[...d.querySelectorAll('#floods-dash .dash-pair table.dash-table')];

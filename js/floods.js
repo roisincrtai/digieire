@@ -60,13 +60,18 @@
 
   // ---- headline numbers --------------------------------------------------
   var s = D.stats;
-  var kpis = elt('div', 'kpis');
+  var topCounty = (s.by_county || []).reduce(function (top, row) {
+    return row[1] > top[1] ? row : top;
+  }, ['—', 0]);
+  var kpis = elt('div', 'kpis kpis--floods');
   [
     [s.n_total.toLocaleString(), 'recorded flood events', 'OPW floodinfo.ie'],
     [s.n_dated.toLocaleString(), 'carry a date', s.year_min + '–' + s.year_max],
     [s.n_since_2000.toLocaleString(), 'dated since 2000', 'of ' + s.n_dated.toLocaleString() + ' dated'],
     [String((D.stats.top_catchments[0] || ['—'])[0]), 'busiest catchment',
-     ((D.stats.top_catchments[0] || ['', 0])[1]) + ' events']
+     ((D.stats.top_catchments[0] || ['', 0])[1]) + ' events'],
+    [String(topCounty[0]), 'most recorded events by county/city',
+     topCounty[1].toLocaleString() + ' events']
   ].forEach(function (k) {
     var c = elt('div', 'kpi');
     c.appendChild(elt('b', null, k[0]));
