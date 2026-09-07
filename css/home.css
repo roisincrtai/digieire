@@ -131,6 +131,7 @@
   background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
 }
 .figure--tight img { max-width: 860px; margin-inline: auto; }
+.figure--mission-context { margin: 24px 0 36px; }
 .figure figcaption {
   margin-top: 12px; font-size: .87rem; color: var(--ink-500);
   max-width: 78ch;
