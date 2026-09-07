@@ -1,0 +1,10 @@
+Review proposal only. Not applied to the page.
+
+Retains the user's preferred orange-to-green scale, worse/better labels and dark-green 0.31 output card. The displayed value is illustrative, not calculated from a supplied discourse.
+
+Calculation checked against apps/analysis/js/compute.js:
+z_i = (x_i - mu_i) / sigma_i
+W = 1 / (1 + exp(alpha * (z_1 + z_2 + z_3)))
+The reference sample supplies means and population standard deviations. The implementation substitutes 1 for zero standard deviation. Alpha is the sensitivity parameter.
+
+SVG is editable; PNG is the review rendering.
