@@ -83,7 +83,7 @@
 }
 .hero-inner {
   position: relative;
-  padding: clamp(56px, 9vw, 104px) 24px clamp(200px, 26vw, 300px);
+  padding: clamp(40px, 6vw, 72px) 24px clamp(64px, 9vw, 112px);
 }
 .h1-sub {
   display: block; font-size: .44em; font-family: var(--sans); font-weight: 500;
@@ -186,6 +186,8 @@
    argument the page is making, so it sits above the footer in a lighter key
    than the sections that carry the project itself. */
 .ack { margin-top: 52px; padding-top: 30px; border-top: 1px solid var(--line); }
+.home-credits { padding-top: 0; }
+.home-credits > .wrap > .ack:first-child { margin-top: 0; }
 .ack h2 { margin-bottom: .5em; }
 .ack-grid {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
