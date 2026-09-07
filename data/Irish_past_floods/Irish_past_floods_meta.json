@@ -1,0 +1,662 @@
+{
+ "format": 1,
+ "generated": "2026-09-07T13:09:41",
+ "source": "https://www.floodinfo.ie/geoserver/wfs?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=opw:past_flood_event_app_fhmfloods_point_view&outputFormat=application/json&maxFeatures=10000",
+ "source_fetched": "2026-04-21T10:08:26.958233Z",
+ "publisher": "Office of Public Works (OPW), floodinfo.ie",
+ "crs": "Irish National Grid (TM75), kilometres",
+ "row_format": [
+  "year",
+  "month",
+  "x_km",
+  "y_km",
+  "source_type",
+  "record_type",
+  "catchment",
+  "severity",
+  "no_reports",
+  "name",
+  "county"
+ ],
+ "row_note": "year and month are null for undated records; source_type, record_type, catchment and county index the lists below",
+ "county_note": "county is DERIVED, not published: the grid position tested against simplified local-authority boundaries (tools/homepage/extract_ireland_counties.py), with a 3 km nearest-boundary fallback for coastal records",
+ "lookups": {
+  "source_type": [
+   "River",
+   "Lake",
+   "Low lying land",
+   "Runoff",
+   "Turlough",
+   "—",
+   "Other",
+   "Coastal/Estuarine Waters"
+  ],
+  "record_type": [
+   "Dated Flood",
+   "Recurring Flood",
+   "Undated Flood"
+  ],
+  "catchment": [
+   "Liffey",
+   "Erne",
+   "Shannon Lwr",
+   "Suck",
+   "Tolka",
+   "Shannon Upr",
+   "Moy",
+   "Corrib",
+   "—",
+   "Lee (Co.Kerry)",
+   "Boyne",
+   "Laune",
+   "Blackwater (Munster)",
+   "Shannon Est Sth",
+   "Nanny",
+   "Owenavorragh",
+   "Nore",
+   "Dee",
+   "Coastal (Bunratty)",
+   "Shannon Est Nth",
+   "Swilly",
+   "Foyle",
+   "Castletown",
+   "Blackwater (Monaghan)",
+   "Barrow",
+   "Suir",
+   "Bandon",
+   "Santry",
+   "Maine",
+   "Fergus",
+   "Lee (Cork)",
+   "Eany Water",
+   "Broad Meadow Water",
+   "Delvin",
+   "Tay",
+   "Kinvarra",
+   "Coastal (Ballyheige)",
+   "Slaney",
+   "Ilen",
+   "Aughaveemagh",
+   "Coastal (Coolmore)",
+   "Coastal (Malin Head)",
+   "Coastal (Kilmichael)",
+   "Feale",
+   "Owennacurra",
+   "Coastal (Dunglow)",
+   "Coastal (Belmullet)",
+   "Owenmore (Co. Mayo)",
+   "Bunowen",
+   "Cloonaghmore",
+   "Drumcliff",
+   "Garvogue",
+   "Mayne",
+   "Glyde",
+   "Aille",
+   "Inny",
+   "Coastal (Bettystown)",
+   "Coastal (Irishtown)",
+   "Stream (Mosney)",
+   "Kilcolgan",
+   "Clarin",
+   "Ballysadare",
+   "Moyour",
+   "Ovoca",
+   "Dargle",
+   "Coastal (Ringaskiddy)",
+   "Owenboy",
+   "Brickey",
+   "Coastal (Howth)",
+   "Coastal (Drummeenagh)",
+   "Coastal (Skerries)",
+   "Coastal (Aghaweel River)",
+   "Coastal (Castlegregory)",
+   "Coastal (Finner Camp)",
+   "Coastal (Moyna)",
+   "Stream",
+   "Coastal (Murlin River)",
+   "Coastal (Ballycotton)",
+   "Coastal",
+   "Coastal (Donabate)",
+   "Coastal (Mallaranny)",
+   "Coastal (Killybegs Harbour)",
+   "Coastal (Ballinderreen)",
+   "Coastal (Doolin Point)",
+   "Coastal (Portmarnock)",
+   "Coastal (Ballyvaghan)",
+   "Coastal (Dundalk)",
+   "Coastal (Rossaveel)",
+   "Coastal (Redbrae)",
+   "Coastal (Cool Burn River)",
+   "Coastal (Castlenageeha)",
+   "Coastal (Baltray)",
+   "Dawros",
+   "Ballynahinch",
+   "Coastal (Roundstone)",
+   "Coastal (Mannin Bay)",
+   "Coastal (Killary Harbour South)",
+   "Owenglin",
+   "Coastal (Cleggan)",
+   "Coastal (Carraroe)",
+   "Owengowla",
+   "Cashla",
+   "Coastal (Ballymacaward)",
+   "Coastal (Little Island)",
+   "Coastal (Tawnaghbaun)",
+   "Coastal (Mizen Head)",
+   "Coastal (Bantry)",
+   "Coastal (Sruffaunree River)",
+   "Coastal (Loughlinstown)",
+   "Coastal (Clogher Head)",
+   "Coastal (Dun Laoghaire)",
+   "Owenboliska",
+   "Coastal (An Spideal Lair)",
+   "Coastal (Salthill)",
+   "Knock",
+   "Coastal (Kilcummin Head)",
+   "Coastal (Ross Carbery)",
+   "Coastal (Camp)",
+   "Coastal (Emlagh Point)",
+   "Coastal (Doughmore Bay)",
+   "Coastal (Doagh Isle)",
+   "Coastal (Ballydavid Head)",
+   "Coastal (Strandhill)",
+   "Coastal (Trawbreaga Bay)",
+   "Coastal (Loughaunbeg)",
+   "Coastal (Roaringwater River)",
+   "Coastal (Killala)",
+   "Womanagh",
+   "Coastal (Glandore)",
+   "Mealagh",
+   "Coastal (Skull)",
+   "Bawnaknockane",
+   "Adrigole",
+   "Coastal (Allihies)",
+   "Coastal (Galway)",
+   "Finn",
+   "Leannan",
+   "Owenea",
+   "Glenamoy",
+   "Coastal (Quilty)",
+   "Coastal (Ballydowane Bay)",
+   "Coastal (Dromoghty River)",
+   "Coastal (Carlingford)",
+   "Ballymasganlan",
+   "Coastal (Jenkinstown)",
+   "Glengariff",
+   "Corock",
+   "Stream (Duncormick)",
+   "Clonough",
+   "Stream (Milltown River Dingle)",
+   "Fane",
+   "Stream (Termonfeckin)",
+   "Vartry",
+   "Coastal (Dowdallshill)",
+   "Owenmore (Co. Kerry)",
+   "Coastal (Greystones)",
+   "Redcross",
+   "Owenalondrig",
+   "Leaffony",
+   "Coastal (Aughris Head)",
+   "Coastal (Ballybeg River)",
+   "Colligan",
+   "Inagh",
+   "Coastal (Milltown Malbay)",
+   "Annagh",
+   "Loughinn",
+   "Mahon",
+   "Dalligan",
+   "Culdaff",
+   "Donagh",
+   "Clonmany",
+   "Coastal (Muff)",
+   "Crana",
+   "Owenerk",
+   "Coastal (Skeoge River)",
+   "Burnfoot",
+   "Coastal (Rathmullan)",
+   "Coastal (Portsalon)",
+   "Coastal (Port Mary Moss)",
+   "Glenvar",
+   "Glenalla",
+   "Lackagh",
+   "Coastal (Carrickart)",
+   "Coastal (Bellanagoal River)",
+   "Abberachrin",
+   "Owentocker",
+   "Coastal (Portnoo)",
+   "Ray",
+   "Coastal (Dunfanaghy)",
+   "Duntally",
+   "Glenna",
+   "Coastal (Cahersiveen)",
+   "Coastal (Dooey Point)",
+   "Gweebarra",
+   "Gweedore",
+   "Coastal (Bunbeg)",
+   "Owencronahulla",
+   "Coastal (Bloody Foreland)",
+   "Bungosteen",
+   "Coastal (Mountcharles)",
+   "Coastal (Bunlacky River)",
+   "Eask",
+   "Coastal (Drumbar)",
+   "Stream (Laghy)",
+   "Glen",
+   "Ballintra",
+   "Bradoge",
+   "Drowes",
+   "Glenaddragh",
+   "Keenagh",
+   "Coastal (Ballymeeny River)",
+   "Easky",
+   "Doonbeg",
+   "Creegh",
+   "Annageeragh",
+   "Coastal (Rossbehy)",
+   "Cummeragh",
+   "Finnihy",
+   "Roughty",
+   "Croanshagh",
+   "Sneem",
+   "Blackwater (Kenmare)",
+   "Behy",
+   "Coastal (Cromane)",
+   "Caragh",
+   "Newport",
+   "Owenwee",
+   "Carrownisky",
+   "Erriff",
+   "Rossow",
+   "Coastal (Achill Islands)",
+   "Coastal (Rosclave)",
+   "Coastal (Tawnawoggaun)",
+   "Coastal (Inishcrone)",
+   "Bellawaddy",
+   "Coastal (Lenstown)",
+   "Finned",
+   "Dunneill",
+   "Stream (Willowbrock)",
+   "Coastal (Mullaghmore Head)",
+   "Duff",
+   "Coastal (Rosses Point)",
+   "Coastal (Myrtleville)",
+   "Coastal (Old Head of Kinsale)",
+   "Stick",
+   "Glashaboy",
+   "Roury"
+  ],
+  "county": [
+   "Kildare County",
+   "Donegal County",
+   "North Tipperary",
+   "Roscommon County",
+   "Dublin City",
+   "Dún Laoghaire-Rathdown",
+   "Galway County",
+   "Cork County",
+   "Meath County",
+   "Limerick County",
+   "Kerry County",
+   "Wexford County",
+   "Kilkenny County",
+   "Offaly County",
+   "Louth County",
+   "Clare County",
+   "Fingal",
+   "Monaghan County",
+   "Laois County",
+   "Carlow County",
+   "Waterford County",
+   "South Tipperary",
+   "Limerick City",
+   "South Dublin",
+   "Mayo County",
+   "Westmeath County",
+   "Sligo County",
+   "Leitrim County",
+   "Galway City",
+   "Longford County",
+   "Cavan County",
+   "Wicklow County",
+   "Cork City",
+   "Waterford City"
+  ]
+ },
+ "stats": {
+  "n_total": 6494,
+  "n_dated": 2796,
+  "n_undated": 3698,
+  "dropped_bad_coords": 1,
+  "year_min": 1763,
+  "year_max": 2023,
+  "n_since_2000": 2142,
+  "n_since_1950": 2731,
+  "busiest_years": [
+   [
+    2015,
+    349
+   ],
+   [
+    2014,
+    234
+   ],
+   [
+    2009,
+    231
+   ],
+   [
+    2000,
+    220
+   ],
+   [
+    2002,
+    171
+   ],
+   [
+    2005,
+    115
+   ]
+  ],
+  "by_source": [
+   [
+    "River",
+    3096
+   ],
+   [
+    "—",
+    1168
+   ],
+   [
+    "Low lying land",
+    681
+   ],
+   [
+    "Coastal/Estuarine Waters",
+    582
+   ],
+   [
+    "Runoff",
+    409
+   ],
+   [
+    "Turlough",
+    364
+   ],
+   [
+    "Lake",
+    117
+   ],
+   [
+    "Other",
+    77
+   ]
+  ],
+  "by_record": [
+   [
+    "Recurring Flood",
+    3562
+   ],
+   [
+    "Dated Flood",
+    2698
+   ],
+   [
+    "Undated Flood",
+    234
+   ]
+  ],
+  "top_catchments": [
+   [
+    "Shannon Lwr",
+    389
+   ],
+   [
+    "Suir",
+    327
+   ],
+   [
+    "Shannon Upr",
+    295
+   ],
+   [
+    "Liffey",
+    268
+   ],
+   [
+    "Corrib",
+    259
+   ],
+   [
+    "Erne",
+    233
+   ],
+   [
+    "Barrow",
+    204
+   ],
+   [
+    "Boyne",
+    199
+   ],
+   [
+    "Coastal (Malin Head)",
+    192
+   ],
+   [
+    "Blackwater (Munster)",
+    190
+   ],
+   [
+    "Suck",
+    135
+   ]
+  ],
+  "by_county": [
+   [
+    "Cork County",
+    731
+   ],
+   [
+    "Galway County",
+    723
+   ],
+   [
+    "Donegal County",
+    400
+   ],
+   [
+    "South Tipperary",
+    296
+   ],
+   [
+    "Sligo County",
+    269
+   ],
+   [
+    "Limerick County",
+    257
+   ],
+   [
+    "Roscommon County",
+    249
+   ],
+   [
+    "Meath County",
+    245
+   ],
+   [
+    "Cavan County",
+    231
+   ],
+   [
+    "Mayo County",
+    223
+   ],
+   [
+    "Kildare County",
+    216
+   ],
+   [
+    "Clare County",
+    208
+   ],
+   [
+    "Kerry County",
+    201
+   ],
+   [
+    "Waterford County",
+    197
+   ],
+   [
+    "Louth County",
+    189
+   ],
+   [
+    "Wexford County",
+    177
+   ],
+   [
+    "Monaghan County",
+    165
+   ],
+   [
+    "Kilkenny County",
+    145
+   ],
+   [
+    "Dublin City",
+    133
+   ],
+   [
+    "Wicklow County",
+    125
+   ],
+   [
+    "Fingal",
+    122
+   ],
+   [
+    "Dún Laoghaire-Rathdown",
+    120
+   ],
+   [
+    "Offaly County",
+    113
+   ],
+   [
+    "Carlow County",
+    112
+   ],
+   [
+    "Laois County",
+    108
+   ],
+   [
+    "Westmeath County",
+    105
+   ],
+   [
+    "Leitrim County",
+    84
+   ],
+   [
+    "North Tipperary",
+    84
+   ],
+   [
+    "South Dublin",
+    81
+   ],
+   [
+    "Cork City",
+    52
+   ],
+   [
+    "Longford County",
+    51
+   ],
+   [
+    "Limerick City",
+    49
+   ],
+   [
+    "Galway City",
+    23
+   ],
+   [
+    "Waterford City",
+    10
+   ]
+  ],
+  "n_county_unassigned": 0,
+  "n_areas": 34,
+  "county_inside": 6300,
+  "county_snapped": 194
+ },
+ "caveats": [
+  "A record of REPORTED events, not a census of floods and not a hazard map.",
+  "Only 2,796 of 6,494 records carry a date, so every figure over time describes the dated subset.",
+  "Reporting density rises steeply with time — recent floods are better recorded, so part of any upward trend is observational.",
+  "Positions are approximate for most records (OPW marks the majority as 'Approximate Point').",
+  "County is derived here by point-in-polygon against simplified boundaries — near a boundary or a shoreline it can be wrong by one area, and it is not an official attribution."
+ ],
+ "shards": [
+  {
+   "file": "Irish_past_floods_0000.json",
+   "n": 915,
+   "year_min": 1763,
+   "year_max": 2002,
+   "bytes": 65379
+  },
+  {
+   "file": "Irish_past_floods_0001.json",
+   "n": 792,
+   "year_min": 2002,
+   "year_max": 2011,
+   "bytes": 65407
+  },
+  {
+   "file": "Irish_past_floods_0002.json",
+   "n": 796,
+   "year_min": 2011,
+   "year_max": 2017,
+   "bytes": 65420
+  },
+  {
+   "file": "Irish_past_floods_0003.json",
+   "n": 841,
+   "year_min": 2017,
+   "year_max": 2023,
+   "bytes": 65438
+  },
+  {
+   "file": "Irish_past_floods_0004.json",
+   "n": 859,
+   "year_min": null,
+   "year_max": null,
+   "bytes": 65416
+  },
+  {
+   "file": "Irish_past_floods_0005.json",
+   "n": 886,
+   "year_min": null,
+   "year_max": null,
+   "bytes": 65399
+  },
+  {
+   "file": "Irish_past_floods_0006.json",
+   "n": 891,
+   "year_min": null,
+   "year_max": null,
+   "bytes": 65423
+  },
+  {
+   "file": "Irish_past_floods_0007.json",
+   "n": 514,
+   "year_min": null,
+   "year_max": null,
+   "bytes": 40199
+  }
+ ]
+}

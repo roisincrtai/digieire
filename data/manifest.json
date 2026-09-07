@@ -1,0 +1,267 @@
+{
+ "format": 2,
+ "dataset": "mcl",
+ "generated": "2026-09-07T12:43:20",
+ "source": "analysis_mcl.json",
+ "source_sha256_12": "c99f789ecd24",
+ "epoch": "2000-01-01",
+ "n_discourses": 90567,
+ "indicators": [
+  "I1_distress",
+  "I2_functional_disruption",
+  "I3_alienation"
+ ],
+ "constructs": [
+  {
+   "id": "I1_distress",
+   "short": "I1",
+   "label": "Distress",
+   "color": "#c0392b"
+  },
+  {
+   "id": "I2_functional_disruption",
+   "short": "I2",
+   "label": "Functional disruption",
+   "color": "#2874a6"
+  },
+  {
+   "id": "I3_alienation",
+   "short": "I3",
+   "label": "Alienation",
+   "color": "#239b56"
+  }
+ ],
+ "wellbeing": {
+  "id": "wellbeing",
+  "label": "Overall wellbeing index",
+  "color": "#16a085"
+ },
+ "reference": [
+  {
+   "id": "floods",
+   "label": "Count of flood events",
+   "color": "#5d6d7e"
+  },
+  {
+   "id": "rain",
+   "label": "Precipitation (mm)",
+   "color": "#2874a6"
+  },
+  {
+   "id": "storms",
+   "label": "Count of named storms",
+   "color": "#8e44ad"
+  }
+ ],
+ "locations": [
+  "all",
+  "cork",
+  "galway",
+  "ireland"
+ ],
+ "date_min": "2010-03-30",
+ "date_max": "2026-04-21",
+ "row_format": [
+  "day",
+  "I1_distress",
+  "I2_functional_disruption",
+  "I3_alienation",
+  "location"
+ ],
+ "row_note": "day is an index from `epoch`; location indexes `locations` MINUS the leading 'all', or -1 if unset",
+ "privacy": {
+  "released": [
+   "date",
+   "construct scores",
+   "location"
+  ],
+  "withheld": [
+   "text",
+   "identifiers",
+   "authors",
+   "reaction counts",
+   "clock time",
+   "score uncertainties"
+  ],
+  "reason": "reaction counts are a near-unique fingerprint of a specific public post and would provide a join key back to it; without them the released scores are model output with nothing to match on",
+  "consequence": "no reaction weighting in the static app; every figure is unweighted",
+  "audit": {
+   "day_location": {
+    "cells": 10016,
+    "unique": 2485,
+    "unique_pct": 2.74
+   },
+   "day_location_scores": {
+    "cells": 29068,
+    "unique": 13294,
+    "unique_pct": 14.68
+   },
+   "note": "uniqueness WITHIN the released table; the scores are model output, not an observable property of a post, so there is no attribute to match on"
+  }
+ },
+ "shards": [
+  {
+   "file": "discourses-000.json",
+   "n": 4088,
+   "day_min": 3741,
+   "day_max": 5137,
+   "bytes": 65469
+  },
+  {
+   "file": "discourses-001.json",
+   "n": 4088,
+   "day_min": 5137,
+   "day_max": 5529,
+   "bytes": 65469
+  },
+  {
+   "file": "discourses-002.json",
+   "n": 4088,
+   "day_min": 5529,
+   "day_max": 5926,
+   "bytes": 65469
+  },
+  {
+   "file": "discourses-003.json",
+   "n": 4088,
+   "day_min": 5926,
+   "day_max": 6415,
+   "bytes": 65469
+  },
+  {
+   "file": "discourses-004.json",
+   "n": 4088,
+   "day_min": 6415,
+   "day_max": 6573,
+   "bytes": 65469
+  },
+  {
+   "file": "discourses-005.json",
+   "n": 4088,
+   "day_min": 6573,
+   "day_max": 6837,
+   "bytes": 65469
+  },
+  {
+   "file": "discourses-006.json",
+   "n": 4088,
+   "day_min": 6837,
+   "day_max": 7090,
+   "bytes": 65469
+  },
+  {
+   "file": "discourses-007.json",
+   "n": 4088,
+   "day_min": 7090,
+   "day_max": 7282,
+   "bytes": 65469
+  },
+  {
+   "file": "discourses-008.json",
+   "n": 4088,
+   "day_min": 7282,
+   "day_max": 7449,
+   "bytes": 65469
+  },
+  {
+   "file": "discourses-009.json",
+   "n": 4088,
+   "day_min": 7450,
+   "day_max": 7661,
+   "bytes": 65469
+  },
+  {
+   "file": "discourses-010.json",
+   "n": 4088,
+   "day_min": 7662,
+   "day_max": 7980,
+   "bytes": 65470
+  },
+  {
+   "file": "discourses-011.json",
+   "n": 4088,
+   "day_min": 7980,
+   "day_max": 8121,
+   "bytes": 65470
+  },
+  {
+   "file": "discourses-012.json",
+   "n": 4088,
+   "day_min": 8122,
+   "day_max": 8473,
+   "bytes": 65470
+  },
+  {
+   "file": "discourses-013.json",
+   "n": 4088,
+   "day_min": 8473,
+   "day_max": 8689,
+   "bytes": 65470
+  },
+  {
+   "file": "discourses-014.json",
+   "n": 4088,
+   "day_min": 8689,
+   "day_max": 8771,
+   "bytes": 65470
+  },
+  {
+   "file": "discourses-015.json",
+   "n": 4088,
+   "day_min": 8772,
+   "day_max": 8925,
+   "bytes": 65470
+  },
+  {
+   "file": "discourses-016.json",
+   "n": 4088,
+   "day_min": 8925,
+   "day_max": 9075,
+   "bytes": 65470
+  },
+  {
+   "file": "discourses-017.json",
+   "n": 4088,
+   "day_min": 9075,
+   "day_max": 9154,
+   "bytes": 65470
+  },
+  {
+   "file": "discourses-018.json",
+   "n": 4088,
+   "day_min": 9154,
+   "day_max": 9240,
+   "bytes": 65470
+  },
+  {
+   "file": "discourses-019.json",
+   "n": 4088,
+   "day_min": 9240,
+   "day_max": 9407,
+   "bytes": 65470
+  },
+  {
+   "file": "discourses-020.json",
+   "n": 4088,
+   "day_min": 9407,
+   "day_max": 9495,
+   "bytes": 65470
+  },
+  {
+   "file": "discourses-021.json",
+   "n": 4088,
+   "day_min": 9495,
+   "day_max": 9587,
+   "bytes": 65470
+  },
+  {
+   "file": "discourses-022.json",
+   "n": 631,
+   "day_min": 9587,
+   "day_max": 9607,
+   "bytes": 10157
+  }
+ ],
+ "climate": "climate.json",
+ "events": "events.json"
+}

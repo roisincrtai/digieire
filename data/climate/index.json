@@ -1,0 +1,70 @@
+{
+ "generated": "2026-09-07T12:32:44",
+ "series": {
+  "temperature": {
+   "key": "temperature",
+   "what": "Global mean temperature anomaly",
+   "unit": "\u00b0C anomaly vs 1951\u20131980",
+   "source": "HadCRUT5 (Met Office Hadley Centre / UEA CRU), via Our World in Data",
+   "cite": "HadCRUT5 / OWID",
+   "url": "https://ourworldindata.org/grapher/temperature-anomaly.csv",
+   "fallback": true,
+   "fetched": "2026-09-07",
+   "n": 177,
+   "year_min": 1850,
+   "year_max": 2026
+  },
+  "emissions": {
+   "key": "emissions",
+   "what": "Global annual fossil CO\u2082 emissions",
+   "unit": "billion tonnes CO\u2082 per year",
+   "source": "Global Carbon Budget, via Our World in Data",
+   "cite": "Global Carbon Budget / OWID",
+   "url": "https://ourworldindata.org/grapher/annual-co2-emissions-per-country.csv",
+   "fallback": false,
+   "fetched": "2026-09-07",
+   "n": 275,
+   "year_min": 1750,
+   "year_max": 2024
+  },
+  "oni": {
+   "key": "oni",
+   "what": "El Ni\u00f1o / La Ni\u00f1a state",
+   "unit": "\u00b0C anomaly, Ni\u00f1o 3.4",
+   "source": "NOAA Climate Prediction Center, Oceanic Ni\u00f1o Index",
+   "cite": "NOAA CPC",
+   "url": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+   "fallback": false,
+   "fetched": "2026-09-07",
+   "n": 77,
+   "year_min": 1950,
+   "year_max": 2026
+  },
+  "floods": {
+   "key": "floods",
+   "what": "Recorded flood disasters worldwide",
+   "unit": "recorded events per year",
+   "source": "EM-DAT, CRED / UCLouvain, via Our World in Data",
+   "cite": "EM-DAT / OWID",
+   "url": "https://ourworldindata.org/grapher/number-of-natural-disaster-events.csv",
+   "fallback": false,
+   "fetched": "2026-09-07",
+   "n": 105,
+   "year_min": 1900,
+   "year_max": 2025
+  },
+  "sea_level": {
+   "key": "sea_level",
+   "what": "Global mean sea level",
+   "unit": "mm vs 1993\u20132008 average",
+   "source": "Church & White (2011) and UHSLC, via Our World in Data",
+   "cite": "Church & White / UHSLC / OWID",
+   "url": "https://ourworldindata.org/grapher/sea-level.csv",
+   "fallback": false,
+   "fetched": "2026-09-07",
+   "n": 141,
+   "year_min": 1880,
+   "year_max": 2020
+  }
+ }
+}

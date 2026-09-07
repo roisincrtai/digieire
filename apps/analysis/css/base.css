@@ -1,0 +1,86 @@
+/* GENERATED COPY -- do not edit. Source: apps/analysis/css/base.css
+   Rebuild: python tools/homepage/build_homepage_app.py */
+/* Base page chrome: typography, header, footer, status.
+
+   THE PALETTE IS THE PROJECT SITE'S, deliberately. This application is reached
+   from the DigiÉire homepage and should not look like a different piece of
+   software when you arrive: the same bog-and-pasture greens, the same Atlantic
+   blue, the same warm paper. The variable names are kept as they were so no
+   other stylesheet has to change. */
+:root {
+  --fg: #14211d;
+  --muted: #66756f;
+  --line: #dfe3e0;
+  --bg: #fbfaf7;
+  --panel-bg: #ffffff;
+  --accent: #0f4c3a;
+  --accent-soft: #1a7a5e;
+  --accent-wash: #e4f2ec;
+  --blue: #2874a6;
+  --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia,
+           'Times New Roman', serif;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--fg); background: var(--bg);
+  margin: 0 auto; padding: 0 clamp(20px, 4vw, 56px) 48px; max-width: 1680px;
+  -webkit-font-smoothing: antialiased;
+}
+/* The header is now a title, a date range and a transient status. A hairline
+   rather than the old 3px slab: with the tab bar directly beneath it, two heavy
+   horizontals in 60px read as a fence. */
+.app-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 18px; flex-wrap: wrap;
+  padding: 26px 0 16px; margin-bottom: 0;
+}
+.app-header h1 {
+  font-family: var(--serif); font-weight: 600; letter-spacing: -.01em;
+  font-size: clamp(22px, 2.4vw, 30px); margin: 0 0 5px; color: var(--accent);
+}
+.subtitle {
+  color: var(--muted); font-size: 12.5px;
+  font-family: 'SFMono-Regular', Menlo, monospace;
+}
+.subtitle .sep { margin: 0 7px; color: #cbd5e1; }
+.hdr-right { display: flex; align-items: center; gap: 10px; }
+.status {
+  font-size: 12px; color: var(--muted); min-width: 92px; text-align: right;
+  font-family: 'SFMono-Regular', Menlo, monospace;
+}
+.btn-primary {
+  font: inherit; font-size: 12px; font-weight: 600; padding: 6px 14px;
+  cursor: pointer; white-space: nowrap;
+  color: #fff; background: var(--accent);
+  border: 1px solid transparent; border-radius: 999px;
+}
+.btn-primary:hover { background: #0b3b2e; }
+.btn-primary:active { transform: translateY(1px); }
+.status.busy { color: var(--accent-soft); }
+.status.error { color: #b03a2e; }
+.empty { color: var(--muted); font-size: 14px; padding: 40px; text-align: center; }
+.app-footer {
+  margin-top: 34px; padding-top: 14px; border-top: 1px solid var(--line);
+  color: var(--muted); font-size: 11px;
+  font-family: 'SFMono-Regular', Menlo, monospace;
+}
+
+
+/* ---- printing / Save as PDF ----------------------------------------------
+   Drop the interactive chrome, keep the header context and the panels, and let
+   the browser lay the figures out across pages without splitting one. */
+@media print {
+  @page { margin: 14mm; }
+  body { padding: 0; max-width: none; color: #000; }
+  /* Chrome: the two control boxes, the buttons, the live status readout.
+     The Fit PANEL and its report are content and do print. */
+  .panel-box, #btn-pdf, .status, .tooltip { display: none !important; }
+  .app-header { border-bottom-width: 1px; padding-top: 0; }
+  figure.panel {
+    break-inside: avoid; page-break-inside: avoid;
+    border-color: #ccc; background: #fff;
+  }
+  .chart .grid { stroke: #e3e3e3; }
+  .app-footer { border-top-color: #ccc; }
+}

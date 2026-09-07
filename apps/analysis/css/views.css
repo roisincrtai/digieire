@@ -1,0 +1,157 @@
+/* GENERATED COPY -- do not edit. Source: apps/analysis/css/views.css
+   Rebuild: python tools/homepage/build_homepage_app.py */
+/* The tab bar, and the components only the Event and Statistics frames use.
+
+   Kept separate from panels.css because these are frame-level chrome and
+   frame-specific output; panels.css owns the shared figure/report styling that
+   every frame reuses. */
+
+/* ---- tab bar ------------------------------------------------------------ */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin: 0 0 22px;
+  border-bottom: 1px solid var(--line);
+}
+.tab {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 10px 4px 12px;
+  margin: 0 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+}
+.tab:first-child { margin-left: 0; }
+.tab:hover { color: var(--accent); }
+/* An underline rather than a folder tab: the panels below are already cards
+   with borders, and a second bordered shape on top of them made the page read
+   as boxes inside boxes. */
+.tab.on { color: var(--accent); }
+.tab.on::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px;
+  height: 2.5px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--blue));
+}
+.tab:focus-visible { outline: 2px solid #2874a6; outline-offset: -2px; }
+
+/* ---- frames -------------------------------------------------------------
+   One per tab, each holding its own configuration box and its own panels. All
+   four stay in the document; only the active one is shown. The [hidden] rule is
+   explicit and !important because `hidden` is only a `display: none` author
+   default -- any later `display` rule on .frame would silently beat it and show
+   all four frames at once. */
+.frame { display: block; }
+.frame[hidden] { display: none !important; }
+/* Each frame's own configuration box, directly above its panels. */
+.config-host > .config-box { margin-bottom: 14px; }
+
+/* ---- event frame -------------------------------------------------------- */
+.ctl-hint.warn {
+  color: #92400e;
+  font-weight: 600;
+}
+/* Day 0 and the impact band. Dashed so it never reads as a data series. */
+.chart .event-line {
+  stroke-width: 1.4;
+  stroke-dasharray: 4 3;
+}
+.chart .event-label {
+  font-size: 9px;
+  font-weight: 600;
+}
+.chart .axis-label {
+  font-size: 9px;
+  fill: var(--muted);
+}
+.chart .bar { shape-rendering: crispEdges; }
+
+/* ---- comparison / breakdown tables -------------------------------------- */
+.cmp-table {
+  border-collapse: collapse;
+  font-size: 12px;
+  width: 100%;
+  margin: 8px 0 4px;
+}
+.cmp-table th,
+.cmp-table td {
+  padding: 5px 10px 5px 0;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #eef2f6;
+  font-variant-numeric: tabular-nums;
+}
+.cmp-table th {
+  font-weight: 600;
+  color: #475569;
+  border-bottom: 1px solid #cbd5e1;
+  white-space: nowrap;
+}
+.cmp-table tbody tr:hover { background: #f8fafc; }
+.cmp-table td.sig { color: #0f172a; }
+.cmp-table .sub {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 400;
+}
+/* A strip of equal-width panels: the three construct distributions sit side by
+   side rather than stacked. --cols is set by the caller, so the same class
+   serves a row of two or four. minmax(0, 1fr) rather than 1fr because a grid
+   item's default min-width is auto, and an SVG inside one would then refuse to
+   shrink below its intrinsic width and overflow the row. */
+.panel-row {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+/* Narrow enough that three across would be unreadable -- stack them instead. */
+@media (max-width: 860px) {
+  .panel-row { grid-template-columns: 1fr; }
+}
+
+.sub-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin: 18px 0 2px;
+}
+
+/* Caveats travel with the numbers they qualify, and are styled to be read --
+   not shrunk to the point of being decorative. */
+.caveats {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+.caveats li { margin-bottom: 3px; }
+
+@media print {
+  .tabs { display: none !important; }
+  /* base.css hides every .panel-box as chrome. These ARE the output of their
+     frame, so they print: a Statistics tab without its tables would be four
+     empty headings, and a before/after comparison is the whole point of the
+     Event frame. */
+  .panel-box--content { display: block !important; }
+  .cmp-table { break-inside: avoid; }
+  .cmp-table.corr td { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ---- the horizon picker -------------------------------------------------
+   It is a CONTROL, so it says so: a pointer cursor over the plot area and a
+   little more height than a read-out panel gets. */
+.chart.is-picker { cursor: crosshair; }
+.chart.is-picker .pick-hit { cursor: crosshair; }
+.chart .pick-line { stroke-width: 1.6; stroke-dasharray: none; }
+.chart .ev-tick { shape-rendering: crispEdges; }
+#event-horizon figure.panel { border-color: #cbd5e1; }

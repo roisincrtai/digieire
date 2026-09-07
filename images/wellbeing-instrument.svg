@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" width="1000" height="420"
+     role="img" aria-labelledby="wi-t wi-d">
+  <title id="wi-t">The wellbeing instrument: three constructs to one index</title>
+  <desc id="wi-d">Each discourse is scored zero to three on distress, functional
+    disruption and alienation. The three scores are standardised, summed, and
+    passed through a logistic function to give one overall wellbeing index
+    between zero and one, inverted so that higher is better.</desc>
+
+  <defs>
+    <style>
+      .h { font: 700 14px -apple-system, 'Segoe UI', Roboto, sans-serif; fill: #0b3b2e; }
+      .n { font: 400 11.5px -apple-system, 'Segoe UI', Roboto, sans-serif; fill: #35443f; }
+      .s { font: 600 10px 'SFMono-Regular', Menlo, monospace; fill: #66756f;
+           letter-spacing: .12em; text-transform: uppercase; }
+      .m { font: 400 12px 'SFMono-Regular', Menlo, monospace; fill: #14211d; }
+      .box { fill: #fff; stroke: #dfe3e0; }
+    </style>
+    <marker id="wi-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7"
+            markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#66756f"/>
+    </marker>
+    <linearGradient id="wi-scale" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"  stop-color="#d35400"/>
+      <stop offset="50%" stop-color="#e8e4d8"/>
+      <stop offset="100%" stop-color="#16a085"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="420" fill="#fbfaf7"/>
+
+  <!-- one discourse in -->
+  <g transform="translate(36,60)">
+    <text class="s" x="0" y="0">One discourse</text>
+    <rect class="box" x="0" y="12" width="176" height="104" rx="9"/>
+    <g fill="#e4f2ec">
+      <rect x="16" y="30" width="144" height="7" rx="3.5"/>
+      <rect x="16" y="44" width="118" height="7" rx="3.5"/>
+      <rect x="16" y="58" width="132" height="7" rx="3.5"/>
+      <rect x="16" y="72" width="86"  height="7" rx="3.5"/>
+    </g>
+    <text class="n" x="16" y="102">a public post about a flood</text>
+  </g>
+
+  <!-- the three constructs -->
+  <g transform="translate(258,36)">
+    <text class="s" x="0" y="24">Three constructs, each scored 0–3</text>
+
+    <g transform="translate(0,36)">
+      <rect class="box" x="0" y="0" width="250" height="70" rx="9"
+            style="stroke:#e6b3ac"/>
+      <rect x="0" y="0" width="4" height="70" fill="#c0392b" rx="2"/>
+      <text class="h" x="16" y="26" fill="#c0392b">I1 · Distress</text>
+      <text class="n" x="16" y="46">worry, dread, hypervigilance,</text>
+      <text class="n" x="16" y="60">exhaustion, hopelessness</text>
+      <g transform="translate(196,22)">
+        <rect x="0"  y="0" width="11" height="11" rx="2" fill="#c0392b"/>
+        <rect x="14" y="0" width="11" height="11" rx="2" fill="#c0392b"/>
+        <rect x="28" y="0" width="11" height="11" rx="2" fill="#efd3cf"/>
+        <text class="n" x="0" y="30" font-size="10">score 2</text>
+      </g>
+    </g>
+
+    <g transform="translate(0,116)">
+      <rect class="box" x="0" y="0" width="250" height="70" rx="9"
+            style="stroke:#a9c9dd"/>
+      <rect x="0" y="0" width="4" height="70" fill="#2874a6" rx="2"/>
+      <text class="h" x="16" y="26" fill="#2874a6">I2 · Functional disruption</text>
+      <text class="n" x="16" y="46">housing, income, insurance,</text>
+      <text class="n" x="16" y="60">work, services, mobility</text>
+      <g transform="translate(196,22)">
+        <rect x="0"  y="0" width="11" height="11" rx="2" fill="#2874a6"/>
+        <rect x="14" y="0" width="11" height="11" rx="2" fill="#2874a6"/>
+        <rect x="28" y="0" width="11" height="11" rx="2" fill="#cfe0ec"/>
+        <text class="n" x="0" y="30" font-size="10">score 2</text>
+      </g>
+    </g>
+
+    <g transform="translate(0,196)">
+      <rect class="box" x="0" y="0" width="250" height="70" rx="9"
+            style="stroke:#a8d4bf"/>
+      <rect x="0" y="0" width="4" height="70" fill="#239b56" rx="2"/>
+      <text class="h" x="16" y="26" fill="#239b56">I3 · Alienation</text>
+      <text class="n" x="16" y="46">unheard, dismissed or failed by</text>
+      <text class="n" x="16" y="60">community, authorities, insurers</text>
+      <g transform="translate(196,22)">
+        <rect x="0"  y="0" width="11" height="11" rx="2" fill="#cfe6da"/>
+        <rect x="14" y="0" width="11" height="11" rx="2" fill="#cfe6da"/>
+        <rect x="28" y="0" width="11" height="11" rx="2" fill="#cfe6da"/>
+        <text class="n" x="0" y="30" font-size="10">score 0</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- standardise and combine -->
+  <g transform="translate(556,36)">
+    <text class="s" x="0" y="24">Standardise, then combine</text>
+    <rect class="box" x="0" y="36" width="196" height="230" rx="9"/>
+
+    <text class="n" x="16" y="64">Each construct is centred on its</text>
+    <text class="n" x="16" y="80">own mean over the whole corpus,</text>
+    <text class="n" x="16" y="96">so the three are comparable:</text>
+    <text class="m" x="16" y="124">z = (x − μ) / σ</text>
+
+    <line x1="16" y1="142" x2="180" y2="142" stroke="#dfe3e0"/>
+
+    <text class="n" x="16" y="166">Summed and passed through a</text>
+    <text class="n" x="16" y="182">logistic, with the sign flipped:</text>
+    <text class="m" x="16" y="212">s = σ(−α · Σ z)</text>
+    <text class="n" x="16" y="240" fill="#66756f">α sets how sharply the index</text>
+    <text class="n" x="16" y="254" fill="#66756f">responds; 5 by default</text>
+  </g>
+
+  <!-- the index -->
+  <g transform="translate(788,36)">
+    <text class="s" x="0" y="24">One index</text>
+    <rect class="box" x="0" y="36" width="176" height="230" rx="9"/>
+    <text class="h" x="16" y="62">Overall wellbeing</text>
+
+    <!-- the scale, with the direction stated because it is counter-intuitive -->
+    <g transform="translate(16,80)">
+      <rect x="0" y="0" width="144" height="14" rx="7" fill="url(#wi-scale)"/>
+      <text class="n" x="0"   y="30" font-size="10">0</text>
+      <text class="n" x="132" y="30" font-size="10">1</text>
+      <text class="n" x="0"   y="46" font-size="10" fill="#d35400">worse</text>
+      <text class="n" x="105" y="46" font-size="10" fill="#16a085">better</text>
+    </g>
+
+    <rect x="16" y="146" width="144" height="52" rx="8" fill="#0f4c3a"/>
+    <text x="88" y="170" text-anchor="middle" fill="#fff"
+          style="font: 700 20px 'SFMono-Regular', Menlo, monospace;">0.31</text>
+    <text x="88" y="188" text-anchor="middle" fill="#9dbbb0"
+          style="font: 400 10px -apple-system, sans-serif;">for this discourse</text>
+
+    <text class="n" x="16" y="224" font-size="10.5">All three constructs are</text>
+    <text class="n" x="16" y="238" font-size="10.5">negative poles, so the index</text>
+    <text class="n" x="16" y="252" font-size="10.5">is inverted: HIGHER IS BETTER.</text>
+  </g>
+
+  <!-- arrows -->
+  <g fill="none" stroke="#66756f" stroke-width="1.5" marker-end="url(#wi-a)">
+    <path d="M216 124 L252 124"/>
+    <path d="M512 106 C534 106 534 150 552 150"/>
+    <path d="M512 186 L552 186"/>
+    <path d="M512 266 C534 266 534 222 552 222"/>
+    <path d="M756 152 L784 152"/>
+  </g>
+
+  <text class="n" x="36" y="386" fill="#66756f">
+    The instrument is trained on expert-annotated examples with marked evidence
+    words, so a score can be traced to the words that produced it.
+  </text>
+</svg>

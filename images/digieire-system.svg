@@ -1,0 +1,245 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700"
+     role="img" aria-labelledby="ds-t ds-d">
+  <title id="ds-t">The DigiÉire digital twin, from climate forcing to adaptation</title>
+  <desc id="ds-d">Five linked stages: climate and sea-level forcing; the three
+    flood pathways (fluvial, pluvial, coastal); exposure of coastal communities;
+    an agent-based model of the Irish population; and wellbeing outcomes feeding
+    adaptation appraisal to 2100, which loops back to the forcing scenarios.</desc>
+
+  <defs>
+    <linearGradient id="ds-band" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e4f2ec"/><stop offset="100%" stop-color="#e8f1f7"/>
+    </linearGradient>
+    <marker id="ds-arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#66756f"/>
+    </marker>
+    <marker id="ds-arrow-g" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1a7a5e"/>
+    </marker>
+    <style>
+      .h  { font: 700 13px -apple-system, 'Segoe UI', Roboto, sans-serif;
+            fill: #0b3b2e; letter-spacing: .01em; }
+      .n  { font: 400 11.5px -apple-system, 'Segoe UI', Roboto, sans-serif;
+            fill: #35443f; }
+      .s  { font: 600 10px 'SFMono-Regular', Menlo, monospace;
+            fill: #66756f; letter-spacing: .12em; text-transform: uppercase; }
+      .k  { font: 600 11px -apple-system, 'Segoe UI', Roboto, sans-serif;
+            fill: #14211d; }
+      .box { fill: #ffffff; stroke: #dfe3e0; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="700" fill="#fbfaf7"/>
+  <rect x="24" y="24" width="1152" height="512" rx="14" fill="url(#ds-band)"
+        opacity=".55"/>
+
+  <!-- ================= 1. forcing ================= -->
+  <g transform="translate(52,60)">
+    <text class="s" x="0" y="0">1 · Forcing</text>
+    <rect class="box" x="0" y="14" width="196" height="196" rx="10"/>
+    <text class="h" x="16" y="42">Climate &amp; sea level</text>
+
+    <!-- a small scenario fan: several futures, not one -->
+    <g transform="translate(16,58)">
+      <path d="M0 78 C40 74 84 62 164 20" fill="none" stroke="#c8791f"
+            stroke-width="2.2"/>
+      <path d="M0 78 C40 76 84 70 164 46" fill="none" stroke="#2874a6"
+            stroke-width="2.2"/>
+      <path d="M0 78 C40 78 84 76 164 66" fill="none" stroke="#1a7a5e"
+            stroke-width="2.2"/>
+      <line x1="0" y1="86" x2="164" y2="86" stroke="#dfe3e0"/>
+      <line x1="0" y1="86" x2="0" y2="8" stroke="#dfe3e0"/>
+      <text class="n" x="0" y="104">2020</text>
+      <text class="n" x="132" y="104">2100</text>
+    </g>
+    <text class="n" x="16" y="188">Sea-level rise, rainfall and</text>
+    <text class="n" x="16" y="204">storminess, as scenarios</text>
+  </g>
+
+  <!-- ================= 2. flood pathways ================= -->
+  <g transform="translate(300,60)">
+    <text class="s" x="0" y="0">2 · Hazard</text>
+    <rect class="box" x="0" y="14" width="222" height="196" rx="10"/>
+    <text class="h" x="16" y="42">Three flood pathways</text>
+
+    <g transform="translate(18,58)">
+      <!-- fluvial -->
+      <circle cx="14" cy="14" r="13" fill="#e8f1f7" stroke="#2874a6"/>
+      <path d="M7 20 C11 12 17 16 21 8" fill="none" stroke="#2874a6"
+            stroke-width="2" stroke-linecap="round"/>
+      <text class="k" x="36" y="12">Fluvial</text>
+      <text class="n" x="36" y="26">rivers exceed channel capacity</text>
+
+      <!-- pluvial -->
+      <circle cx="14" cy="60" r="13" fill="#f0ecf6" stroke="#7a5ea8"/>
+      <g stroke="#7a5ea8" stroke-width="1.8" stroke-linecap="round">
+        <line x1="9"  y1="56" x2="7"  y2="64"/>
+        <line x1="15" y1="54" x2="13" y2="64"/>
+        <line x1="21" y1="56" x2="19" y2="64"/>
+      </g>
+      <text class="k" x="36" y="58">Pluvial</text>
+      <text class="n" x="36" y="72">rain outruns urban drainage</text>
+
+      <!-- coastal -->
+      <circle cx="14" cy="106" r="13" fill="#e4f2ec" stroke="#1a7a5e"/>
+      <path d="M4 108 q5 -6 10 0 t10 0" fill="none" stroke="#1a7a5e"
+            stroke-width="2" stroke-linecap="round"/>
+      <text class="k" x="36" y="104">Coastal</text>
+      <text class="n" x="36" y="118">surge and tide overtop defences</text>
+    </g>
+  </g>
+
+  <!-- ================= 3. exposure ================= -->
+  <g transform="translate(574,60)">
+    <text class="s" x="0" y="0">3 · Exposure</text>
+    <rect class="box" x="0" y="14" width="196" height="196" rx="10"/>
+    <text class="h" x="16" y="42">Coastal communities</text>
+
+    <g transform="translate(16,62)">
+      <path d="M0 96 C40 88 80 92 164 86 L164 108 L0 108 Z" fill="#cfe0d6"/>
+      <path d="M0 108 L164 108 L164 122 L0 122 Z" fill="#8fc1de" opacity=".55"/>
+      <g fill="#ffffff" stroke="#0b3b2e" stroke-opacity=".25">
+        <g transform="translate(14,66)"><rect x="0" y="12" width="20" height="20"/>
+          <path d="M-3 12 L10 2 L23 12 Z"/></g>
+        <g transform="translate(48,58)"><rect x="0" y="14" width="24" height="26"/>
+          <path d="M-3 14 L12 2 L27 14 Z"/></g>
+        <g transform="translate(88,66)"><rect x="0" y="12" width="20" height="20"/>
+          <path d="M-3 12 L10 2 L23 12 Z"/></g>
+        <g transform="translate(120,54)"><rect x="0" y="16" width="22" height="28"/>
+          <path d="M-3 16 L11 4 L25 16 Z"/></g>
+      </g>
+    </g>
+    <text class="n" x="16" y="188">Homes, services and routines</text>
+    <text class="n" x="16" y="204">in the reach of the water</text>
+  </g>
+
+  <!-- ================= 4. agent-based population ================= -->
+  <g transform="translate(848,60)">
+    <text class="s" x="0" y="0">4 · Population</text>
+    <rect class="box" x="0" y="14" width="300" height="196" rx="10"/>
+    <text class="h" x="16" y="42">Agent-based model of Ireland</text>
+
+    <!-- a lattice of agents, a few highlighted as affected -->
+    <g transform="translate(18,58)">
+      <g fill="#cfe0d6">
+        <circle cx="8"   cy="8"  r="5"/><circle cx="34"  cy="8"  r="5"/>
+        <circle cx="60"  cy="8"  r="5"/><circle cx="86"  cy="8"  r="5"/>
+        <circle cx="112" cy="8"  r="5"/><circle cx="138" cy="8"  r="5"/>
+        <circle cx="164" cy="8"  r="5"/><circle cx="190" cy="8"  r="5"/>
+        <circle cx="216" cy="8"  r="5"/><circle cx="242" cy="8"  r="5"/>
+        <circle cx="8"   cy="34" r="5"/><circle cx="34"  cy="34" r="5"/>
+        <circle cx="86"  cy="34" r="5"/><circle cx="112" cy="34" r="5"/>
+        <circle cx="164" cy="34" r="5"/><circle cx="190" cy="34" r="5"/>
+        <circle cx="216" cy="34" r="5"/><circle cx="242" cy="34" r="5"/>
+        <circle cx="8"   cy="60" r="5"/><circle cx="60"  cy="60" r="5"/>
+        <circle cx="86"  cy="60" r="5"/><circle cx="138" cy="60" r="5"/>
+        <circle cx="190" cy="60" r="5"/><circle cx="242" cy="60" r="5"/>
+        <circle cx="34"  cy="86" r="5"/><circle cx="60"  cy="86" r="5"/>
+        <circle cx="112" cy="86" r="5"/><circle cx="164" cy="86" r="5"/>
+        <circle cx="216" cy="86" r="5"/><circle cx="242" cy="86" r="5"/>
+      </g>
+      <g fill="#c8791f">
+        <circle cx="60"  cy="34" r="5.5"/><circle cx="138" cy="34" r="5.5"/>
+        <circle cx="34"  cy="60" r="5.5"/><circle cx="112" cy="60" r="5.5"/>
+        <circle cx="164" cy="60" r="5.5"/><circle cx="216" cy="60" r="5.5"/>
+        <circle cx="8"   cy="86" r="5.5"/><circle cx="86"  cy="86" r="5.5"/>
+        <circle cx="138" cy="86" r="5.5"/><circle cx="190" cy="86" r="5.5"/>
+      </g>
+      <!-- a few ties between agents: households and neighbours -->
+      <g stroke="#1a7a5e" stroke-opacity=".35" stroke-width="1">
+        <line x1="34" y1="34" x2="60" y2="34"/>
+        <line x1="60" y1="34" x2="60" y2="60"/>
+        <line x1="112" y1="60" x2="138" y2="34"/>
+        <line x1="164" y1="60" x2="190" y2="86"/>
+        <line x1="8"  y1="60" x2="34"  y2="60"/>
+      </g>
+    </g>
+    <text class="n" x="16" y="188">Households and life-courses simulated</text>
+    <text class="n" x="16" y="204">forward, each carrying its own exposure</text>
+  </g>
+
+  <!-- ================= 5. wellbeing outcome ================= -->
+  <g transform="translate(300,292)">
+    <rect class="box" x="0" y="0" width="470" height="180" rx="10"/>
+    <text class="s" x="16" y="26">5 · Outcome</text>
+    <text class="h" x="16" y="50">Wellbeing, measured beyond GDP</text>
+
+    <g transform="translate(16,66)">
+      <rect x="0"   y="0" width="140" height="34" rx="6" fill="#fdecea"/>
+      <text class="k" x="12" y="15" fill="#c0392b">I1 · Distress</text>
+      <text class="n" x="12" y="28" font-size="10">worry, dread, exhaustion</text>
+
+      <rect x="150" y="0" width="150" height="34" rx="6" fill="#e8f1f7"/>
+      <text class="k" x="162" y="15" fill="#2874a6">I2 · Disruption</text>
+      <text class="n" x="162" y="28" font-size="10">housing, income, mobility</text>
+
+      <rect x="310" y="0" width="128" height="34" rx="6" fill="#e4f2ec"/>
+      <text class="k" x="322" y="15" fill="#1a7a5e">I3 · Alienation</text>
+      <text class="n" x="322" y="28" font-size="10">unheard, dismissed</text>
+
+      <path d="M70 40 L70 56 M225 40 L225 56 M374 40 L374 56" stroke="#66756f"
+            stroke-width="1.4" marker-end="url(#ds-arrow)"/>
+      <rect x="120" y="58" width="204" height="34" rx="17" fill="#0f4c3a"/>
+      <text x="222" y="80" text-anchor="middle" fill="#ffffff"
+            style="font: 600 12px -apple-system, 'Segoe UI', sans-serif;">
+        Overall wellbeing index
+      </text>
+    </g>
+  </g>
+
+  <!-- ================= adaptation appraisal ================= -->
+  <g transform="translate(848,292)">
+    <rect class="box" x="0" y="0" width="300" height="180" rx="10"/>
+    <text class="s" x="16" y="26">6 · Appraisal</text>
+    <text class="h" x="16" y="50">Adaptation options to 2100</text>
+    <g transform="translate(16,64)">
+      <g class="n">
+        <circle cx="6" cy="8"  r="3.5" fill="#1a7a5e"/>
+        <text x="18" y="12">Defend — walls, barriers, drainage</text>
+        <circle cx="6" cy="34" r="3.5" fill="#2874a6"/>
+        <text x="18" y="38">Accommodate — resilient building</text>
+        <circle cx="6" cy="60" r="3.5" fill="#c8791f"/>
+        <text x="18" y="64">Retreat — managed relocation</text>
+        <circle cx="6" cy="86" r="3.5" fill="#66756f"/>
+        <text x="18" y="90">Do nothing — the baseline to beat</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ================= flow arrows ================= -->
+  <!-- Left to right along the top row: forcing drives hazard, hazard meets
+       exposure, exposure is carried by the population. -->
+  <g fill="none" stroke="#66756f" stroke-width="1.6" marker-end="url(#ds-arrow)">
+    <line x1="252" y1="172" x2="294" y2="172"/>
+    <line x1="526" y1="172" x2="568" y2="172"/>
+    <line x1="774" y1="172" x2="842" y2="172"/>
+  </g>
+  <!-- Down into the outcome: both exposure and the population feed it. -->
+  <g fill="none" stroke="#66756f" stroke-width="1.6" marker-end="url(#ds-arrow)">
+    <path d="M672 274 L672 288"/>
+    <path d="M998 274 L998 282 L700 282 L700 288"/>
+  </g>
+  <!-- The outcome is what the appraisal ranks options by. -->
+  <line x1="774" y1="382" x2="842" y2="382" fill="none" stroke="#66756f"
+        stroke-width="1.6" marker-end="url(#ds-arrow)"/>
+
+  <!-- The loop back: an appraisal that did not change what gets simulated
+       would be a report, not a twin. -->
+  <path d="M998 472 L998 506 L150 506 L150 292" fill="none" stroke="#1a7a5e"
+        stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#ds-arrow-g)"/>
+  <text class="s" x="470" y="500" fill="#1a7a5e">
+    each option is re-run through the twin — that is what makes it a twin
+  </text>
+
+  <!-- footer note -->
+  <text class="n" x="52" y="586" font-size="11.5">
+    Coastal Ireland first: sea-level rise and flooding in the places most exposed
+    to them, with wellbeing — not output — as the quantity being maximised.
+  </text>
+  <text class="n" x="52" y="608" font-size="11.5" fill="#66756f">
+    Stages 1–4 are simulated. Stage 5 is measured today from public discourse,
+    which is what the interactive Flood &amp; Wellbeing application shows.
+  </text>
+</svg>

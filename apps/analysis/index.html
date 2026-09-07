@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flood &amp; Wellbeing — Project DigiÉire</title>
+<!-- Modular stylesheets, linked in cascade order. -->
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/controls.css">
+<link rel="stylesheet" href="css/panels.css">
+<link rel="stylesheet" href="css/views.css">
+</head>
+<body>
+
+<noscript style="display:block;padding:18px 24px;font:14px -apple-system,sans-serif">
+  This visualisation is interactive and needs JavaScript. The figures and the
+  method are described on the project page.
+</noscript>
+
+<!-- Structural partials only — NO baked-in data. The client fetches all
+     config from /api/config and every series from /api/series. -->
+<header class="app-header">
+  <div class="titles">
+    <a class="back-home" href="../../index.html">&larr; Project DigiÉire</a>
+    <h1>Flood-Wellbeing Analysis</h1>
+    <!-- The date range only. The dataset key and the corpus size were dropped:
+         they are provenance, not something the reader steers by, and they were
+         crowding the one fact that helps you read the panels — how far back the
+         record goes. The footer still names the source. -->
+    <div class="subtitle"><span id="hdr-range"></span></div>
+  </div>
+  <div class="hdr-right">
+    <!-- A transient state only: "updating…", or an error. The idle summary
+         ("N points · N posts") and the binning pill are gone — every panel
+         already prints its own point count and the configuration box states
+         the binning, so the header was repeating two things and adding a third
+         nobody needed at rest. -->
+    <span id="status" class="status" role="status" aria-live="polite"></span>
+  </div>
+</header>
+
+<!-- The frames. Built at runtime from /api/config's `tabs`, so adding a frame
+     is a change to apps/analysis/config.py and nowhere else. -->
+<nav class="tabs" id="tabs" role="tablist"></nav>
+
+<!-- _controls.html is a <template>: each frame clones its own copy. The frames
+     themselves (and the boxes that belong to one frame only) live in
+     _panels.html, so a frame's controls and its plots are hidden together. -->
+<!-- The Analysis Configuration box, as a TEMPLATE rather than a live element.
+
+     Every frame gets its OWN copy, cloned from here by controls.js, with its own
+     inputs and its own state. Nothing is shared: setting Statistics to a monthly
+     resolution leaves Overall on whatever it was, and a date range narrowed on
+     the Event frame does not move the Fit frame underneath you. Frames answer
+     different questions and want different settings, and one box quietly
+     rewriting the others is the surprise this avoids.
+
+     Ids inside the template are LOCAL names. On clone they are prefixed with the
+     frame id (`overall__period_n`), which is also why the radio `name` is
+     rewritten: two frames sharing the name "scale" would form one radio group,
+     and picking z-normalised on Overall would silently clear it on Fit Model.
+
+     `data-group` marks each block. A frame declares the groups it uses in
+     config.TABS and the rest are dropped from its copy -- not hidden, dropped,
+     so a control that does not apply cannot be read back by accident. -->
+<template id="tpl-controls">
+<section class="panel-box config-box">
+  <h2 class="box-title">Analysis Configuration</h2>
+  <p class="box-note" data-c="scope"></p>
+  <div class="controls">
+
+  <div class="ctl-group ctl-group--dates" data-group="dates">
+    <span class="ctl-label">Date range <span class="unit-tag">YYYY/MM/DD</span></span>
+    <div class="field-row">
+      <input type="text" id="start_date" class="ctl-date" inputmode="numeric"
+             placeholder="YYYY/MM/DD" maxlength="10" size="10">
+      <span class="unit-tag">&rarr;</span>
+      <input type="text" id="end_date" class="ctl-date" inputmode="numeric"
+             placeholder="YYYY/MM/DD" maxlength="10" size="10">
+    </div>
+    <!-- Dual-handle range slider: both thumbs sit on one track. The handles
+         cannot cross -- the end is always kept after the start. -->
+    <div class="range2" id="range2">
+      <div class="range2-track"></div>
+      <div class="range2-fill" id="range2_fill"></div>
+      <input type="range" id="start_slider" min="0" max="1000" step="1" value="0"
+             aria-label="start date">
+      <input type="range" id="end_slider" min="0" max="1000" step="1" value="1000"
+             aria-label="end date">
+    </div>
+    <button id="btn-range-reset" class="btn-ghost" type="button">full range</button>
+  </div>
+
+  <!-- LAYOUT ONLY: these keep their own groups, stacked in one column in the
+       order unit -> resolution -> window. `window` nests inside `period`
+       because a window is measured in periods: a frame that drops the
+       resolution has nothing left for the window to be a multiple of. -->
+  <div class="ctl-col" data-group="period">
+    <div class="ctl-group">
+      <label class="ctl-label" for="unit">Time unit</label>
+      <select id="unit" class="ctl-select wide">
+        <option value="d" selected>days</option>
+        <option value="m">months</option>
+        <option value="y">years</option>
+      </select>
+    </div>
+
+    <div class="ctl-group">
+      <label class="ctl-label" for="period_n">Resolution (period)</label>
+      <div class="field-row">
+        <input type="number" id="period_n" class="ctl-num" min="1" step="1" value="7">
+        <span class="unit-tag" id="period_unit_tag">days</span>
+      </div>
+    </div>
+
+    <div class="ctl-group" data-group="window">
+      <label class="ctl-label" for="window_n">Analysis window</label>
+      <div class="field-row">
+        <input type="number" id="window_n" class="ctl-num" min="7" step="1" value="10">
+        <span class="unit-tag" id="window_unit_tag">days</span>
+      </div>
+      <select id="mode" class="ctl-select wide">
+        <option value="double" selected>double-sided (before &amp; after)</option>
+        <option value="single">single-sided (before only)</option>
+      </select>
+      <div class="ctl-hint" id="window_hint"></div>
+    </div>
+  </div>
+
+  <div class="ctl-group" data-group="location">
+    <label class="ctl-label" for="location">Location</label>
+    <select id="location" class="ctl-select wide"></select>
+    <label class="ctl-check">
+      <input type="checkbox" id="weight" checked> weight by reactions
+    </label>
+    <p class="ctl-note">Each post counts as <code>1 + its reaction count</code>
+      (reacted 30&times; &rarr; 31&times; the weight). Off = one vote per post.</p>
+  </div>
+
+  <div class="ctl-group ctl-group--view" data-group="view">
+    <span class="ctl-label">Visualization</span>
+    <label class="ctl-check">
+      <input type="checkbox" id="show_constructs" checked> show per-construct
+    </label>
+    <label class="ctl-check">
+      <input type="radio" name="scale" value="raw" id="scale_raw"> raw scores
+    </label>
+    <label class="ctl-check">
+      <input type="radio" name="scale" value="znorm" id="scale_znorm" checked> z-normalised
+    </label>
+    <p class="ctl-note">z-normalised centres each construct on its own mean, so
+      shapes are comparable between constructs.</p>
+    <label class="ctl-check">
+      <input type="checkbox" id="show_band" checked> &plusmn; std band
+    </label>
+    <label class="ctl-check">
+      <input type="checkbox" id="show_mean" checked> mean line (wellbeing)
+    </label>
+    <label class="ctl-check">
+      <input type="checkbox" id="two_colors" checked> two colors above/below mean
+    </label>
+    <div class="field-row">
+      <label class="ctl-label" for="sensitivity" style="margin:0">sensitivity</label>
+      <input type="number" id="sensitivity" class="ctl-num narrow" min="0.1"
+             max="20" step="0.1" value="5">
+      <output id="sensitivity_out" class="ctl-out">5.0</output>
+    </div>
+  </div>
+
+</div>
+</section>
+</template>
+
+<!-- One FRAME per tab, each holding its OWN configuration box and its own panel
+     stack. All four exist in the document at once and are shown or hidden by
+     views.js; only the active one is rendered.
+
+     Keeping them separate rather than rebuilding one container on every tab
+     switch is what lets a completed fit survive a trip to the Statistics tab
+     and back -- the SVGs, the fit reports and the linked-hover registration all
+     stay where they were. The configuration box lives INSIDE its frame for the
+     same reason: each frame's settings belong to it alone, and hiding the frame
+     hides exactly the controls that drive it. -->
+
+<div class="frame" id="frame-overall" hidden>
+  <div class="config-host" id="config-overall"></div>
+  <main class="panels" id="panels-overall" data-tab="overall"></main>
+</div>
+
+<div class="frame" id="frame-event" hidden>
+  <!-- The horizon plot comes FIRST: it is the control the window is chosen
+       with, not an output of the choice. -->
+  <div id="event-horizon" class="panels"></div>
+  <!-- EVENT ANALYSIS: a window picked off the rainfall record.
+
+     The window is chosen by CLICKING the full-horizon precipitation plot, not
+     selected from a dropdown of named storms. That is the right way round for a
+     flood study: the question is "what happened around this wet period?", and
+     the wet periods are visible in the record itself, whereas a fixed catalogue
+     would have decided in advance which dates are worth looking at. A month with
+     no named storm can still be the month a town flooded.
+
+     The catalogue is still drawn on the horizon plot as markers, and a chosen
+     day that lands inside a known event is labelled with it -- informative
+     without being restrictive. -->
+<section class="panel-box" id="event-box">
+  <h2 class="box-title">Event window</h2>
+  <p class="box-note">Click anywhere on the <b>precipitation record</b> below to
+    centre the window on that date. Named storms and major floods are marked on
+    it; a chosen day inside one is labelled, but any day can be chosen. The
+    rainfall record is <b>monthly</b> &mdash; the finest the data goes &mdash; so
+    the choosing is monthly while the window it opens is daily.</p>
+
+  <div class="controls">
+    <div class="ctl-group">
+      <label class="ctl-label" for="event_days">Window</label>
+      <div class="field-row">
+        <span class="unit-tag">&plusmn;</span>
+        <input type="number" id="event_days" class="ctl-num" min="1" max="180"
+               step="1" value="15">
+        <span class="unit-tag">days</span>
+      </div>
+      <select id="event_mode" class="ctl-select wide">
+        <option value="double" selected>double-sided (before &amp; after)</option>
+        <option value="single">single-sided (before only)</option>
+      </select>
+      <div class="ctl-hint" id="event_window_hint"></div>
+    </div>
+
+    <div class="ctl-group">
+      <span class="ctl-label">Selected date</span>
+      <div class="field-row">
+        <input type="text" id="event_date" class="ctl-date" inputmode="numeric"
+               placeholder="YYYY/MM/DD" maxlength="10" size="10">
+      </div>
+      <div class="ctl-hint" id="event_when">click the record above</div>
+      <p class="ctl-note">Day&nbsp;0 is the selected date, marked on every plot.
+        For a named storm it defaults to the <b>last</b> day of its impact
+        period &mdash; a proxy for the rainfall peak, which lags the peak winds a
+        storm is named for. The before/after comparison needs both sides, so it
+        is only produced for the double-sided window.</p>
+    </div>
+
+    <div class="ctl-group">
+      <span class="ctl-label">Reading these panels</span>
+      <p class="ctl-note">Scores are binned <b>per day</b> and the constructs
+        are shown z-normalised. Standardisation uses the <b>whole corpus</b>,
+        not the window &mdash; re-centring inside 31 days would measure each
+        post against its own neighbours and erase exactly the shift being
+        looked for. The climate reference is <b>monthly</b>, so
+        inside a 31-day window it is one or two points; its three panels are
+        therefore drawn compactly, side by side, as steps rather than curves
+        &mdash; a monthly total holds across its month and does not slope
+        through it.</p>
+    </div>
+  </div>
+</section>
+
+  <div class="config-host" id="config-event"></div>
+  <main class="panels" id="panels-event" data-tab="event">
+    <div class="empty" id="event-empty" hidden></div>
+    <div id="event-charts"></div>
+    <div id="event-compare"></div>
+  </main>
+</div>
+
+<div class="frame" id="frame-stats" hidden>
+  <div class="config-host" id="config-stats"></div>
+  <main class="panels" id="panels-stats" data-tab="stats">
+    <div class="empty" id="stats-empty" hidden></div>
+    <div id="stats-body"></div>
+  </main>
+</div>
+
+<footer class="app-footer">
+  <span id="foot-source"></span>
+</footer>
+
+
+<!-- Modular UI: classic scripts share one global scope; load in dependency
+     order. config.js declares the shared globals (populated at runtime). -->
+<!-- The data layer. The static homepage build swaps this one file for a local
+     implementation and every module above it is unchanged. -->
+<script src="../../data/bundle.js"></script>
+<script src="js/config.js"></script>
+<script src="js/store.js"></script>
+<script src="js/compute.js"></script>
+<script src="js/compute-stats.js"></script>
+<script src="js/compute-event.js"></script>
+<script src="js/api-static.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/controls.js"></script>
+<script src="js/panels.js"></script>
+<script src="js/event.js"></script>
+<script src="js/stats.js"></script>
+<script src="js/views.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

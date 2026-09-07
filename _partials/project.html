@@ -1,0 +1,88 @@
+    <p class="eyebrow">Project DigiÉire</p>
+    <h1>Ireland's digital twin for long-run flood-wellbeing analysis</h1>
+    <p class="lede narrow">
+      Informed by the international debate for a &lsquo;beyond GDP&rsquo; framing
+      of climate change within policy, the goal of this project is to produce a
+      Digital Twin for Ireland to aid climate-change adaptation planning that
+      maximises the wellbeing of the Irish population over time.
+    </p>
+    <p class="narrow">
+      Focusing initially on possible sea-level rise and flooding events in
+      coastal communities in Ireland, the project creates a digital twin of
+      Ireland, underpinned by a dynamic agent-based model of the Irish
+      population, to quantify the impact of sea-level rise and increased flooding
+      events. Working with stakeholders, further work will quantify the impact of
+      different sea-level-rise and flooding-based adaptation proposals on quality
+      of life and subjective wellbeing of the Irish population up to 2100.
+    </p>
+
+    <figure class="figure">
+      <img src="../images/digieire-system.svg"
+           alt="Diagram of the DigiÉire twin: climate and sea-level scenarios
+                drive three flood pathways — fluvial, pluvial and coastal — which
+                meet exposed coastal communities; an agent-based model of the
+                Irish population carries that exposure into wellbeing outcomes
+                measured as distress, functional disruption and alienation, which
+                feed appraisal of adaptation options to 2100; the appraisal loops
+                back to re-run the twin.">
+      <figcaption>
+        The twin end to end. Stages 1&ndash;4 are simulated forward under
+        scenarios; stage 5 is a construct we can also <em>measure today</em>,
+        which is what the interactive application shows.
+      </figcaption>
+    </figure>
+
+    <h3 class="sub">What makes it a twin rather than a model</h3>
+    <div class="grid grid-2">
+      <div class="card card--rule">
+        <h3>Large-scale analysis of public discourse</h3>
+        <p>
+          The wellbeing side is not a survey of a few hundred people after the
+          fact. It is <b>90,567 scored discourses</b> spanning 2010&ndash;2026,
+          read for distress, functional disruption and alienation, and lined up
+          against the rainfall record and a dated catalogue of Irish storms and
+          floods.
+        </p>
+        <p>
+          That gives the twin something most simulations lack: a measured
+          response to real floods, at a scale and a time resolution that lets the
+          model be calibrated against what actually happened rather than against
+          an assumption about what people feel.
+        </p>
+      </div>
+      <div class="card card--rule">
+        <h3>Projection to 2100 under RCP scenarios</h3>
+        <p>
+          The twin is run forward to <b>2100</b> under Representative
+          Concentration Pathways &mdash; the standard low, intermediate and high
+          forcing scenarios (RCP&nbsp;2.6, 4.5 and 8.5) that drive the sea-level
+          and rainfall projections adaptation planning is built on.
+        </p>
+        <p>
+          Each adaptation option is put through the same population under the
+          same pathways, so the comparison between options is the output. A model
+          that produced one number for one future would not be a twin; being
+          re-runnable under a different future is the whole point.
+        </p>
+      </div>
+    </div>
+
+    <h3 class="sub">Measuring wellbeing, concretely</h3>
+    <p class="narrow">
+      &ldquo;Wellbeing&rdquo; only becomes measurable once it is broken into
+      things a reader could disagree with. We use three negative-pole constructs,
+      each scored 0&ndash;3 on a piece of public discourse, and combine them into
+      a single index where <b>higher means better</b>.
+    </p>
+    <figure class="figure figure--tight">
+      <img src="../images/wellbeing-instrument.svg"
+           alt="The three constructs — I1 distress, I2 functional disruption and
+                I3 alienation — each scored zero to three, standardised and
+                combined through a logistic function into one overall wellbeing
+                index between zero and one, where higher is better.">
+      <figcaption>
+        Three constructs, standardised and combined. Because all three are
+        negative poles, the index is inverted so that a higher number is a better
+        state &mdash; the sign convention that catches people out most often.
+      </figcaption>
+    </figure>

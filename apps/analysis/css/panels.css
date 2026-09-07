@@ -1,0 +1,170 @@
+/* GENERATED COPY -- do not edit. Source: apps/analysis/css/panels.css
+   Rebuild: python tools/homepage/build_homepage_app.py */
+/* One <figure> per series; the chart itself is inline SVG from js/chart.js. */
+.panels { display: flex; flex-direction: column; gap: 14px; }
+figure.panel {
+  margin: 0; padding: 13px 18px 9px;
+  background: var(--panel-bg); border: 1px solid var(--line);
+  border-radius: 10px;
+}
+/* The climate reference is context, not measurement, and is tinted to say so
+   without needing a label on every panel. */
+figure.panel.is-reference { background: #f7f9f8; }
+.panel-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  margin-bottom: 2px;
+}
+.panel-title { font-size: 13.5px; font-weight: 700; letter-spacing: -.005em; }
+.panel-meta {
+  font-size: 11px; color: var(--muted);
+  font-family: 'SFMono-Regular', Menlo, monospace;
+}
+.chart { width: 100%; display: block; }
+.chart .grid { stroke: #e9ecef; stroke-width: 1; }
+.chart .axis { stroke: #adb5bd; stroke-width: 1; }
+.chart .tick {
+  font-size: 10px; fill: #6b7280;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+.chart .lta { stroke: #566573; stroke-dasharray: 4 3; stroke-width: 1; }
+.chart .lta-label { font-size: 9px; fill: #566573; }
+.chart .hover-line { stroke: #9ca3af; stroke-width: 1; stroke-dasharray: 3 3; }
+.chart .dot { stroke: #fff; stroke-width: 1; }
+.tooltip {
+  position: fixed; pointer-events: none; z-index: 40;
+  background: #111827; color: #f9fafb; font-size: 11px; line-height: 1.5;
+  padding: 6px 9px; border-radius: 4px; white-space: pre;
+  font-family: 'SFMono-Regular', Menlo, monospace;
+  opacity: 0; transition: opacity .08s;
+}
+.tooltip.on { opacity: .96; }
+.chart .mean-line { stroke-dasharray: 5 3; stroke-width: 1.1; opacity: .9; }
+.chart .mean-label { font-size: 9px; }
+
+/* ---- Fit panel: one report block per forecast model --------------------- */
+.fit-reports, .eval-reports { margin: 4px 0 0 56px; }  /* aligned with the plot */
+.eval-reports { margin-top: 6px; }
+
+/* FOLDED by default: the numbers a manuscript needs, one click away, with the
+   headline effects visible on the closed summary line. */
+.fit-details {
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #fbfcfe;
+}
+.fit-summary {
+  cursor: pointer;
+  padding: 5px 9px;
+  font-size: 11.5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px 8px;
+  list-style: none;
+}
+.fit-summary::-webkit-details-marker { display: none; }
+.fit-summary::before {
+  content: '\25b8';                 /* rotates when open, so the state is obvious */
+  color: #94a3b8;
+  font-size: 10px;
+  transition: transform .12s;
+}
+.fit-details[open] > .fit-summary::before { transform: rotate(90deg); }
+.fit-sum-label {
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: #334155;
+}
+.fit-sum-item {
+  border-left: 3px solid #94a3b8;
+  padding-left: 6px;
+  font-variant-numeric: tabular-nums;
+  color: #334155;
+}
+.fit-details-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  padding: 2px 10px 9px;
+  border-top: 1px solid #eef2f6;
+}
+/* the evaluation body is a single column: a wide table, then its footnotes */
+.fit-details-body.is-block { display: block; }
+.fit-tools { flex: 1 0 100%; margin: 6px 0 0; }
+.fit-report {
+  flex: 1 1 320px;
+  min-width: 300px;
+  border-left: 3px solid #94a3b8;
+  padding: 4px 0 4px 9px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: #334155;
+}
+.fit-report.is-failed { opacity: .8; }
+.fit-report-head { margin-bottom: 2px; }
+.fit-report-head b { letter-spacing: .01em; }
+.fit-report-fail { color: #92400e; }
+.fit-stats { display: flex; flex-direction: column; gap: 1px; }
+.fit-stat { font-variant-numeric: tabular-nums; }
+.fit-stat.is-strong { font-weight: 600; color: #0f172a; }
+.fit-stat-label { display: inline-block; min-width: 17em; color: #475569; }
+.fit-stat-val { font-variant-numeric: tabular-nums; }
+.fit-stat.is-strong .fit-stat-label { color: #334155; }
+.fit-dim { color: #64748b; font-weight: 400; }
+.fit-report-meta { margin-top: 3px; }
+.fit-note { color: #64748b; }
+.fit-warn {
+  color: #92400e;
+  background: #fef3c7;
+  border-radius: 3px;
+  padding: 1px 6px;
+  display: inline-block;
+  margin-top: 2px;
+}
+/* ---- rolling-origin score table ---------------------------------------- */
+.eval-table {
+  border-collapse: collapse;
+  font-size: 11px;
+  margin: 6px 0 8px;
+  width: 100%;
+}
+.eval-table th,
+.eval-table td {
+  padding: 2px 8px 2px 0;
+  text-align: left;
+  white-space: nowrap;
+}
+.eval-table th {
+  font-weight: 600;
+  color: #475569;
+  border-bottom: 1px solid #cbd5e1;
+}
+.eval-table td.num, .eval-table th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.eval-table tbody tr:hover { background: #f8fafc; }
+.eval-table tr.is-benchmark td { color: #64748b; font-style: italic; }
+.eval-table td.is-best { font-weight: 700; color: #0f172a; }
+.eval-table td.is-off { background: #fef3c7; color: #92400e; }
+.eval-table td.is-dim { color: #cbd5e1; }
+.eval-swatch {
+  display: inline-block;
+  width: 14px; height: 3px;
+  border-radius: 2px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+@media print {
+  .fit-report { break-inside: avoid; }
+  .eval-table { break-inside: avoid; }
+  /* A printed PDF must carry the numbers even if the block was left folded --
+     a paper figure with the statistics missing is not much use. */
+  .fit-details[open] > .fit-summary::before,
+  .fit-summary::before { display: none; }
+  .fit-details > .fit-details-body { display: flex !important; }
+  .fit-tools { display: none; }
+}

@@ -1,0 +1,86 @@
+    <p class="eyebrow">Data Source</p>
+    <h1>Where the numbers come from</h1>
+    <p class="lede narrow">
+      Three independent sources, deliberately kept apart: what people said, what
+      the weather did, and which events actually happened. Nothing in the
+      wellbeing measurement knows about the climate record, so any relationship
+      between them is a finding rather than a construction.
+    </p>
+
+    <div class="grid grid-3 sources">
+      <div class="card">
+        <p class="src-kind">Discourse</p>
+        <h3>Public social-media discourse</h3>
+        <p>
+          Irish flood-related public discourse, scored for the three wellbeing
+          constructs by a transformer model trained on expert-annotated examples
+          with marked evidence words.
+        </p>
+        <p class="src-n"><b>90,567</b> scored discourses<br>
+          <span class="muted small">2010&ndash;2026 · Cork, Galway, national</span></p>
+      </div>
+      <div class="card">
+        <p class="src-kind">Climate</p>
+        <h3>Monthly rainfall</h3>
+        <p>
+          Station rainfall from the Central Statistics Office (MTM01), expressed
+          against the 1991&ndash;2020 long-term average so a wet month is legible
+          as wet rather than merely numerous.
+        </p>
+        <p class="src-n"><b>204</b> months<br>
+          <span class="muted small">CSO PxStat · monthly resolution</span></p>
+      </div>
+      <div class="card">
+        <p class="src-kind">Events</p>
+        <h3>Storms and floods</h3>
+        <p>
+          Named storms from the Met Éireann Storm Centre and major flood episodes
+          curated from RTÉ, the Irish Examiner, FloodList and OPW reports, each
+          dated to its days of Irish impact.
+        </p>
+        <p class="src-n"><b>78</b> named storms · <b>31</b> flood episodes<br>
+          <span class="muted small">dated catalogue, 2015&ndash;2026</span></p>
+      </div>
+    </div>
+
+    <p class="small muted narrow" style="margin-top:18px">
+      The global series on this page &mdash; temperature, emissions, sea level,
+      flood counts and the El Niño index &mdash; are separate again, and come
+      from HadCRUT5, the Global Carbon Budget, Church &amp; White / UHSLC, EM-DAT
+      and NOAA CPC. They set the context; they are not inputs to the wellbeing
+      measurement.
+    </p>
+
+    <figure class="figure">
+      <img src="../images/data-pipeline.svg"
+           alt="Pipeline: annotated examples train a scoring model; the model
+                scores the discourse corpus; scores only — no text, identifiers
+                or reaction counts — are exported, and the browser application
+                reads them directly with no server.">
+      <figcaption>
+        From annotation to the page you can click. The published export carries
+        scores and dates and nothing else.
+      </figcaption>
+    </figure>
+
+    <!-- The "What is published, and what is not" notice was removed at the
+         user's request. Nothing about the export changed: it still carries a
+         date, three construct scores and a coarse location and nothing else,
+         the re-identification audit still runs on every build, and the result
+         is still recorded in the export manifest. What went was the page's
+         prose account of it. The figure caption above still states the
+         substance in one line. -->
+
+    <div class="cta-band">
+      <div>
+        <h3>Flood &amp; Wellbeing &mdash; the interactive application</h3>
+        <p>
+          The wellbeing index against the climate record, a window around any
+          storm or wet period you pick off the rainfall series, and the
+          distributions behind every number. It runs entirely in your browser.
+        </p>
+      </div>
+      <a class="btn btn-primary" href="../apps/analysis/index.html">
+        Open the application <span aria-hidden="true">&rarr;</span>
+      </a>
+    </div>

@@ -1,0 +1,136 @@
+const { JSDOM, VirtualConsole } = require('jsdom');
+const B = process.env.BASE || 'http://127.0.0.1:8000';
+let pass=0,fail=0;
+const ok=(c,w,x)=>{c?pass++:fail++;console.log((c?'  PASS  ':'  FAIL  ')+w+(x!==undefined&&!c?'  ['+x+']':''));};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const PAGES=[['index.html','Project DigiÉire'],
+             ['pages/introduction.html','Introduction'],
+             ['pages/project.html','Project DigiÉire'],
+             ['pages/data-source.html','Data Source'],
+             ['pages/irish-floods.html','Irish Floods'],
+             ['pages/climate-change.html','Climate Change'],
+             ['pages/about.html','About us']];
+(async()=>{
+  for (const [p, label] of PAGES) {
+    const errs=[]; const vc=new VirtualConsole();
+    vc.on('jsdomError',e=>errs.push(String(e.message).slice(0,160)));
+    const dom=await JSDOM.fromURL(B+'/'+p,{runScripts:'dangerously',resources:'usable',pretendToBeVisual:true,virtualConsole:vc});
+    const d=dom.window.document, w=dom.window;
+    await sleep(p.includes('floods')||p.includes('climate')?2200:500);
+    console.log('\n— '+p);
+    ok(!!d.querySelector('h1'),'has an h1');
+    const nav=[...d.querySelectorAll('.nav a')].map(a=>a.textContent.trim());
+    ok(JSON.stringify(nav.slice(0,6))===JSON.stringify(['Introduction','Project DigiÉire','Data Source','Irish Floods','Climate Change','About us']),
+       'nav complete and in order',nav.join(' | '));
+    if (label!=='Project DigiÉire' || p!=='index.html') {
+      const cur=[...d.querySelectorAll('.nav a.is-current')].map(a=>a.textContent.trim());
+      if (p!=='index.html') ok(cur.length===1 && cur[0]===label,'current page marked in nav',cur.join(','));
+    }
+    // every local link resolves
+    const links=[...d.querySelectorAll('a[href]')].map(a=>a.getAttribute('href'))
+      .filter(h=>h && !/^https?:|^#|^mailto:/.test(h));
+    let bad=[];
+    for (const h of [...new Set(links)]) {
+      const base=p.includes('/')?p.replace(/[^/]+$/,''):'';
+      const r=await fetch(B+'/'+new URL(h,'http://x/'+base).pathname.slice(1));
+      if(!r.ok) bad.push(h+' ('+r.status+')');
+    }
+    ok(bad.length===0,links.length+' internal links resolve',bad.join(', '));
+    const assets=[...d.querySelectorAll('link[href],script[src],img[src]')]
+      .map(e=>e.getAttribute('href')||e.getAttribute('src'));
+    ok(assets.every(s=>!/^https?:|^\/\//.test(s)),'all assets relative');
+    let abad=[];
+    for (const a of [...new Set(assets)]) {
+      const base=p.includes('/')?p.replace(/[^/]+$/,''):'';
+      const r=await fetch(B+'/'+new URL(a,'http://x/'+base).pathname.slice(1));
+      if(!r.ok) abad.push(a+' ('+r.status+')');
+    }
+    ok(abad.length===0,assets.length+' assets resolve',abad.join(', '));
+    ok(!/loading/i.test(d.body.textContent),'no loading text');
+    const brand=d.querySelector('.brand .brand-text i');
+    ok(brand && brand.textContent.trim()==='Irish Flood-Wellbeing Digital Twin',
+       'logo uses the short form',brand&&brand.textContent.trim());
+    const fb=d.querySelector('.foot-brand');
+    ok(fb && /Irish Flood-Wellbeing Digital Twin/.test(fb.textContent),
+       'footer brand matches the logo',fb&&fb.textContent.replace(/\s+/g,' ').trim());
+    ok(!/What is published, and what is not/.test(d.body.textContent),
+       'publication notice dropped');
+    ok(!/Figures are generated from the project's own analysis code/.test(d.body.textContent),
+       'footer disclaimer dropped');
+    const cta=d.querySelector('.nav a.nav-cta');
+    ok(cta && cta.getAttribute('target')==='_blank' && /noopener/.test(cta.getAttribute('rel')||''),
+       'Explore the data opens a new page');
+    if (p==='index.html') {
+      ok(d.querySelectorAll('.cards .card').length===0,'section cards dropped');
+      ok(!/Start anywhere|The project, in five parts/.test(d.body.textContent),'"start anywhere" block dropped');
+      ok(!!d.querySelector('.cta-band'),'application CTA kept');
+      const cb=d.querySelector('.cta-band .btn-primary');
+      ok(cb && cb.getAttribute('target')==='_blank','CTA opens a new page');
+      const ack=d.querySelector('.ack');
+      ok(!!ack,'acknowledgements section present');
+      ok(ack && /Meta/.test(ack.textContent) && /Office of Public Works/.test(ack.textContent),
+         'acknowledges Meta and the OPW');
+      ok(ack && /Meta Content Library/.test(ack.textContent),
+         'names what Meta supported',ack&&ack.textContent.replace(/\s+/g,' ').slice(0,160));
+      ok(ack && !/measurable at national scale/.test(ack.textContent),
+         'no editorialising in the acknowledgement');
+      ok(d.querySelectorAll('.ack-item').length===4,'four acknowledgements',
+         d.querySelectorAll('.ack-item').length);
+      ok(ack && /MeluXina/.test(ack.textContent) && /High-End Computing/.test(ack.textContent)
+         && /School of Computer Science/.test(ack.textContent),
+         'acknowledges the compute providers');
+      const mx=[...d.querySelectorAll('.ack-item a')].find(a=>/MeluXina/.test(a.textContent));
+      ok(mx && mx.getAttribute('href')==='https://www.luxprovide.lu/meluxina/'
+         && mx.getAttribute('target')==='_blank','MeluXina links out in a new page',
+         mx&&mx.getAttribute('href'));
+    }
+    if (p.includes('irish-floods')) {
+      ok(d.querySelectorAll('#floods-dash svg.dash-map circle').length>6000,'flood map drawn');
+      ok(d.querySelectorAll('#floods-dash .kpi').length===4,'flood KPIs');
+      ok(d.querySelectorAll('#floods-dash svg.dash-map .dash-cty path.cty').length===34,
+         'all 34 county outlines drawn',d.querySelectorAll('#floods-dash .dash-cty path.cty').length);
+      const tables=[...d.querySelectorAll('#floods-dash .dash-pair table.dash-table')];
+      ok(tables.length===2,'county and catchment tables side by side',tables.length);
+      const ctyRows=tables[0]?[...tables[0].querySelectorAll('tbody tr')]:[];
+      ok(ctyRows.length===34,'county table lists every area',ctyRows.length);
+      ok(ctyRows.every(r=>r.classList.contains('linkable')),'county rows link to the map');
+      const first=ctyRows[0]?ctyRows[0].textContent:'';
+      ok(/Cork County/.test(first),'busiest county first',first);
+      // the tooltip machinery exists and answers
+      ok(!!d.querySelector('#floods-dash .dash-tip'),'tooltip element present');
+      ok(!!d.querySelector('#floods-dash circle.dash-halo'),'hover halo present');
+      const pt=w.DIGIEIRE_FLOODS.points[0], lk=w.DIGIEIRE_FLOODS.lookups;
+      ok(pt.length===8,'points carry the tooltip fields',pt.length);
+      ok(typeof lk.name[pt[7]]==='string' && lk.name[pt[7]].length>0,'point resolves a name',lk.name[pt[7]]);
+      ok(typeof lk.county[pt[6]]==='string','point resolves a county',lk.county[pt[6]]);
+      const cs=w.DIGIEIRE_FLOODS.stats;
+      ok(cs.by_county.reduce((a,b)=>a+b[1],0)===cs.n_total,'county counts sum to the catalogue');
+      ok(cs.n_county_unassigned===0,'no event left unassigned',cs.n_county_unassigned);
+      ok(!d.querySelector('main.page > .wrap > p.small.muted.narrow'),'floods page-bottom source note dropped');
+    }
+    if (p.includes('climate-change')) {
+      ok(d.querySelectorAll('#climate-dash svg').length>=6,'climate charts drawn');
+      ok(d.querySelectorAll('#climate-dash .kpi').length===4,'climate KPIs');
+      ok(!d.querySelector('main.page > .wrap > p.small.muted.narrow'),'climate page-bottom source note dropped');
+    }
+    if (p.includes('about')) {
+      ok(d.querySelectorAll('.avatar').length===0,'no team photos');
+      ok(!/Get in touch/.test(d.body.textContent),'"Get in touch" aside dropped');
+      ok(!/TO BE COMPLETED/.test(d.body.textContent),'no unfilled placeholders left');
+      const mem=[...d.querySelectorAll('.team-rows .member')];
+      ok(mem.length===2,'one row per member',mem.length);
+      ok(mem.every(m=>m.querySelector('.m-name')&&m.querySelector('.m-role')&&m.querySelector('.m-affil')),
+         'each row carries name, role and affiliation');
+      ok(/Karyn Morrissey/.test(mem[0].textContent)&&/Principal Investigator/.test(mem[0].textContent),
+         'PI first',mem[0].textContent.replace(/\s+/g,' ').trim());
+      ok(d.querySelectorAll('.card.person').length===0,'team cards replaced by rows');
+    }
+    // prose pages must not pull the dashboard payloads
+    if (!p.includes('floods')&&!p.includes('climate'))
+      ok(!w.DIGIEIRE_FLOODS && !w.DIGIEIRE_CLIMATE,'prose page loads no dashboard data');
+    ok(errs.length===0,'no JS errors',errs.join(' / '));
+    dom.window.close();
+  }
+  console.log('\n  '+pass+' passed, '+fail+' failed');
+  process.exit(fail?1:0);
+})().catch(e=>{console.error('HARNESS',e);process.exit(2);});
