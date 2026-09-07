@@ -140,7 +140,7 @@ var DASHBOARD = (function () {
     el('db-slider').value=year;el('db-slider').setAttribute('aria-valuetext',String(year));
     el('db-prev').disabled=year===model.keys[0];el('db-next').disabled=year===model.keys[model.keys.length-1];
     var host=el('db-kpis');host.replaceChildren();
-    [[row.total.toLocaleString(),'Recorded floods','OPW · selected year'],[row.discourses&&Number.isFinite(row.wellbeing)?row.wellbeing.toFixed(3):'—','National wellbeing','0–1 index · higher is better'],[row.discourses.toLocaleString(),'Scored discourses',year===model.keys[0]?'MCL · from 30 March '+year:'MCL · selected year'],[row.affected+' / '+model.names.length,'Counties with records','Dated flood records only']].forEach(function(k){var c=node('div','db-kpi');c.appendChild(node('span','db-eyebrow',k[1]));c.appendChild(node('strong','',k[0]));c.appendChild(node('small','',k[2]));host.appendChild(c);});
+    [[row.total.toLocaleString(),'Recorded floods','OPW · selected year'],[row.discourses&&Number.isFinite(row.wellbeing)?row.wellbeing.toFixed(3):'—','National wellbeing','0–1 index · higher is better'],[row.affected+' / '+model.names.length,'Counties with records','Dated flood records only']].forEach(function(k){var c=node('div','db-kpi');c.appendChild(node('span','db-eyebrow',k[1]));c.appendChild(node('strong','',k[0]));c.appendChild(node('small','',k[2]));host.appendChild(c);});
     dots.replaceChildren();
     row.points.forEach(function(p){dots.appendChild(svgNode('circle',{cx:project.x(p.x),cy:project.y(p.y),r:2.6,class:'db-flood-dot'}));});
     model.names.forEach(function(n){
