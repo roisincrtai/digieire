@@ -5,14 +5,9 @@
    assignment, so there is nothing to fetch and the section works from `file://`
    as well as from a web server.
 
-   TWO HONESTY CONSTRAINTS run through this file, because the catalogue invites
-   two specific misreadings:
-
-   * It is a record of REPORTED events. Only 2,796 of the 6,494 carry a date, so
-     the timeline is explicitly labelled as the dated subset rather than being
-     drawn as if it were the whole catalogue.
-   * Reporting density rises steeply with time. The timeline says so in its own
-     caption, next to the bars, not in a footnote three screens away.
+   Timeline and month charts use the dated subset of the catalogue.
+   Reporting coverage and approximate locations affect interpretation;
+   metadata retains those limitations even when page notes are omitted.
 
    The map plots Irish National Grid coordinates directly. No basemap and no
    projection: the grid is already a metric projection of Ireland, and six
@@ -90,11 +85,7 @@
   split.appendChild(left);
   split.appendChild(right);
 
-  var mapBody = figure(left, 'Where Ireland floods',
-    'Every recorded event, plotted on the Irish National Grid and coloured by '
-    + 'flood source, with the local-authority boundaries beneath. Point at the '
-    + 'map to read a record; the rivers and the coastline are drawn by the '
-    + 'events themselves, not by a basemap.');
+  var mapBody = figure(left, 'Where Ireland floods');
 
   /* The tooltip answers "what is this dot?" in the order a reader asks it:
      what happened, then when, then the three classifications. Blank fields are
@@ -137,11 +128,7 @@
   mapBody.appendChild(legend);
 
   // by year
-  var yrBody = figure(right, 'Recorded events per year, 1950 onwards',
-    'The DATED subset only — ' + s.n_dated.toLocaleString() + ' of '
-    + s.n_total.toLocaleString() + ' records. Read the rise with care: '
-    + 'record-keeping improved sharply over this period, so part of it is '
-    + 'better reporting rather than more flooding.');
+  var yrBody = figure(right, 'Recorded events per year, 1950 onwards');
   var byYear = (D.by_year || []).filter(function (r) { return r[0] >= 1950; });
   DASH.bars(yrBody, { rows: byYear, colour: '#2874a6', height: 250,
                       yLabel: 'events' });
@@ -204,22 +191,12 @@
   var byCounty = D.stats.by_county || [];
   var countyRows = {};
   if (byCounty.length) {
-    var pct = D.stats.county_snapped
-      ? Math.round(1000 * D.stats.county_snapped / s.n_total) / 10 : 0;
-    var ctyBody = figure(pair, 'Every county and city, by recorded events',
-      'Derived here, not published: each event\'s grid position tested against '
-      + 'the 34 local-authority boundaries. ' + D.stats.county_inside.toLocaleString()
-      + ' fell inside one; ' + D.stats.county_snapped.toLocaleString() + ' (' + pct
-      + '%) sat just offshore and were snapped to the coast within 3 km. Point '
-      + 'at a row to find it on the map.');
+    var ctyBody = figure(pair, 'Every county and city, by recorded events');
     countyRows = rankTable(ctyBody, ['County or city', 'Recorded events', ''],
                            byCounty, { link: true });
   }
 
-  var catBody = figure(pair, 'The catchments that flood most',
-    'The publisher\'s own division, by river basin. Named catchments only; a '
-    + 'third of records carry no catchment, which is the reason the county view '
-    + 'exists beside it.');
+  var catBody = figure(pair, 'The catchments that flood most');
   rankTable(catBody, ['Catchment', 'Recorded events', ''],
             D.stats.top_catchments || []);
 
@@ -231,8 +208,4 @@
     if (markedRow) markedRow.classList.add('on');
   }
 
-  // ---- the caveats, in the figure and not in a footnote ------------------
-  var cav = elt('ul', 'caveat-list');
-  (D.caveats || []).forEach(function (c) { cav.appendChild(elt('li', null, c)); });
-  host.appendChild(cav);
 })();
