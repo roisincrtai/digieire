@@ -1,4 +1,4 @@
-Review proposal only. Not approved or applied to the page.
+Approved by the user and applied to the Data page as images/data-landscape.webp.
 Created with the built-in image generation tool. Conceptual landscape, not a map or quantitative projection. Weather icons illustrate future climate inputs, not definitions of individual RCP pathways.
 
 Generation prompt:
