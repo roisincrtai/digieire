@@ -4,7 +4,7 @@
   "temperature": {
    "key": "temperature",
    "what": "Global mean temperature anomaly",
-   "unit": "\u00b0C anomaly vs 1951\u20131980",
+   "unit": "\u00b0C anomaly vs 1850\u20131900",
    "source": "HadCRUT5 (Met Office Hadley Centre / UEA CRU), via Our World in Data",
    "cite": "HadCRUT5 / OWID",
    "url": "https://ourworldindata.org/grapher/temperature-anomaly.csv",
