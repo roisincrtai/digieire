@@ -4,7 +4,7 @@ let pass=0,fail=0;
 const ok=(c,w,x)=>{c?pass++:fail++;console.log((c?'  PASS  ':'  FAIL  ')+w+(x!==undefined&&!c?'  ['+x+']':''));};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const PAGES=[['index.html','Project DigiÉire'],
-             ['pages/introduction.html','Mission'],
+             ['pages/introduction.html','Introduction'],
              ['pages/project.html','Project DigiÉire'],
              ['pages/data-source.html','Data Source'],
              ['pages/irish-floods.html','Irish Floods'],
@@ -20,7 +20,7 @@ const PAGES=[['index.html','Project DigiÉire'],
     console.log('\n— '+p);
     ok(!!d.querySelector('h1'),'has an h1');
     const nav=[...d.querySelectorAll('.nav a')].map(a=>a.textContent.trim());
-    ok(JSON.stringify(nav.slice(0,6))===JSON.stringify(['Mission','Project DigiÉire','Data Source','Irish Floods','Climate Change','About us']),
+    ok(JSON.stringify(nav.slice(0,6))===JSON.stringify(['Introduction','Project DigiÉire','Data Source','Irish Floods','Climate Change','About us']),
        'nav complete and in order',nav.join(' | '));
     if (label!=='Project DigiÉire' || p!=='index.html') {
       const cur=[...d.querySelectorAll('.nav a.is-current')].map(a=>a.textContent.trim());
