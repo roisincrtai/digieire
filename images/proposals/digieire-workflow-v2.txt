@@ -1,0 +1,7 @@
+Review proposal only. Not applied to the DigiÉire page.
+
+Workflow follows the user's description:
+Public discourse in Ireland -> language-model extraction of wellbeing indicators -> flood-wellbeing model -> agent-based simulation through 2100 -> adaptation assessment.
+Historical rainfall and flood records inform the empirical flood-wellbeing model. RCP climate pathways and adaptation choices enter future simulations. Illustrated dots and bars are conceptual, not results.
+
+Editable SVG with a PNG preview. No external scientific data are plotted.

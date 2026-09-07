@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000" role="img" aria-labelledby="title desc"><title id="title">DigiÉire: from public discourse to future wellbeing</title><desc id="desc">Public discourse in Ireland is analysed using language models to extract wellbeing indicators. These indicators and historical rainfall and flood records inform a flood-wellbeing model. That model informs agent-based simulations to 2100, driven by RCP climate pathways and adaptation choices, to compare projected wellbeing outcomes.</desc>
+<rect width="1800" height="1000" fill="#fbfaf7"/>
+<text x="60" y="69" font-family="Arial" font-size="22" font-weight="700" fill="#1a7a5e">DigiÉire</text>
+<text x="60" y="125" font-family="Arial" font-size="44" font-weight="700" fill="#123e33">From public discourse to future wellbeing</text>
+<text x="60" y="165" font-family="Arial" font-size="25" font-weight="400" fill="#526a64">An evidence-informed digital twin for flood adaptation in Ireland</text>
+<text x="60" y="229" font-family="Arial" font-size="18" font-weight="700" fill="#1a7a5e">01  OBSERVE AND ESTIMATE</text>
+<text x="1086" y="229" font-family="Arial" font-size="18" font-weight="700" fill="#2874a6">02  SIMULATE AND COMPARE</text>
+<rect x="60" y="259" width="312" height="320" rx="16" fill="#ffffff" stroke="#d7e3dd"/>
+<rect x="60" y="259" width="312" height="7" rx="0" fill="#1a7a5e" stroke="none"/>
+<text x="84" y="314" font-family="Arial" font-size="27" font-weight="700" fill="#123e33">Public discourse</text>
+<text x="84" y="348" font-family="Arial" font-size="27" font-weight="700" fill="#123e33">in Ireland</text>
+<text x="84" y="502" font-family="Arial" font-size="22" font-weight="400" fill="#526a64">Public accounts of</text>
+<text x="84" y="532" font-family="Arial" font-size="22" font-weight="400" fill="#526a64">experiences and impacts</text>
+<rect x="379" y="408" width="9" height="4" rx="0" fill="#526a64" stroke="none"/>
+<polygon points="386,403 395,410 386,417" fill="#526a64"/>
+<rect x="402" y="259" width="312" height="320" rx="16" fill="#ffffff" stroke="#d7e3dd"/>
+<rect x="402" y="259" width="312" height="7" rx="0" fill="#1a7a5e" stroke="none"/>
+<text x="426" y="314" font-family="Arial" font-size="27" font-weight="700" fill="#123e33">Language-model</text>
+<text x="426" y="348" font-family="Arial" font-size="27" font-weight="700" fill="#123e33">analysis</text>
+<text x="426" y="502" font-family="Arial" font-size="22" font-weight="400" fill="#526a64">Extract wellbeing</text>
+<text x="426" y="532" font-family="Arial" font-size="22" font-weight="400" fill="#526a64">indicators from text</text>
+<rect x="721" y="408" width="9" height="4" rx="0" fill="#526a64" stroke="none"/>
+<polygon points="728,403 737,410 728,417" fill="#526a64"/>
+<rect x="744" y="259" width="312" height="320" rx="16" fill="#ffffff" stroke="#d7e3dd"/>
+<rect x="744" y="259" width="312" height="7" rx="0" fill="#1a7a5e" stroke="none"/>
+<text x="768" y="314" font-family="Arial" font-size="27" font-weight="700" fill="#123e33">Flood–wellbeing</text>
+<text x="768" y="348" font-family="Arial" font-size="27" font-weight="700" fill="#123e33">model</text>
+<text x="768" y="502" font-family="Arial" font-size="22" font-weight="400" fill="#526a64">Estimate how flooding</text>
+<text x="768" y="532" font-family="Arial" font-size="22" font-weight="400" fill="#526a64">relates to wellbeing</text>
+<rect x="1063" y="408" width="9" height="4" rx="0" fill="#526a64" stroke="none"/>
+<polygon points="1070,403 1079,410 1070,417" fill="#526a64"/>
+<rect x="1086" y="259" width="312" height="320" rx="16" fill="#ffffff" stroke="#d7e3dd"/>
+<rect x="1086" y="259" width="312" height="7" rx="0" fill="#2874a6" stroke="none"/>
+<text x="1110" y="314" font-family="Arial" font-size="27" font-weight="700" fill="#123e33">Agent-based</text>
+<text x="1110" y="348" font-family="Arial" font-size="27" font-weight="700" fill="#123e33">simulation</text>
+<text x="1110" y="502" font-family="Arial" font-size="22" font-weight="400" fill="#526a64">Simulate population</text>
+<text x="1110" y="532" font-family="Arial" font-size="22" font-weight="400" fill="#526a64">wellbeing through 2100</text>
+<rect x="1405" y="408" width="9" height="4" rx="0" fill="#526a64" stroke="none"/>
+<polygon points="1412,403 1421,410 1412,417" fill="#526a64"/>
+<rect x="1428" y="259" width="312" height="320" rx="16" fill="#ffffff" stroke="#d7e3dd"/>
+<rect x="1428" y="259" width="312" height="7" rx="0" fill="#2874a6" stroke="none"/>
+<text x="1452" y="314" font-family="Arial" font-size="27" font-weight="700" fill="#123e33">Adaptation</text>
+<text x="1452" y="348" font-family="Arial" font-size="27" font-weight="700" fill="#123e33">assessment</text>
+<text x="1452" y="502" font-family="Arial" font-size="22" font-weight="400" fill="#526a64">Compare projected</text>
+<text x="1452" y="532" font-family="Arial" font-size="22" font-weight="400" fill="#526a64">wellbeing across options</text>
+<rect x="88" y="383" width="102" height="59" rx="8" fill="#e4f2ec" stroke="#d7e3dd"/>
+<path d="M101 404 h63" stroke="#1a7a5e" stroke-width="3" opacity=".55"/>
+<path d="M101 418 h63" stroke="#1a7a5e" stroke-width="3" opacity=".55"/>
+<rect x="133" y="393" width="102" height="59" rx="8" fill="#edf4f1" stroke="#d7e3dd"/>
+<path d="M146 414 h63" stroke="#1a7a5e" stroke-width="3" opacity=".55"/>
+<path d="M146 428 h63" stroke="#1a7a5e" stroke-width="3" opacity=".55"/>
+<rect x="178" y="403" width="102" height="59" rx="8" fill="#d6e8df" stroke="#d7e3dd"/>
+<path d="M191 424 h63" stroke="#1a7a5e" stroke-width="3" opacity=".55"/>
+<path d="M191 438 h63" stroke="#1a7a5e" stroke-width="3" opacity=".55"/>
+<rect x="429" y="384" width="58" height="9" rx="3" fill="#c7dbd2" stroke="none"/>
+<rect x="564" y="382" width="98" height="13" rx="4" fill="#1a7a5e" stroke="none"/>
+<rect x="429" y="407" width="82" height="9" rx="3" fill="#c7dbd2" stroke="none"/>
+<rect x="564" y="405" width="69" height="13" rx="4" fill="#1a7a5e" stroke="none"/>
+<rect x="429" y="430" width="44" height="9" rx="3" fill="#c7dbd2" stroke="none"/>
+<rect x="564" y="428" width="43" height="13" rx="4" fill="#1a7a5e" stroke="none"/>
+<rect x="521" y="412" width="22" height="4" rx="0" fill="#1a7a5e" stroke="none"/>
+<polygon points="541,407 550,414 541,421" fill="#1a7a5e"/>
+<circle cx="780" cy="457" r="7" fill="#1a7a5e" opacity=".7"/>
+<circle cx="813" cy="433" r="7" fill="#1a7a5e" opacity=".7"/>
+<circle cx="845" cy="449" r="7" fill="#1a7a5e" opacity=".7"/>
+<circle cx="874" cy="422" r="7" fill="#1a7a5e" opacity=".7"/>
+<circle cx="903" cy="437" r="7" fill="#1a7a5e" opacity=".7"/>
+<circle cx="941" cy="412" r="7" fill="#1a7a5e" opacity=".7"/>
+<circle cx="982" cy="401" r="7" fill="#1a7a5e" opacity=".7"/>
+<circle cx="1122" cy="387" r="8" fill="#2874a6"/>
+<circle cx="1156" cy="387" r="8" fill="#cbdedc"/>
+<circle cx="1190" cy="387" r="8" fill="#cbdedc"/>
+<circle cx="1224" cy="387" r="8" fill="#2874a6"/>
+<circle cx="1258" cy="387" r="8" fill="#cbdedc"/>
+<circle cx="1292" cy="387" r="8" fill="#cbdedc"/>
+<circle cx="1326" cy="387" r="8" fill="#2874a6"/>
+<circle cx="1122" cy="416" r="8" fill="#cbdedc"/>
+<circle cx="1156" cy="416" r="8" fill="#cbdedc"/>
+<circle cx="1190" cy="416" r="8" fill="#2874a6"/>
+<circle cx="1224" cy="416" r="8" fill="#cbdedc"/>
+<circle cx="1258" cy="416" r="8" fill="#cbdedc"/>
+<circle cx="1292" cy="416" r="8" fill="#2874a6"/>
+<circle cx="1326" cy="416" r="8" fill="#cbdedc"/>
+<circle cx="1122" cy="445" r="8" fill="#cbdedc"/>
+<circle cx="1156" cy="445" r="8" fill="#2874a6"/>
+<circle cx="1190" cy="445" r="8" fill="#cbdedc"/>
+<circle cx="1224" cy="445" r="8" fill="#cbdedc"/>
+<circle cx="1258" cy="445" r="8" fill="#2874a6"/>
+<circle cx="1292" cy="445" r="8" fill="#cbdedc"/>
+<circle cx="1326" cy="445" r="8" fill="#cbdedc"/>
+<text x="1456" y="395" font-family="Arial" font-size="17" font-weight="400" fill="#526a64">A</text>
+<rect x="1481" y="382" width="158" height="13" rx="4" fill="#a1c3b5" stroke="none"/>
+<text x="1456" y="423" font-family="Arial" font-size="17" font-weight="400" fill="#526a64">B</text>
+<rect x="1481" y="410" width="119" height="13" rx="4" fill="#1a7a5e" stroke="none"/>
+<text x="1456" y="451" font-family="Arial" font-size="17" font-weight="400" fill="#526a64">C</text>
+<rect x="1481" y="438" width="182" height="13" rx="4" fill="#2874a6" stroke="none"/>
+<rect x="744" y="659" width="312" height="196" rx="16" fill="#edf4f0" stroke="#d7e3dd"/>
+<text x="768" y="701" font-family="Arial" font-size="24" font-weight="700" fill="#123e33">Historical rainfall</text>
+<text x="768" y="732" font-family="Arial" font-size="24" font-weight="700" fill="#123e33">and flood records</text>
+<text x="768" y="783" font-family="Arial" font-size="21" font-weight="400" fill="#526a64">Link observed floods</text>
+<text x="768" y="812" font-family="Arial" font-size="21" font-weight="400" fill="#526a64">to wellbeing indicators</text>
+<rect x="898" y="595" width="4" height="58" rx="0" fill="#1a7a5e" stroke="none"/>
+<polygon points="893,598 900,587 907,598" fill="#1a7a5e"/>
+<rect x="1086" y="659" width="654" height="196" rx="16" fill="#edf3f7" stroke="#d7e3dd"/>
+<text x="1110" y="701" font-family="Arial" font-size="19" font-weight="700" fill="#2874a6">Future inputs</text>
+<text x="1110" y="743" font-family="Arial" font-size="24" font-weight="700" fill="#123e33">RCP pathways</text>
+<text x="1110" y="777" font-family="Arial" font-size="20" font-weight="400" fill="#526a64">Rainfall, sea-level</text>
+<text x="1110" y="805" font-family="Arial" font-size="20" font-weight="400" fill="#526a64">and flood scenarios</text>
+<path d="M1400 726 V826" stroke="#d7e3dd" stroke-width="2"/>
+<text x="1424" y="743" font-family="Arial" font-size="24" font-weight="700" fill="#123e33">Adaptation choices</text>
+<text x="1424" y="777" font-family="Arial" font-size="20" font-weight="400" fill="#526a64">Baseline and alternative</text>
+<text x="1424" y="805" font-family="Arial" font-size="20" font-weight="400" fill="#526a64">adaptation options</text>
+<rect x="1240" y="595" width="4" height="58" rx="0" fill="#2874a6" stroke="none"/>
+<polygon points="1235,598 1242,587 1249,598" fill="#2874a6"/>
+<text x="60" y="709" font-family="Arial" font-size="25" font-weight="700" fill="#123e33">Learn from observed experience.</text>
+<text x="60" y="751" font-family="Arial" font-size="23" font-weight="400" fill="#526a64">Use those relationships to explore</text>
+<text x="60" y="784" font-family="Arial" font-size="23" font-weight="400" fill="#526a64">plausible futures and adaptation choices.</text>
+<path d="M60 902 H1740" stroke="#d7e3dd" stroke-width="2"/>
+<text x="60" y="943" font-family="Arial" font-size="24" font-weight="400" fill="#123e33">Compare adaptation options within each RCP pathway, with wellbeing assessed beyond GDP.</text>
+<text x="60" y="977" font-family="Arial" font-size="17" font-weight="400" fill="#526a64">Conceptual workflow • Illustrations show stages, not measured values or model results.</text>
+</svg>
