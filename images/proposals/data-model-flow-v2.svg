@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100" role="img" aria-labelledby="title desc"><title id="title">DigiÉire data: from observed experience to future wellbeing</title><desc id="desc">Meta Content Library public discourse feeds language-model wellbeing extraction. The resulting wellbeing indicators, OPW past flood records and E-OBS and Met Éireann historical climate inform the climate-wellbeing model. That model and RCP climate projections feed agent-based simulations comparing adaptation and wellbeing outcomes through 2100.</desc>
+<rect x="0" y="0" width="1800" height="1100" rx="0" fill="#fbfaf7"/>
+<text x="60" y="60" font-family="Arial" font-size="22" fill="#1a7a5e">DigiÉire · Data</text>
+<text x="60" y="121" font-family="Arial" font-size="43" fill="#123e33">From observed experience to future wellbeing</text>
+<text x="60" y="166" font-family="Arial" font-size="25" fill="#526a64">Four data sources, with distinct roles in measurement, modelling and projection</text>
+<rect x="60" y="240" width="460" height="205" rx="16" fill="#eef4f0"/>
+<text x="86" y="278" font-family="Arial" font-size="18" fill="#1a7a5e">PUBLIC OPINION</text>
+<text x="86" y="322" font-family="Arial" font-size="29" fill="#123e33">Meta Content Library</text>
+<text x="86" y="363" font-family="Arial" font-size="23" fill="#526a64">Flood-related public discourse</text>
+<text x="86" y="397" font-family="Arial" font-size="23" fill="#526a64">in Ireland</text>
+<rect x="640" y="240" width="500" height="205" rx="16" fill="#ffffff"/>
+<text x="666" y="278" font-family="Arial" font-size="18" fill="#1a7a5e">MEASUREMENT</text>
+<text x="666" y="322" font-family="Arial" font-size="29" fill="#123e33">Language-model analysis</text>
+<text x="666" y="363" font-family="Arial" font-size="23" fill="#526a64">Extract wellbeing indicators</text>
+<text x="666" y="397" font-family="Arial" font-size="23" fill="#526a64">from public discourse</text>
+<rect x="1260" y="240" width="480" height="205" rx="16" fill="#edf3f8"/>
+<text x="1286" y="278" font-family="Arial" font-size="18" fill="#2874a6">FUTURE CLIMATE</text>
+<text x="1286" y="322" font-family="Arial" font-size="29" fill="#123e33">RCP pathways</text>
+<text x="1286" y="363" font-family="Arial" font-size="23" fill="#526a64">Climate projections for</text>
+<text x="1286" y="397" font-family="Arial" font-size="23" fill="#526a64">long-run simulations</text>
+<rect x="533" y="342" width="83" height="4" rx="0" fill="#1a7a5e"/>
+<polygon points="614,336 626,344 614,352" fill="#1a7a5e"/>
+<rect x="888" y="458" width="4" height="118" rx="0" fill="#1a7a5e"/>
+<polygon points="882,574 890,586 898,574" fill="#1a7a5e"/>
+<text x="916" y="516" font-family="Arial" font-size="21" fill="#526a64">Wellbeing</text>
+<text x="916" y="547" font-family="Arial" font-size="21" fill="#526a64">indicators</text>
+<rect x="1498" y="458" width="4" height="118" rx="0" fill="#2874a6"/>
+<polygon points="1492,574 1500,586 1508,574" fill="#2874a6"/>
+<text x="1526" y="516" font-family="Arial" font-size="21" fill="#526a64">Climate</text>
+<text x="1526" y="547" font-family="Arial" font-size="21" fill="#526a64">scenarios</text>
+<rect x="60" y="520" width="460" height="145" rx="16" fill="#eef4f0"/>
+<text x="86" y="558" font-family="Arial" font-size="18" fill="#1a7a5e">PAST FLOODS</text>
+<text x="86" y="602" font-family="Arial" font-size="29" fill="#123e33">Office of Public Works</text>
+<text x="86" y="643" font-family="Arial" font-size="23" fill="#526a64">Where and when floods occurred</text>
+<rect x="60" y="705" width="460" height="145" rx="16" fill="#eef4f0"/>
+<text x="86" y="743" font-family="Arial" font-size="18" fill="#1a7a5e">HISTORICAL CLIMATE</text>
+<text x="86" y="787" font-family="Arial" font-size="29" fill="#123e33">E-OBS + Met Éireann</text>
+<text x="86" y="828" font-family="Arial" font-size="23" fill="#526a64">Precipitation and storm records</text>
+<rect x="640" y="600" width="500" height="250" rx="16" fill="#ffffff"/>
+<text x="666" y="638" font-family="Arial" font-size="18" fill="#1a7a5e">MODELLING</text>
+<text x="666" y="682" font-family="Arial" font-size="29" fill="#123e33">Climate–wellbeing model</text>
+<text x="666" y="723" font-family="Arial" font-size="23" fill="#526a64">Link wellbeing indicators to</text>
+<text x="666" y="757" font-family="Arial" font-size="23" fill="#526a64">historical climate and flood events.</text>
+<text x="666" y="791" font-family="Arial" font-size="23" fill="#526a64">Estimate flood–wellbeing relationships.</text>
+<rect x="1260" y="600" width="480" height="250" rx="16" fill="#edf3f8"/>
+<text x="1286" y="638" font-family="Arial" font-size="18" fill="#2874a6">SIMULATION</text>
+<text x="1286" y="682" font-family="Arial" font-size="29" fill="#123e33">Agent-based model</text>
+<text x="1286" y="723" font-family="Arial" font-size="23" fill="#526a64">Project wellbeing through 2100.</text>
+<text x="1286" y="757" font-family="Arial" font-size="23" fill="#526a64">Compare adaptation choices</text>
+<text x="1286" y="791" font-family="Arial" font-size="23" fill="#526a64">under each RCP pathway.</text>
+<rect x="533" y="639" width="83" height="4" rx="0" fill="#1a7a5e"/>
+<polygon points="614,633 626,641 614,649" fill="#1a7a5e"/>
+<rect x="533" y="756" width="83" height="4" rx="0" fill="#1a7a5e"/>
+<polygon points="614,750 626,758 614,766" fill="#1a7a5e"/>
+<rect x="1153" y="721" width="83" height="4" rx="0" fill="#1a7a5e"/>
+<polygon points="1234,715 1246,723 1234,731" fill="#1a7a5e"/>
+<rect x="1498" y="863" width="4" height="58" rx="0" fill="#2874a6"/>
+<polygon points="1492,919 1500,931 1508,919" fill="#2874a6"/>
+<rect x="60" y="945" width="1680" height="102" rx="16" fill="#123e33"/>
+<text x="88" y="989" font-family="Arial" font-size="32" fill="#ffffff">Projected wellbeing and adaptation outcomes through 2100</text>
+<text x="88" y="1026" font-family="Arial" font-size="23" fill="#c5ddd2">Past observations inform the model; future pathways drive the simulations.</text>
+</svg>

@@ -1,0 +1,8 @@
+Review proposal only. Not applied to the Data page.
+
+Based on the user's four sources and modelling roles:
+- MCL public discourse -> language-model wellbeing extraction.
+- Wellbeing indicators + OPW flood records + E-OBS / Met Éireann historical climate -> climate-wellbeing model.
+- Climate-wellbeing model + RCP scenario inputs -> agent-based simulation and adaptation assessment through 2100.
+
+Editable SVG and PNG preview. Replaces the previous export/browser-focused explanation only after approval.
