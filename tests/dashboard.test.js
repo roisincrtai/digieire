@@ -6,7 +6,20 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 (async () => {
   const errors = [], vc = new VirtualConsole();
   vc.on('jsdomError', e => errors.push(e.message));
-  const dom = await JSDOM.fromURL(base + '/apps/analysis/index.html', {
+  // Follow the actual website links rather than assuming an app URL.
+  const entries = ['index.html','pages/introduction.html','pages/project.html',
+    'pages/data-source.html','pages/irish-floods.html','pages/climate-change.html','pages/about.html'];
+  let dashboardURL;
+  for (const page of entries) {
+    const site = await JSDOM.fromURL(base + '/' + page);
+    const link = site.window.document.querySelector('a.nav-cta');
+    const url = new URL(link.href);
+    assert.equal(url.searchParams.get('view'),'dashboard',page);
+    assert.equal(url.pathname,'/apps/analysis/index.html',page);
+    dashboardURL = url.href;
+    site.window.close();
+  }
+  const dom = await JSDOM.fromURL(dashboardURL, {
     resources:'usable',runScripts:'dangerously',pretendToBeVisual:true,virtualConsole:vc
   });
   const w=dom.window,d=w.document;

@@ -73,7 +73,10 @@ var MAIN = (function () {
           FIT.bind(function () { PANELS.render('fit', APP.series.fit); });
         }
         if (window.DASHBOARD) DASHBOARD.build(cfg);
-        VIEWS.show(window.DASHBOARD ? 'dashboard' : 'overall');
+        var entry = window.DASHBOARD ? 'dashboard' : 'overall';
+        var requested = new URLSearchParams(window.location.search).get('view');
+        if ((cfg.tabs || []).some(function (t) { return t.id === requested; })) entry = requested;
+        VIEWS.show(entry);
         if (window.DASHBOARD) setStatus('', '');
       })
       .catch(function (e) { setStatus('config failed: ' + e.message, 'error'); });
