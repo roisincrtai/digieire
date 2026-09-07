@@ -19,9 +19,9 @@
       <div class="db-legend"><span class="db-dot"></span> One recorded flood location <span class="db-legend-year"></span></div>
     </figure>
     <figure class="db-map-card db-map-card--wellbeing">
-      <figcaption><div><p class="db-eyebrow">02 / Spatial allocation</p><h3>Wellbeing</h3></div><span class="db-badge">Illustrative</span></figcaption>
+      <figcaption><div><p class="db-eyebrow">02 / Spatial allocation</p><h3>Wellbeing burden</h3></div><span class="db-badge">Illustrative</span></figcaption>
       <div class="db-map-surface" id="db-wellbeing-map"></div>
-      <div class="db-legend db-scale"><span>0</span><i></i><span id="db-scale-max"></span><small>Allocated wellbeing · larger share →</small></div>
+      <div class="db-legend db-scale"><span>0</span><i></i><span id="db-scale-max"></span><small>Allocated burden · higher burden →</small></div>
     </figure>
   </div>
   <section class="db-inspector" aria-label="County details">
@@ -30,10 +30,10 @@
     <button type="button" class="db-reset" id="db-reset">Reset selection</button>
   </section>
   <p class="db-map-note">Select either map to compare a county. Floods show dated records; unrecorded events and undated records are not represented. Coverage: Republic of Ireland.</p>
-  <details class="db-method"><summary>How the wellbeing map is allocated</summary>
+  <details class="db-method"><summary>How wellbeing burden is allocated</summary>
     <p>The national wellbeing index is calculated from scored public discourse using the same method as National Analysis (annual bins, no smoothing, sensitivity 5). Higher index values mean better wellbeing.</p>
-    <p>For each year, we allocate the national wellbeing index across counties. A county’s weight is its recorded flood count multiplied by its population density, divided by the sum of those weights across Ireland. Allocated wellbeing = national wellbeing × county weight. The county allocations sum to the national index; the score is not inverted.</p>
-    <p>This is an illustrative allocation, not a measured county wellbeing score or an estimate of the causal effect of flooding. Larger values indicate a larger allocation, not better local wellbeing. A zero means no wellbeing assigned by this rule, not zero wellbeing in that county. With no recorded floods or no discourse, allocation is unavailable. The colour scale stays fixed across years.</p>
+    <p>For each year, we invert the national wellbeing index (1 − wellbeing) and allocate this burden across counties. A county’s weight is its recorded flood count multiplied by its population density, divided by the sum of those weights across Ireland. Allocated burden = (1 − national wellbeing) × county weight. The county allocations sum to the inverse of the national index.</p>
+    <p>This is an illustrative allocation, not a measured county wellbeing score or an estimate of the causal effect of flooding. Darker colours indicate greater allocated burden. Counties with no recorded floods remain visible in the lightest colour, with zero allocated burden; this does not establish an absence of flooding or harm. With no recorded floods or no discourse, allocation is unavailable. The colour scale stays fixed across years.</p>
     <p>Population is held at <a href="https://data.cso.ie/table/FY001" target="_blank" rel="noopener">CSO Census 2022</a> levels. Density uses approximate areas from the map boundaries; city and county areas are combined into 26 counties. The shared timeline covers years present in both datasets; 2010 discourse begins on 30 March. <a href="https://www.floodinfo.ie/" target="_blank" rel="noopener">Flood records: OPW</a>.</p>
   </details>
   <nav class="db-explore" aria-label="Detailed analyses">

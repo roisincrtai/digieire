@@ -32,6 +32,10 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   assert.equal(w.VIEWS.current(),'dashboard');
   assert.equal(d.querySelectorAll('.db-map-svg').length,2);
   assert.equal(d.querySelectorAll('.db-county-shape').length,52);
+  assert.equal(d.querySelector('.db-map-card--wellbeing h3').textContent,'Wellbeing burden');
+  const noFloodCounty=d.querySelector('#db-wellbeing-map [data-county="Dublin"]');
+  assert.equal(noFloodCounty.getAttribute('fill'),'rgb(230,238,229)');
+  assert.ok(noFloodCounty.getAttribute('aria-label').includes('0.000 allocated wellbeing burden'));
   assert.equal(d.querySelector('#db-year').textContent,'2015');
   assert.equal(d.querySelectorAll('.db-flood-dot').length,349);
   const D=w.STORE.data(), F=w.DIGIEIRE_FLOODS, P=w.DIGIEIRE_POPULATION;
@@ -45,8 +49,9 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     assert.equal(row.total,F.points.filter(p=>p[2]===y).length);
     if(row.available) {
       assert.ok(Math.abs(Object.values(row.weights).reduce((a,b)=>a+b,0)-1)<1e-12);
-      assert.ok(Math.abs(Object.values(row.allocation).reduce((a,b)=>a+b,0)-row.wellbeing)<1e-10);
+      assert.ok(Math.abs(Object.values(row.allocation).reduce((a,b)=>a+b,0)-(1-row.wellbeing))<1e-10);
       for(const b of Object.values(row.allocation)) assert.ok(b>=0 && b<=1 && b<=m.max);
+      for(const n of m.names) if(row.counts[n]===0) assert.equal(row.allocation[n],0);
     }
     d.querySelector('#db-slider').value=y;
     d.querySelector('#db-slider').dispatchEvent(new w.Event('input'));
@@ -55,6 +60,10 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     assert.equal(d.querySelector('#db-scale-max').textContent,colMax);
     assert.ok([...d.querySelectorAll('.db-county-shape')].every(p=>p.getAttribute('aria-label').includes(String(y))));
   }
+  // Inversion: a national wellbeing of one allocates zero burden everywhere.
+  const bestSeries=structuredClone(series);bestSeries.wellbeing.mean.fill(1);
+  const best=w.DASHBOARD.makeModel(F,P,bestSeries);
+  assert.ok(Object.values(best.years).every(r=>Object.values(r.allocation).every(b=>b===0)));
   // Missing data must not become a perfect wellbeing or zero-allocation observation.
   const emptyF={...F,points:[]};
   const empty=w.DASHBOARD.makeModel(emptyF,P,series);

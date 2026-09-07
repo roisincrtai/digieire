@@ -18,14 +18,16 @@ as National Analysis. No new index or date-dependent standardisation is used.
 For county i and year t:
 
     weight_i,t = floods_i,t × density_i / sum_j(floods_j,t × density_j)
-    allocated_wellbeing_i,t = national_wellbeing_t × weight_i,t
+    allocated_burden_i,t = (1 − national_wellbeing_t) × weight_i,t
 
-Weights sum to one, and the county allocations sum to the national
-wellbeing index. The score is used directly, without inversion. This does not estimate local wellbeing,
+Weights sum to one, and the county allocations sum to the inverse of the
+national wellbeing index (1 − wellbeing). This does not estimate local wellbeing,
 flood probability, exposed population, or the causal effect of floods.
-Higher allocations indicate a larger assigned share, not better local wellbeing.
+Higher values represent greater allocated burden. The national headline retains
+the original wellbeing index, where higher is better.
 The interface labels the layer as an illustrative allocation and explains the
-rule. No recorded floods in a county yields zero allocation, not zero local wellbeing;
+rule. Counties with no recorded floods remain visible in the lightest map colour
+with zero allocated burden; this does not establish no flooding or harm;
 zero floods nationally or absent discourse yields unavailable allocation.
 
 Population snapshot: CSO Census 2022 FY001, both sexes, 26 counties, sum 5,149,139.

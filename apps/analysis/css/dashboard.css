@@ -46,7 +46,7 @@ body[data-tab="dashboard"] .app-header h1 { font-size:clamp(23px,2.3vw,32px); }
 .db-legend-year { margin-left:auto; }
 .db-dot { border-radius:50%; width:7px; height:7px; background:#2874a6; }
 .db-scale { flex-wrap:wrap; gap:7px; }
-.db-scale i { display:block; width:115px; height:7px; border-radius:5px; background:linear-gradient(90deg,#e6eee5,#adcdb7,#55947d,#0f4c3a); }
+.db-scale i { display:block; width:115px; height:7px; border-radius:5px; background:linear-gradient(90deg,#e6eee5,#d6c789,#bd702e,#733d27); }
 .db-scale small { margin-left:auto; font-size:10px; }
 .db-inspector { display:flex; align-items:center; gap:25px; padding:18px 22px; margin-top:18px; border:1px solid var(--line); background:#fff; border-radius:12px; }
 .db-county-picker label { display:block; font-size:10px; color:var(--muted); margin-bottom:5px; }

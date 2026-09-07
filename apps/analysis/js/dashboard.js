@@ -50,7 +50,7 @@ var DASHBOARD = (function () {
       row.available = totalWeight > 0 && row.discourses > 0 && Number.isFinite(row.wellbeing);
       names.forEach(function (n) {
         row.weights[n] = totalWeight > 0 ? row.counts[n] * areas[n].density / totalWeight : null;
-        row.allocation[n] = row.available ? row.wellbeing * row.weights[n] : null;
+        row.allocation[n] = row.available ? (1 - row.wellbeing) * row.weights[n] : null;
         if (row.allocation[n] !== null) maximum = Math.max(maximum, row.allocation[n]);
       });
       if (row.total > most) { initial = +key; most = row.total; }
@@ -73,7 +73,7 @@ var DASHBOARD = (function () {
   }
   function colour(v) {
     if (v === null) return 'url(#db-no-data)';
-    var colours = [[230,238,229],[173,205,183],[85,148,125],[15,76,58]];
+    var colours = [[230,238,229],[214,199,137],[189,112,46],[115,61,39]];
     var x = Math.max(0,Math.min(1,v/model.max))*3, a = Math.min(2,Math.floor(x)), t = x-a;
     return 'rgb(' + colours[a].map(function (c,i) { return Math.round(c+(colours[a+1][i]-c)*t); }).join(',') + ')';
   }
@@ -86,7 +86,7 @@ var DASHBOARD = (function () {
     function x(v) { return 240+(v-(xmin+xmax)/2)*scale; }
     function y(v) { return 210-(v-(ymin+ymax)/2)*scale; }
     ['flood','wellbeing'].forEach(function (kind) {
-      var svg = svgNode('svg', {viewBox:'0 0 480 420',class:'db-map-svg','aria-label':kind === 'flood' ? 'Interactive map of recorded floods by county' : 'Interactive county allocation of wellbeing'});
+      var svg = svgNode('svg', {viewBox:'0 0 480 420',class:'db-map-svg','aria-label':kind === 'flood' ? 'Interactive map of recorded floods by county' : 'Interactive county allocation of wellbeing burden'});
       if (kind === 'wellbeing') {
         var defs=svgNode('defs'),pat=svgNode('pattern',{id:'db-no-data',width:6,height:6,patternUnits:'userSpaceOnUse'});
         pat.appendChild(svgNode('rect',{width:6,height:6,fill:'#eef0eb'}));
@@ -126,7 +126,7 @@ var DASHBOARD = (function () {
     var host=el('db-county-detail');host.replaceChildren();
     if(!name) { host.textContent='Hover or select a county on either map to compare the two views.';return; }
     var a=model.areas[name],b=row.allocation[name];
-    [[name,'Selected county'],[String(row.counts[name]),'recorded floods'],[b===null?'Unavailable':b.toFixed(3),'allocated wellbeing'],[a.density.toFixed(1),'people / km² · '+model.census]].forEach(function(v){var item=node('span');item.appendChild(node('strong','',v[0]));item.appendChild(node('small','',v[1]));host.appendChild(item);});
+    [[name,'Selected county'],[String(row.counts[name]),'recorded floods'],[b===null?'Unavailable':b.toFixed(3),'allocated wellbeing burden'],[a.density.toFixed(1),'people / km² · '+model.census]].forEach(function(v){var item=node('span');item.appendChild(node('strong','',v[0]));item.appendChild(node('small','',v[1]));host.appendChild(item);});
   }
   function setYear(value) {
     var y=Math.max(model.keys[0],Math.min(model.keys[model.keys.length-1],Number(value)));
@@ -144,7 +144,7 @@ var DASHBOARD = (function () {
     dots.replaceChildren();
     row.points.forEach(function(p){dots.appendChild(svgNode('circle',{cx:project.x(p.x),cy:project.y(p.y),r:2.6,class:'db-flood-dot'}));});
     model.names.forEach(function(n){
-      var b=row.allocation[n],description=n+', '+year+': '+row.counts[n]+' recorded floods; '+(b===null?'allocation unavailable':b.toFixed(3)+' allocated wellbeing');
+      var b=row.allocation[n],description=n+', '+year+': '+row.counts[n]+' recorded floods; '+(b===null?'allocation unavailable':b.toFixed(3)+' allocated wellbeing burden');
       paths.wellbeing[n].setAttribute('fill',colour(b));
       ['flood','wellbeing'].forEach(function(kind){paths[kind][n].setAttribute('aria-label',description);paths[kind][n].querySelector('title').textContent=description;});
     });

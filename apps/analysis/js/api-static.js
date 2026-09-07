@@ -55,7 +55,7 @@ var API = (function () {
   function tabs() {
     var W = ['weight'];
     return [
-      { id: 'dashboard', label: 'Dashboard', hint: 'Linked maps of recorded floods and allocated wellbeing', controls: [] },
+      { id: 'dashboard', label: 'Dashboard', hint: 'Linked maps of recorded floods and allocated wellbeing burden', controls: [] },
       { id: 'overall', label: 'National Analysis',
         hint: 'the wellbeing index, the three constructs, and the climate ' +
               'reference',
