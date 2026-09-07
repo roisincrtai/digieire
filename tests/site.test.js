@@ -82,6 +82,8 @@ const PAGES=[['index.html','Project DigiÉire'],
          collab.textContent.replace(/\s+/g,' ').trim().slice(0,120));
       ok(collab.querySelectorAll('.ack-item').length===2,'two collaborators',
          collab.querySelectorAll('.ack-item').length);
+      ok(!collab.querySelector('h2'),'no heading above the collaborators');
+      ok(!/Working with/.test(d.body.textContent),'"Working with" dropped');
       ok(secs[1].querySelectorAll('.ack-item').length===4,'four acknowledgements',
          secs[1].querySelectorAll('.ack-item').length);
       ok(ack && /MeluXina/.test(ack.textContent) && /High-End Computing/.test(ack.textContent)
