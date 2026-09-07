@@ -1,0 +1,23 @@
+Review draft only — not approved or applied to the website.
+Generated using the built-in image generation tool. This is a conceptual illustration, not a quantitative map or projection. Ocean-current pathways are schematic; the local landscape is illustrative. The figure was not produced or endorsed by the cited agencies.
+
+Scientific sources:
+- https://www.met.ie/climate/climate-of-ireland — maritime climate, ocean warmth and Atlantic weather systems.
+- https://www.met.ie/climate/climate-change — warming, rainfall and sea-level change.
+- https://www.met.ie/atlantic-meridional-overturning-circulation-amoc — circulation changes and regional uncertainty.
+- https://www.epa.ie/environment-and-you/climate-change/what-impact-will-climate-change-have-for-ireland/ — coastal flooding and erosion.
+
+Generation prompt:
+Use case: scientific-educational. Create a polished, scientifically careful explanatory figure for DigiÉire, an Irish flood-wellbeing research website. Title exactly "Ireland in the global climate system". Wide landscape 1800x1100 or similar. Style must match sophisticated flat geometric landscape artwork: muted sage/forest greens, Atlantic blue, warm ivory #fbfaf7 background, restrained gradients, clean silhouettes and crisp readable typography. Not watercolour, not photoreal, no 3D. Design a cohesive editorial two-panel scientific schematic with generous white space and clear hierarchy.
+
+LEFT ~55%: simplified geographically credible NORTH ATLANTIC locator map, North America on left, Greenland upper centre-left, Iceland upper centre, Ireland highlighted dark green to west of Great Britain on right, western European land only as geographical backdrop. Ireland's recognizable island silhouette and location must be correct, no political border needed. Label "North Atlantic", "Greenland", and "Ireland". Show a restrained amber ocean-current arrow from offshore east coast of North America flowing northeast into central North Atlantic labelled "Ocean heat transport". This arrow remains over water and forks northward west of Ireland, never crosses land. A separate blue dashed atmospheric arrow flows east/northeast from the Atlantic toward Ireland labelled "Moist westerly winds". Small white icecap on Greenland; a subtle annotation "Land-ice loss" with no suggestion a local glacier-outburst wave reaches Ireland. Do not conflate ocean currents and winds. Small legend: amber solid arrow "Ocean circulation"; blue dashed arrow "Atmospheric moisture". Small subtitle above map "Connected through ocean and atmosphere".
+
+RIGHT ~40%: Irish coastal landscape section, Atlantic sea on left of panel, rolling western hills and low-lying river/estuary settlement to right, geometric small cream houses with slate roofs. Rain clouds over western hills with fine slanting rain. Wind carries moisture from sea to hill; short label "Atlantic rainfall". River goes downhill toward the estuary and connects to sea. An unobtrusive higher dashed blue waterline at coast labelled "Rising sea level". Small heading above this panel "Local exposure". Small unobtrusive caption underneath: "Coasts, rivers and communities".
+
+BOTTOM across width: three elegant unboxed annotation columns, no charts or invented quantitative data:
+1 heading "A warmer atmosphere" then "Greater potential for heavy rainfall"
+2 heading "A warming ocean + land-ice loss" then "Higher seas increase coastal flood risk"
+3 heading "Changing Atlantic circulation" then "Shifts in regional climate; local effects remain uncertain"
+
+Footer small but legible: "Conceptual schematic — not to scale. Sources: Met Éireann; EPA Ireland."
+All labels precisely readable, typeset cleanly, no crowding, no spelling mistakes. Clear separation between ocean heat transport, atmospheric moisture, and sea-level processes. No claim Ireland is most vulnerable in the world. No exaggerated storm disasters or inundated island. The art should be beautiful and subdued enough to belong on a professional research homepage, with greens and blues echoing the existing site.
