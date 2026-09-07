@@ -66,7 +66,7 @@ const PAGES=[['index.html','Project DigiÉire'],
       ok(!!d.querySelector('.cta-band'),'application CTA kept');
       const cb=d.querySelector('.cta-band .btn-primary');
       ok(cb && cb.getAttribute('target')==='_blank','CTA opens a new page');
-      const ack=d.querySelector('.ack');
+      const ack=[...d.querySelectorAll('.ack')].pop();
       ok(!!ack,'acknowledgements section present');
       ok(ack && /Meta/.test(ack.textContent) && /Office of Public Works/.test(ack.textContent),
          'acknowledges Meta and the OPW');
@@ -74,8 +74,16 @@ const PAGES=[['index.html','Project DigiÉire'],
          'names what Meta supported',ack&&ack.textContent.replace(/\s+/g,' ').slice(0,160));
       ok(ack && !/measurable at national scale/.test(ack.textContent),
          'no editorialising in the acknowledgement');
-      ok(d.querySelectorAll('.ack-item').length===4,'four acknowledgements',
-         d.querySelectorAll('.ack-item').length);
+      const secs=[...d.querySelectorAll('.ack')];
+      ok(secs.length===2,'a collaboration section and an acknowledgements one',secs.length);
+      const collab=secs[0];
+      ok(/Collaboration/.test(collab.textContent)&&/GLOWB Project/.test(collab.textContent)
+         &&/DTU Denmark/.test(collab.textContent),'names the collaborators',
+         collab.textContent.replace(/\s+/g,' ').trim().slice(0,120));
+      ok(collab.querySelectorAll('.ack-item').length===2,'two collaborators',
+         collab.querySelectorAll('.ack-item').length);
+      ok(secs[1].querySelectorAll('.ack-item').length===4,'four acknowledgements',
+         secs[1].querySelectorAll('.ack-item').length);
       ok(ack && /MeluXina/.test(ack.textContent) && /High-End Computing/.test(ack.textContent)
          && /School of Computer Science/.test(ack.textContent),
          'acknowledges the compute providers');
