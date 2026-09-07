@@ -214,9 +214,8 @@ var EVENT = (function () {
         if (mine !== seq) return;          // a newer request won
         current = j;
         render(j);
-        setStatus(j.empty ? 'no posts in this window'
-                          : (j.meta.n_posts.toLocaleString() + ' posts · ' +
-                             j.meta.n_days + ' days'), j.empty ? 'error' : '');
+        setStatus(j.empty ? 'no posts in this window' : '',
+                  j.empty ? 'error' : '');
       })
       .catch(function (e) {
         if (mine !== seq) return;

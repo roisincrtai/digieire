@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="css/controls.css">
 <link rel="stylesheet" href="css/panels.css">
 <link rel="stylesheet" href="css/views.css">
+<link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
 
@@ -21,7 +22,7 @@
      config from /api/config and every series from /api/series. -->
 <header class="app-header">
   <div class="titles">
-    <a class="back-home" href="../../index.html">&larr; Project DigiÉire</a>
+    <a class="back-home" href="../../index.html"><span aria-hidden="true">←</span> DigiÉire <span class="db-sr">homepage</span></a>
     <h1>Flood-Wellbeing Analysis</h1>
     <!-- The date range only. The dataset key and the corpus size were dropped:
          they are provenance, not something the reader steers by, and they were
@@ -182,6 +183,51 @@
      same reason: each frame's settings belong to it alone, and hiding the frame
      hides exactly the controls that drive it. -->
 
+<section class="frame dashboard" id="frame-dashboard" hidden aria-labelledby="dashboard-title">
+  <div class="db-heading">
+    <div><p class="db-eyebrow">Ireland · Historical explorer</p><h2 id="dashboard-title">Floods and wellbeing, together</h2></div>
+    <span class="db-coverage" id="db-coverage"></span>
+  </div>
+  <div class="db-kpis" id="db-kpis" aria-live="polite"></div>
+  <section class="db-timeline" aria-label="Shared map timeline">
+    <div class="db-time-heading">
+      <div><span class="db-eyebrow">Explore a year</span><output id="db-year" for="db-slider"></output></div>
+      <div class="db-playback"><button type="button" id="db-prev" aria-label="Previous year">←</button><button type="button" id="db-play" aria-label="Play timeline">▶ <span>Play</span></button><button type="button" id="db-next" aria-label="Next year">→</button></div>
+    </div>
+    <div class="db-track"><svg id="db-history" viewBox="0 0 1000 48" preserveAspectRatio="none" aria-hidden="true"></svg><label class="db-sr" for="db-slider">Year shown on both maps</label><input id="db-slider" type="range" step="1"><div class="db-years" id="db-years"></div></div>
+    <p class="db-timeline-note">Annual OPW records · both maps move together · bars show recorded floods</p>
+  </section>
+  <div class="db-maps">
+    <figure class="db-map-card">
+      <figcaption><div><p class="db-eyebrow">01 / Recorded events</p><h3>Floods</h3></div><span class="db-badge">OPW</span></figcaption>
+      <div class="db-map-surface" id="db-flood-map"></div>
+      <div class="db-legend"><span class="db-dot"></span> One recorded flood location <span class="db-legend-year"></span></div>
+    </figure>
+    <figure class="db-map-card db-map-card--wellbeing">
+      <figcaption><div><p class="db-eyebrow">02 / Spatial allocation</p><h3>Wellbeing</h3></div><span class="db-badge">Illustrative</span></figcaption>
+      <div class="db-map-surface" id="db-wellbeing-map"></div>
+      <div class="db-legend db-scale"><span>0</span><i></i><span id="db-scale-max"></span><small>Allocated wellbeing · larger share →</small></div>
+    </figure>
+  </div>
+  <section class="db-inspector" aria-label="County details">
+    <div class="db-county-picker"><label for="db-county">Explore a county</label><select id="db-county"><option value="">Ireland · all counties</option></select></div>
+    <div id="db-county-detail" aria-live="polite"></div>
+    <button type="button" class="db-reset" id="db-reset">Reset selection</button>
+  </section>
+  <p class="db-map-note">Select either map to compare a county. Floods show dated records; unrecorded events and undated records are not represented. Coverage: Republic of Ireland.</p>
+  <details class="db-method"><summary>How the wellbeing map is allocated</summary>
+    <p>The national wellbeing index is calculated from scored public discourse using the same method as National Analysis (annual bins, no smoothing, sensitivity 5). Higher index values mean better wellbeing.</p>
+    <p>For each year, we allocate the national wellbeing index across counties. A county’s weight is its recorded flood count multiplied by its population density, divided by the sum of those weights across Ireland. Allocated wellbeing = national wellbeing × county weight. The county allocations sum to the national index; the score is not inverted.</p>
+    <p>This is an illustrative allocation, not a measured county wellbeing score or an estimate of the causal effect of flooding. Larger values indicate a larger allocation, not better local wellbeing. A zero means no wellbeing assigned by this rule, not zero wellbeing in that county. With no recorded floods or no discourse, allocation is unavailable. The colour scale stays fixed across years.</p>
+    <p>Population is held at <a href="https://data.cso.ie/table/FY001" target="_blank" rel="noopener">CSO Census 2022</a> levels. Density uses approximate areas from the map boundaries; city and county areas are combined into 26 counties. The shared timeline covers years present in both datasets; 2010 discourse begins on 30 March. <a href="https://www.floodinfo.ie/" target="_blank" rel="noopener">Flood records: OPW</a>.</p>
+  </details>
+  <nav class="db-explore" aria-label="Detailed analyses">
+    <button type="button" data-db-open="overall"><span class="db-eyebrow">The national picture</span><strong>National Analysis <span>↗</span></strong><small>Explore wellbeing alongside climate over time.</small></button>
+    <button type="button" data-db-open="event"><span class="db-eyebrow">Around a flood or storm</span><strong>Event Analysis <span>↗</span></strong><small>Compare the period before and after an event.</small></button>
+    <button type="button" data-db-open="stats"><span class="db-eyebrow">Behind the index</span><strong>Statistics <span>↗</span></strong><small>Inspect score distributions and data coverage.</small></button>
+  </nav>
+</section>
+
 <div class="frame" id="frame-overall" hidden>
   <div class="config-host" id="config-overall"></div>
   <main class="panels" id="panels-overall" data-tab="overall"></main>
@@ -282,6 +328,8 @@
 <!-- The data layer. The static homepage build swaps this one file for a local
      implementation and every module above it is unchanged. -->
 <script src="../../data/bundle.js"></script>
+<script src="../../data/Irish_past_floods/floods_page.js"></script>
+<script src="../../data/dashboard-population.js"></script>
 <script src="js/config.js"></script>
 <script src="js/store.js"></script>
 <script src="js/compute.js"></script>
@@ -293,6 +341,7 @@
 <script src="js/panels.js"></script>
 <script src="js/event.js"></script>
 <script src="js/stats.js"></script>
+<script src="js/dashboard.js"></script>
 <script src="js/views.js"></script>
 <script src="js/main.js"></script>
 </body>

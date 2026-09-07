@@ -52,9 +52,20 @@ var VIEWS = (function () {
       b.textContent = t.label;
       b.title = t.hint || '';
       b.setAttribute('role', 'tab');
+      b.setAttribute('aria-controls', 'frame-' + t.id);
+      b.addEventListener('keydown', function (e) {
+        var list = Array.from(nav.querySelectorAll('[role=tab]'));
+        var index = list.indexOf(b), next;
+        if (e.key === 'ArrowRight') next = (index + 1) % list.length;
+        if (e.key === 'ArrowLeft') next = (index + list.length - 1) % list.length;
+        if (e.key === 'Home') next = 0;
+        if (e.key === 'End') next = list.length - 1;
+        if (next !== undefined) { e.preventDefault(); list[next].focus(); list[next].click(); }
+      });
       b.addEventListener('click', function () { show(t.id); });
       nav.appendChild(b);
 
+      if (t.id === 'dashboard') return;
       var opts = { hint: t.hint, disabled: t.disabled || [] };
       Object.keys(t.defaults || {}).forEach(function (k) {
         opts[k] = t.defaults[k];
@@ -78,10 +89,15 @@ var VIEWS = (function () {
 
   function show(id) {
     if (!def(id)) id = 'overall';
+    if (window.DASHBOARD && active === 'dashboard' && id !== active) DASHBOARD.pause();
     active = id;
     tabs().forEach(function (d) {
       var btn = $('tab-' + d.id);
-      if (btn) btn.classList.toggle('on', d.id === id);
+      if (btn) {
+        btn.classList.toggle('on', d.id === id);
+        btn.setAttribute('aria-selected', String(d.id === id));
+        btn.tabIndex = d.id === id ? 0 : -1;
+      }
       var frame = $('frame-' + d.id);
       if (frame) frame.hidden = (d.id !== id);
     });
@@ -104,7 +120,8 @@ var VIEWS = (function () {
   /* Redraw a frame from data it already holds -- a view toggle, or a resize. */
   function redraw(id) {
     id = id || active;
-    if (id === 'event') EVENT.render();
+    if (id === 'dashboard' && window.DASHBOARD) DASHBOARD.render();
+    else if (id === 'event') EVENT.render();
     else if (id === 'stats') STATS.render();
     else PANELS.render(id, APP.series[id]);
   }
@@ -113,6 +130,7 @@ var VIEWS = (function () {
      their turn -- an unread Statistics payload is a scan of 90k posts for
      nobody. */
   function refresh(force) {
+    if (active === 'dashboard' && window.DASHBOARD) { setStatus('', ''); DASHBOARD.render(); return; }
     if (!stale[active] && !force) { redraw(active); return; }
     stale[active] = false;
     if (active === 'event') { EVENT.fetch(); return; }

@@ -1,0 +1,100 @@
+/* Static historical dashboard; shared view styles remain generated. */
+.back-home,.back-home:visited { display:inline-flex; align-items:center; gap:8px; color:var(--accent); text-decoration:none; font-size:12px; font-weight:600; border:1px solid #d9e5df; padding:7px 12px; border-radius:30px; margin-bottom:14px; background:#f0f5f1; }
+.back-home:hover { background:#e1eee7; }
+.back-home:focus-visible,.dashboard button:focus-visible,.dashboard select:focus-visible { outline:2px solid #2874a6; outline-offset:3px; }
+body[data-tab="dashboard"] .app-header h1 { font-size:clamp(23px,2.3vw,32px); }
+.tabs { gap:6px; overflow-x:auto; padding-bottom:9px; margin-bottom:24px; }
+.tab { margin:0; padding:10px 16px; border-radius:8px; }
+.tab.on { background:var(--accent); color:white; }
+.tab.on::after { display:none; }
+.db-heading { display:flex; align-items:center; justify-content:space-between; gap:20px; margin:4px 0 22px; }
+.db-eyebrow { display:block; font-size:10px; font-weight:650; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); margin:0 0 7px; }
+.db-heading h2 { font-family:var(--serif); font-size:clamp(25px,2.5vw,34px); color:var(--accent); font-weight:500; letter-spacing:-.02em; margin:0; }
+.db-coverage { font-size:11px; color:var(--muted); border-left:2px solid #a5c8b8; padding:5px 0 5px 12px; max-width:180px; line-height:1.6; }
+.db-kpis { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--line); background:#fff; border-radius:14px; overflow:hidden; margin-bottom:20px; }
+.db-kpi { position:relative; padding:19px 22px; border-right:1px solid var(--line); min-width:0; }
+.db-kpi:last-child { border:0; }
+.db-kpi strong { display:block; font-size:34px; line-height:1.2; letter-spacing:-.04em; font-weight:550; color:var(--accent); font-variant-numeric:tabular-nums; }
+.db-kpi small { color:var(--muted); font-size:11px; display:block; margin-top:8px; }
+.db-kpi .db-eyebrow { letter-spacing:.05em; font-size:10px; }
+.db-timeline { border:1px solid #d6e3dc; background:#eef4f0; border-radius:12px; padding:15px 22px 12px; margin-bottom:20px; display:grid; grid-template-columns:155px 1fr; column-gap:28px; align-items:center; }
+.db-time-heading { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+#db-year { display:block; color:var(--accent); font-size:29px; font-weight:550; font-variant-numeric:tabular-nums; }
+.db-playback { display:flex; gap:5px; }
+.db-playback button { border:1px solid #cfddd5; border-radius:6px; background:white; color:var(--accent); padding:6px 8px; cursor:pointer; font-size:11px; }
+.db-playback button:disabled { opacity:.35; cursor:default; }
+.db-track { min-width:0; }
+#db-history { display:block; width:100%; height:36px; }
+#db-slider { width:100%; margin:3px 0; accent-color:var(--accent); display:block; cursor:ew-resize; }
+.db-years { display:flex; justify-content:space-between; color:var(--muted); font-size:10px; font-variant-numeric:tabular-nums; }
+.db-timeline-note { grid-column:2; margin:7px 0 0; color:var(--muted); font-size:10px; }
+.db-maps { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.db-map-card { margin:0; border:1px solid #dbe4df; border-radius:16px; overflow:hidden; background:white; }
+.db-map-card figcaption { display:flex; align-items:center; justify-content:space-between; padding:20px 24px 14px; gap:10px; }
+.db-map-card h3 { font-family:var(--serif); color:var(--accent); font-size:26px; font-weight:500; margin:0; }
+.db-badge { border:1px solid #d6e4db; border-radius:20px; padding:5px 9px; color:#5d7367; font-size:10px; }
+.db-map-surface { position:relative; background:radial-gradient(ellipse at 55% 40%,#f8fbf9,#edf3f5); }
+.db-map-card--wellbeing .db-map-surface { background:radial-gradient(ellipse at 55% 40%,#f8faf4,#edf3ef); }
+.db-map-svg { display:block; width:100%; height:clamp(340px,33vw,460px); }
+.db-county-shape { stroke:#fff; stroke-width:1; vector-effect:non-scaling-stroke; cursor:pointer; transition:fill .18s; }
+.db-county-shape.is-active { stroke:#173e35; stroke-width:2; }
+.db-county-shape:focus-visible { outline:none; stroke:#142f57; stroke-width:3; }
+.db-map-water { font-size:10px; fill:#809eaa; letter-spacing:3px; font-style:italic; font-family:Georgia,serif; }
+.db-map-label { font-size:9px; fill:#91a39b; }
+.db-flood-dot { fill:#2874a6; stroke:#fff; stroke-width:.5; opacity:.75; pointer-events:none; }
+.db-legend { display:flex; align-items:center; gap:8px; padding:14px 22px; min-height:55px; font-size:11px; color:var(--muted); }
+.db-legend-year { margin-left:auto; }
+.db-dot { border-radius:50%; width:7px; height:7px; background:#2874a6; }
+.db-scale { flex-wrap:wrap; gap:7px; }
+.db-scale i { display:block; width:115px; height:7px; border-radius:5px; background:linear-gradient(90deg,#e6eee5,#adcdb7,#55947d,#0f4c3a); }
+.db-scale small { margin-left:auto; font-size:10px; }
+.db-inspector { display:flex; align-items:center; gap:25px; padding:18px 22px; margin-top:18px; border:1px solid var(--line); background:#fff; border-radius:12px; }
+.db-county-picker label { display:block; font-size:10px; color:var(--muted); margin-bottom:5px; }
+.db-county-picker select { font:inherit; font-size:14px; font-weight:550; color:var(--accent); border:0; background:transparent; max-width:230px; padding:3px 20px 3px 0; }
+#db-county-detail { flex:1; display:flex; gap:30px; align-items:center; min-height:36px; font-size:12px; color:var(--muted); }
+#db-county-detail strong { color:var(--accent); display:block; font-weight:550; font-size:18px; margin-bottom:4px; }
+#db-county-detail small { display:block; font-size:10px; }
+.db-reset { font:inherit; font-size:11px; border:0; color:var(--accent); background:#edf4f0; padding:8px 12px; border-radius:6px; cursor:pointer; }
+.db-map-note { font-size:11px; color:var(--muted); line-height:1.7; margin:12px 2px; }
+.db-method { font-size:12px; color:var(--muted); line-height:1.75; margin:16px 0 24px; }
+.db-method summary { cursor:pointer; color:var(--accent); font-weight:550; }
+.db-method p { max-width:920px; }
+.db-method a { color:var(--accent); }
+.db-explore { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.db-explore button { font:inherit; text-align:left; border:1px solid #d4e3da; border-radius:12px; background:linear-gradient(115deg,#f0f5ef,#f9faf6); padding:20px 22px; color:var(--accent); cursor:pointer; }
+.db-explore button:hover { border-color:var(--accent-soft); background:#e8f1e9; }
+.db-explore strong { display:block; font-size:18px; font-weight:550; margin-bottom:10px; }
+.db-explore strong span { float:right; font-size:21px; }
+.db-explore small { font-size:12px; color:var(--muted); line-height:1.6; }
+.db-sr { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+@media(prefers-reduced-motion:reduce) { .db-county-shape { transition:none; } }
+@media(max-width:900px) { .db-kpi { padding:17px 14px; } .db-kpi strong { font-size:29px; } .db-inspector { flex-wrap:wrap; gap:16px; } .db-explore { gap:10px; } .db-explore button { padding:16px; } .db-explore strong { font-size:16px; } .db-scale small { width:100%; margin:0; } }
+@media(max-width:620px) { body { padding:0 16px 30px; } .app-header { padding-top:16px; } .db-heading { align-items:flex-start; } .db-coverage { display:none; } .db-kpis { grid-template-columns:1fr 1fr; } .db-kpi:nth-child(2) { border-right:0; } .db-kpi:nth-child(-n+2) { border-bottom:1px solid var(--line); } .db-maps { grid-template-columns:1fr; gap:16px; } .db-map-svg { height:380px; } .db-timeline { grid-template-columns:1fr; padding:16px; gap:12px; } .db-time-heading { justify-content:space-between; } .db-time-heading>div:first-child { display:flex; align-items:center; gap:14px; } .db-timeline-note { grid-column:1; margin:0; } .db-explore { grid-template-columns:1fr; } .db-inspector { padding:16px; } #db-county-detail { flex-basis:100%; gap:24px; order:3; } .db-reset { margin-left:auto; } .db-years span:nth-child(even) { visibility:hidden; } .tab { font-size:12px; padding:10px 12px; } }
+@media print { .db-playback,.db-explore,.db-reset,.back-home { display:none; } .db-maps { grid-template-columns:1fr 1fr; } .db-map-card { break-inside:avoid; } }
+/* Keep the maps close to the top of the working surface. */
+.app-header { padding-top:20px; padding-bottom:12px; }
+.app-header .titles { width:100%; }
+.back-home { float:right; margin:0 0 0 16px; }
+.db-heading { margin:0 0 16px; }
+.db-heading h2 { font-size:clamp(23px,2.2vw,29px); }
+.db-heading .db-eyebrow { margin-bottom:5px; }
+.db-coverage { white-space:pre-line; }
+.db-kpi { padding:14px 20px; }
+.db-kpi strong { font-size:30px; }
+.db-kpi small { margin-top:5px; }
+.db-timeline { grid-template-columns:230px 1fr; padding:12px 20px; column-gap:24px; }
+.db-time-heading { justify-content:space-between; }
+.db-timeline-note { margin-top:3px; }
+.db-map-svg { height:clamp(320px,29vw,400px); }
+@media(max-width:620px) {
+  .back-home { float:none; margin:0 0 12px; }
+  .db-kpi { padding:14px; }
+  .db-timeline { grid-template-columns:1fr; padding:14px; }
+  .db-map-svg { height:370px; }
+  #db-county-detail { display:grid; grid-template-columns:1fr 1fr; }
+}
+.db-years { display:block; position:relative; height:14px; }
+.db-years span { position:absolute; transform:translateX(-50%); white-space:nowrap; }
+.db-years span:first-child { transform:none; }
+.db-years span:last-child { transform:translateX(-100%); visibility:visible; }
+@media(max-width:900px) { .db-years span:nth-child(even):not(:last-child) { visibility:hidden; } }

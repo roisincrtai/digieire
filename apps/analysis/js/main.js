@@ -72,7 +72,9 @@ var MAIN = (function () {
           // Toggling a model on/off only needs a redraw of the Fit frame.
           FIT.bind(function () { PANELS.render('fit', APP.series.fit); });
         }
-        VIEWS.show('overall');
+        if (window.DASHBOARD) DASHBOARD.build(cfg);
+        VIEWS.show(window.DASHBOARD ? 'dashboard' : 'overall');
+        if (window.DASHBOARD) setStatus('', '');
       })
       .catch(function (e) { setStatus('config failed: ' + e.message, 'error'); });
   }
