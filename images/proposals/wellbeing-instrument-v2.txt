@@ -1,4 +1,4 @@
-Review proposal only. Not applied to the page.
+Approved by the user and applied to the DigiÉire page as images/wellbeing-instrument.svg.
 
 Retains the user's preferred orange-to-green scale, worse/better labels and dark-green 0.31 output card. The displayed value is illustrative, not calculated from a supplied discourse.
 

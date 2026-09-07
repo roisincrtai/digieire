@@ -1,149 +1,185 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" width="1000" height="420"
-     role="img" aria-labelledby="wi-t wi-d">
-  <title id="wi-t">The wellbeing instrument: three constructs to one index</title>
-  <desc id="wi-d">Each discourse is scored zero to three on distress, functional
-    disruption and alienation. The three scores are standardised, summed, and
-    passed through a logistic function to give one overall wellbeing index
-    between zero and one, inverted so that higher is better.</desc>
-
-  <defs>
-    <style>
-      .h { font: 700 14px -apple-system, 'Segoe UI', Roboto, sans-serif; fill: #0b3b2e; }
-      .n { font: 400 11.5px -apple-system, 'Segoe UI', Roboto, sans-serif; fill: #35443f; }
-      .s { font: 600 10px 'SFMono-Regular', Menlo, monospace; fill: #66756f;
-           letter-spacing: .12em; text-transform: uppercase; }
-      .m { font: 400 12px 'SFMono-Regular', Menlo, monospace; fill: #14211d; }
-      .box { fill: #fff; stroke: #dfe3e0; }
-    </style>
-    <marker id="wi-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7"
-            markerHeight="7" orient="auto-start-reverse">
-      <path d="M0 0 L10 5 L0 10 z" fill="#66756f"/>
-    </marker>
-    <linearGradient id="wi-scale" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%"  stop-color="#d35400"/>
-      <stop offset="50%" stop-color="#e8e4d8"/>
-      <stop offset="100%" stop-color="#16a085"/>
-    </linearGradient>
-  </defs>
-
-  <rect width="1000" height="420" fill="#fbfaf7"/>
-
-  <!-- one discourse in -->
-  <g transform="translate(36,60)">
-    <text class="s" x="0" y="0">One discourse</text>
-    <rect class="box" x="0" y="12" width="176" height="104" rx="9"/>
-    <g fill="#e4f2ec">
-      <rect x="16" y="30" width="144" height="7" rx="3.5"/>
-      <rect x="16" y="44" width="118" height="7" rx="3.5"/>
-      <rect x="16" y="58" width="132" height="7" rx="3.5"/>
-      <rect x="16" y="72" width="86"  height="7" rx="3.5"/>
-    </g>
-    <text class="n" x="16" y="102">a public post about a flood</text>
-  </g>
-
-  <!-- the three constructs -->
-  <g transform="translate(258,36)">
-    <text class="s" x="0" y="24">Three constructs, each scored 0–3</text>
-
-    <g transform="translate(0,36)">
-      <rect class="box" x="0" y="0" width="250" height="70" rx="9"
-            style="stroke:#e6b3ac"/>
-      <rect x="0" y="0" width="4" height="70" fill="#c0392b" rx="2"/>
-      <text class="h" x="16" y="26" fill="#c0392b">I1 · Distress</text>
-      <text class="n" x="16" y="46">worry, dread, hypervigilance,</text>
-      <text class="n" x="16" y="60">exhaustion, hopelessness</text>
-      <g transform="translate(196,22)">
-        <rect x="0"  y="0" width="11" height="11" rx="2" fill="#c0392b"/>
-        <rect x="14" y="0" width="11" height="11" rx="2" fill="#c0392b"/>
-        <rect x="28" y="0" width="11" height="11" rx="2" fill="#efd3cf"/>
-        <text class="n" x="0" y="30" font-size="10">score 2</text>
-      </g>
-    </g>
-
-    <g transform="translate(0,116)">
-      <rect class="box" x="0" y="0" width="250" height="70" rx="9"
-            style="stroke:#a9c9dd"/>
-      <rect x="0" y="0" width="4" height="70" fill="#2874a6" rx="2"/>
-      <text class="h" x="16" y="26" fill="#2874a6">I2 · Functional disruption</text>
-      <text class="n" x="16" y="46">housing, income, insurance,</text>
-      <text class="n" x="16" y="60">work, services, mobility</text>
-      <g transform="translate(196,22)">
-        <rect x="0"  y="0" width="11" height="11" rx="2" fill="#2874a6"/>
-        <rect x="14" y="0" width="11" height="11" rx="2" fill="#2874a6"/>
-        <rect x="28" y="0" width="11" height="11" rx="2" fill="#cfe0ec"/>
-        <text class="n" x="0" y="30" font-size="10">score 2</text>
-      </g>
-    </g>
-
-    <g transform="translate(0,196)">
-      <rect class="box" x="0" y="0" width="250" height="70" rx="9"
-            style="stroke:#a8d4bf"/>
-      <rect x="0" y="0" width="4" height="70" fill="#239b56" rx="2"/>
-      <text class="h" x="16" y="26" fill="#239b56">I3 · Alienation</text>
-      <text class="n" x="16" y="46">unheard, dismissed or failed by</text>
-      <text class="n" x="16" y="60">community, authorities, insurers</text>
-      <g transform="translate(196,22)">
-        <rect x="0"  y="0" width="11" height="11" rx="2" fill="#cfe6da"/>
-        <rect x="14" y="0" width="11" height="11" rx="2" fill="#cfe6da"/>
-        <rect x="28" y="0" width="11" height="11" rx="2" fill="#cfe6da"/>
-        <text class="n" x="0" y="30" font-size="10">score 0</text>
-      </g>
-    </g>
-  </g>
-
-  <!-- standardise and combine -->
-  <g transform="translate(556,36)">
-    <text class="s" x="0" y="24">Standardise, then combine</text>
-    <rect class="box" x="0" y="36" width="196" height="230" rx="9"/>
-
-    <text class="n" x="16" y="64">Each construct is centred on its</text>
-    <text class="n" x="16" y="80">own mean over the whole corpus,</text>
-    <text class="n" x="16" y="96">so the three are comparable:</text>
-    <text class="m" x="16" y="124">z = (x − μ) / σ</text>
-
-    <line x1="16" y1="142" x2="180" y2="142" stroke="#dfe3e0"/>
-
-    <text class="n" x="16" y="166">Summed and passed through a</text>
-    <text class="n" x="16" y="182">logistic, with the sign flipped:</text>
-    <text class="m" x="16" y="212">s = σ(−α · Σ z)</text>
-    <text class="n" x="16" y="240" fill="#66756f">α sets how sharply the index</text>
-    <text class="n" x="16" y="254" fill="#66756f">responds; 5 by default</text>
-  </g>
-
-  <!-- the index -->
-  <g transform="translate(788,36)">
-    <text class="s" x="0" y="24">One index</text>
-    <rect class="box" x="0" y="36" width="176" height="230" rx="9"/>
-    <text class="h" x="16" y="62">Overall wellbeing</text>
-
-    <!-- the scale, with the direction stated because it is counter-intuitive -->
-    <g transform="translate(16,80)">
-      <rect x="0" y="0" width="144" height="14" rx="7" fill="url(#wi-scale)"/>
-      <text class="n" x="0"   y="30" font-size="10">0</text>
-      <text class="n" x="132" y="30" font-size="10">1</text>
-      <text class="n" x="0"   y="46" font-size="10" fill="#d35400">worse</text>
-      <text class="n" x="105" y="46" font-size="10" fill="#16a085">better</text>
-    </g>
-
-    <rect x="16" y="146" width="144" height="52" rx="8" fill="#0f4c3a"/>
-    <text x="88" y="170" text-anchor="middle" fill="#fff"
-          style="font: 700 20px 'SFMono-Regular', Menlo, monospace;">0.31</text>
-    <text x="88" y="188" text-anchor="middle" fill="#9dbbb0"
-          style="font: 400 10px -apple-system, sans-serif;">for this discourse</text>
-
-  </g>
-
-  <!-- arrows -->
-  <g fill="none" stroke="#66756f" stroke-width="1.5" marker-end="url(#wi-a)">
-    <path d="M216 124 L252 124"/>
-    <path d="M512 106 C534 106 534 150 552 150"/>
-    <path d="M512 186 L552 186"/>
-    <path d="M512 266 C534 266 534 222 552 222"/>
-    <path d="M756 152 L784 152"/>
-  </g>
-
-  <text class="n" x="36" y="386" fill="#66756f">
-    The instrument is trained on expert-annotated examples with marked evidence
-    words, so a score can be traced to the words that produced it.
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100" role="img" aria-labelledby="title desc"><title id="title">Measuring wellbeing from public discourse</title><desc id="desc">Language models score distress, functional disruption and alienation from zero to three. Each construct is standardised against a reference sample. The index is one divided by one plus the exponential of sensitivity times the sum of the three standardised scores.</desc>
+<rect x="0" y="0" width="1800" height="1100" rx="0" fill="#fbfaf7"/>
+<text x="60" y="62" font-family="Arial" font-size="22" fill="#1a7a5e" text-anchor="start">DigiÉire · Wellbeing measurement</text>
+<text x="60" y="123" font-family="Arial" font-size="46" fill="#123e33" text-anchor="start">From public discourse to a wellbeing index</text>
+<text x="60" y="168" font-family="Arial" font-size="26" fill="#566b65" text-anchor="start">Three constructs, a common scale, one measure</text>
+<text x="60" y="234" font-family="Arial" font-size="19" fill="#1a7a5e" text-anchor="start">01  EXTRACT</text>
+<rect x="60" y="266" width="500" height="650" rx="18" fill="#fff"/>
+<rect x="60" y="266" width="500" height="5" rx="0" fill="#1a7a5e"/>
+<text x="650" y="234" font-family="Arial" font-size="19" fill="#1a7a5e" text-anchor="start">02  STANDARDISE AND COMBINE</text>
+<rect x="650" y="266" width="500" height="650" rx="18" fill="#fff"/>
+<rect x="650" y="266" width="500" height="5" rx="0" fill="#1a7a5e"/>
+<text x="1240" y="234" font-family="Arial" font-size="19" fill="#1a7a5e" text-anchor="start">03  INTERPRET</text>
+<rect x="1240" y="266" width="500" height="650" rx="18" fill="#fff"/>
+<rect x="1240" y="266" width="500" height="5" rx="0" fill="#1a7a5e"/>
+<rect x="585" y="563" width="23" height="4" rx="0" fill="#566b65"/>
+<polygon points="607,557 620,565 607,573" fill="#566b65"/>
+<rect x="1175" y="563" width="23" height="4" rx="0" fill="#566b65"/>
+<polygon points="1197,557 1210,565 1197,573" fill="#566b65"/>
+<text x="88" y="320" font-family="Arial" font-size="30" fill="#123e33" text-anchor="start">Language-model analysis</text>
+<text x="88" y="364" font-family="Arial" font-size="23" fill="#566b65" text-anchor="start">A public post or comment is scored</text>
+<text x="88" y="398" font-family="Arial" font-size="23" fill="#566b65" text-anchor="start">on three wellbeing constructs.</text>
+<rect x="88" y="431" width="444" height="111" rx="10" fill="#f4f7f5"/>
+<rect x="88" y="431" width="4" height="111" rx="0" fill="#a7624a"/>
+<text x="108" y="468" font-family="Arial" font-size="27" fill="#123e33" text-anchor="start">I1  Distress</text>
+<text x="108" y="501" font-family="Arial" font-size="20" fill="#566b65" text-anchor="start">Worry, dread and exhaustion</text>
+<text x="108" y="527" font-family="Arial" font-size="18" fill="#a7624a" text-anchor="start">Score: 0–3</text>
+<rect x="88" y="568" width="444" height="111" rx="10" fill="#f4f7f5"/>
+<rect x="88" y="568" width="4" height="111" rx="0" fill="#2874a6"/>
+<text x="108" y="605" font-family="Arial" font-size="27" fill="#123e33" text-anchor="start">I2  Functional disruption</text>
+<text x="108" y="638" font-family="Arial" font-size="20" fill="#566b65" text-anchor="start">Housing, income, services and mobility</text>
+<text x="108" y="664" font-family="Arial" font-size="18" fill="#2874a6" text-anchor="start">Score: 0–3</text>
+<rect x="88" y="705" width="444" height="111" rx="10" fill="#f4f7f5"/>
+<rect x="88" y="705" width="4" height="111" rx="0" fill="#1a7a5e"/>
+<text x="108" y="742" font-family="Arial" font-size="27" fill="#123e33" text-anchor="start">I3  Alienation</text>
+<text x="108" y="775" font-family="Arial" font-size="20" fill="#566b65" text-anchor="start">Feeling unheard, dismissed or failed</text>
+<text x="108" y="801" font-family="Arial" font-size="18" fill="#1a7a5e" text-anchor="start">Score: 0–3</text>
+<text x="88" y="868" font-family="Arial" font-size="22" fill="#566b65" text-anchor="start">Scores describe evidence in the text.</text>
+<text x="678" y="320" font-family="Arial" font-size="25" fill="#123e33" text-anchor="start">Put each construct on a common scale</text>
+<text x="720" y="409" font-family="Georgia" font-size="38" fill="#123e33" text-anchor="start">z</text>
+<text x="740.9" y="417" font-family="Georgia" font-size="21.28" fill="#123e33" text-anchor="start">i</text>
+<text x="764" y="409" font-family="Georgia" font-size="36" fill="#123e33" text-anchor="start">=</text>
+<text x="822" y="387" font-family="Georgia" font-size="36" fill="#123e33" text-anchor="start">x</text>
+<text x="841.8" y="395" font-family="Georgia" font-size="20.160000000000004" fill="#123e33" text-anchor="start">i</text>
+<text x="866" y="387" font-family="Georgia" font-size="36" fill="#123e33" text-anchor="start">−</text>
+<text x="907" y="387" font-family="Georgia" font-size="36" fill="#123e33" text-anchor="start">μ</text>
+<text x="926.8" y="395" font-family="Georgia" font-size="20.160000000000004" fill="#123e33" text-anchor="start">i</text>
+<rect x="809" y="402" width="154" height="2" rx="0" fill="#123e33"/>
+<text x="866" y="443" font-family="Georgia" font-size="36" fill="#123e33" text-anchor="start">σ</text>
+<text x="885.8" y="451" font-family="Georgia" font-size="20.160000000000004" fill="#123e33" text-anchor="start">i</text>
+<text x="678" y="499" font-family="Arial" font-size="21" fill="#566b65" text-anchor="start">x: construct score · μ: reference mean</text>
+<text x="678" y="530" font-family="Arial" font-size="21" fill="#566b65" text-anchor="start">σ: reference standard deviation</text>
+<text x="678" y="561" font-family="Arial" font-size="21" fill="#566b65" text-anchor="start">i = 1, 2, 3</text>
+<rect x="678" y="589" width="444" height="1" rx="0" fill="#dce5df"/>
+<text x="678" y="633" font-family="Arial" font-size="28" fill="#123e33" text-anchor="start">Combine into one index</text>
+<text x="681" y="722" font-family="Georgia" font-size="32" fill="#123e33" text-anchor="start">W =</text>
+<text x="929" y="690" font-family="Georgia" font-size="35" fill="#123e33" text-anchor="middle">1</text>
+<rect x="769" y="704" width="348" height="2" rx="0" fill="#123e33"/>
+<text x="778" y="752" font-family="Georgia" font-size="25" fill="#123e33" text-anchor="start">1 + exp[α(</text>
+<text x="908" y="752" font-family="Georgia" font-size="27" fill="#123e33" text-anchor="start">z</text>
+<text x="922.85" y="760" font-family="Georgia" font-size="15.120000000000001" fill="#123e33" text-anchor="start">1</text>
+<text x="939" y="752" font-family="Georgia" font-size="25" fill="#123e33" text-anchor="start">+</text>
+<text x="965" y="752" font-family="Georgia" font-size="27" fill="#123e33" text-anchor="start">z</text>
+<text x="979.85" y="760" font-family="Georgia" font-size="15.120000000000001" fill="#123e33" text-anchor="start">2</text>
+<text x="996" y="752" font-family="Georgia" font-size="25" fill="#123e33" text-anchor="start">+</text>
+<text x="1022" y="752" font-family="Georgia" font-size="27" fill="#123e33" text-anchor="start">z</text>
+<text x="1036.85" y="760" font-family="Georgia" font-size="15.120000000000001" fill="#123e33" text-anchor="start">3</text>
+<text x="1054" y="752" font-family="Georgia" font-size="25" fill="#123e33" text-anchor="start">)]</text>
+<text x="678" y="809" font-family="Arial" font-size="21" fill="#566b65" text-anchor="start">α controls the index’s sensitivity.</text>
+<text x="678" y="841" font-family="Arial" font-size="21" fill="#566b65" text-anchor="start">The reference sample supplies μ and σ.</text>
+<text x="678" y="890" font-family="Arial" font-size="18" fill="#566b65" text-anchor="start">Calculation follows the analysis application.</text>
+<text x="1268" y="320" font-family="Arial" font-size="32" fill="#123e33" text-anchor="start">Overall wellbeing</text>
+<text x="1268" y="367" font-family="Arial" font-size="25" fill="#566b65" text-anchor="start">One index for each discourse,</text>
+<text x="1268" y="401" font-family="Arial" font-size="25" fill="#566b65" text-anchor="start">on a scale from 0 to 1.</text>
+<rect x="1268.0" y="482" width="4.5" height="28" rx="0" fill="#d35400"/>
+<rect x="1272.4" y="482" width="4.5" height="28" rx="0" fill="#d35704"/>
+<rect x="1276.8" y="482" width="4.5" height="28" rx="0" fill="#d45a09"/>
+<rect x="1281.2" y="482" width="4.5" height="28" rx="0" fill="#d45d0d"/>
+<rect x="1285.6" y="482" width="4.5" height="28" rx="0" fill="#d56011"/>
+<rect x="1290.0" y="482" width="4.5" height="28" rx="0" fill="#d56316"/>
+<rect x="1294.4" y="482" width="4.5" height="28" rx="0" fill="#d6651a"/>
+<rect x="1298.8" y="482" width="4.5" height="28" rx="0" fill="#d6681f"/>
+<rect x="1303.2" y="482" width="4.5" height="28" rx="0" fill="#d66b23"/>
+<rect x="1307.6" y="482" width="4.5" height="28" rx="0" fill="#d76e27"/>
+<rect x="1312.0" y="482" width="4.5" height="28" rx="0" fill="#d7712c"/>
+<rect x="1316.4" y="482" width="4.5" height="28" rx="0" fill="#d87430"/>
+<rect x="1320.8" y="482" width="4.5" height="28" rx="0" fill="#d87734"/>
+<rect x="1325.2" y="482" width="4.5" height="28" rx="0" fill="#d97a39"/>
+<rect x="1329.6" y="482" width="4.5" height="28" rx="0" fill="#d97d3d"/>
+<rect x="1334.0" y="482" width="4.5" height="28" rx="0" fill="#d98041"/>
+<rect x="1338.4" y="482" width="4.5" height="28" rx="0" fill="#da8346"/>
+<rect x="1342.8" y="482" width="4.5" height="28" rx="0" fill="#da854a"/>
+<rect x="1347.2" y="482" width="4.5" height="28" rx="0" fill="#db884f"/>
+<rect x="1351.6" y="482" width="4.5" height="28" rx="0" fill="#db8b53"/>
+<rect x="1356.0" y="482" width="4.5" height="28" rx="0" fill="#db8e57"/>
+<rect x="1360.4" y="482" width="4.5" height="28" rx="0" fill="#dc915c"/>
+<rect x="1364.8" y="482" width="4.5" height="28" rx="0" fill="#dc9460"/>
+<rect x="1369.2" y="482" width="4.5" height="28" rx="0" fill="#dd9764"/>
+<rect x="1373.6" y="482" width="4.5" height="28" rx="0" fill="#dd9a69"/>
+<rect x="1378.0" y="482" width="4.5" height="28" rx="0" fill="#de9d6d"/>
+<rect x="1382.4" y="482" width="4.5" height="28" rx="0" fill="#dea071"/>
+<rect x="1386.8" y="482" width="4.5" height="28" rx="0" fill="#dea376"/>
+<rect x="1391.2" y="482" width="4.5" height="28" rx="0" fill="#dfa57a"/>
+<rect x="1395.6" y="482" width="4.5" height="28" rx="0" fill="#dfa87f"/>
+<rect x="1400.0" y="482" width="4.5" height="28" rx="0" fill="#e0ab83"/>
+<rect x="1404.4" y="482" width="4.5" height="28" rx="0" fill="#e0ae87"/>
+<rect x="1408.8" y="482" width="4.5" height="28" rx="0" fill="#e1b18c"/>
+<rect x="1413.2" y="482" width="4.5" height="28" rx="0" fill="#e1b490"/>
+<rect x="1417.6" y="482" width="4.5" height="28" rx="0" fill="#e1b794"/>
+<rect x="1422.0" y="482" width="4.5" height="28" rx="0" fill="#e2ba99"/>
+<rect x="1426.4" y="482" width="4.5" height="28" rx="0" fill="#e2bd9d"/>
+<rect x="1430.8" y="482" width="4.5" height="28" rx="0" fill="#e3c0a1"/>
+<rect x="1435.2" y="482" width="4.5" height="28" rx="0" fill="#e3c3a6"/>
+<rect x="1439.6" y="482" width="4.5" height="28" rx="0" fill="#e4c5aa"/>
+<rect x="1444.0" y="482" width="4.5" height="28" rx="0" fill="#e4c8af"/>
+<rect x="1448.4" y="482" width="4.5" height="28" rx="0" fill="#e4cbb3"/>
+<rect x="1452.8" y="482" width="4.5" height="28" rx="0" fill="#e5ceb7"/>
+<rect x="1457.2" y="482" width="4.5" height="28" rx="0" fill="#e5d1bc"/>
+<rect x="1461.6" y="482" width="4.5" height="28" rx="0" fill="#e6d4c0"/>
+<rect x="1466.0" y="482" width="4.5" height="28" rx="0" fill="#e6d7c4"/>
+<rect x="1470.4" y="482" width="4.5" height="28" rx="0" fill="#e7dac9"/>
+<rect x="1474.8" y="482" width="4.5" height="28" rx="0" fill="#e7ddcd"/>
+<rect x="1479.2" y="482" width="4.5" height="28" rx="0" fill="#e7e0d1"/>
+<rect x="1483.6" y="482" width="4.5" height="28" rx="0" fill="#e8e3d6"/>
+<rect x="1488.0" y="482" width="4.5" height="28" rx="0" fill="#e6e3d7"/>
+<rect x="1492.4" y="482" width="4.5" height="28" rx="0" fill="#e2e2d5"/>
+<rect x="1496.8" y="482" width="4.5" height="28" rx="0" fill="#dde1d4"/>
+<rect x="1501.2" y="482" width="4.5" height="28" rx="0" fill="#d9dfd2"/>
+<rect x="1505.6" y="482" width="4.5" height="28" rx="0" fill="#d5ded0"/>
+<rect x="1510.0" y="482" width="4.5" height="28" rx="0" fill="#d1dccf"/>
+<rect x="1514.4" y="482" width="4.5" height="28" rx="0" fill="#ccdbcd"/>
+<rect x="1518.8" y="482" width="4.5" height="28" rx="0" fill="#c8dacb"/>
+<rect x="1523.2" y="482" width="4.5" height="28" rx="0" fill="#c4d8ca"/>
+<rect x="1527.6" y="482" width="4.5" height="28" rx="0" fill="#c0d7c8"/>
+<rect x="1532.0" y="482" width="4.5" height="28" rx="0" fill="#bbd6c6"/>
+<rect x="1536.4" y="482" width="4.5" height="28" rx="0" fill="#b7d4c5"/>
+<rect x="1540.8" y="482" width="4.5" height="28" rx="0" fill="#b3d3c3"/>
+<rect x="1545.2" y="482" width="4.5" height="28" rx="0" fill="#afd1c1"/>
+<rect x="1549.6" y="482" width="4.5" height="28" rx="0" fill="#aad0c0"/>
+<rect x="1554.0" y="482" width="4.5" height="28" rx="0" fill="#a6cfbe"/>
+<rect x="1558.4" y="482" width="4.5" height="28" rx="0" fill="#a2cdbc"/>
+<rect x="1562.8" y="482" width="4.5" height="28" rx="0" fill="#9eccbb"/>
+<rect x="1567.2" y="482" width="4.5" height="28" rx="0" fill="#9acbb9"/>
+<rect x="1571.6" y="482" width="4.5" height="28" rx="0" fill="#95c9b7"/>
+<rect x="1576.0" y="482" width="4.5" height="28" rx="0" fill="#91c8b6"/>
+<rect x="1580.4" y="482" width="4.5" height="28" rx="0" fill="#8dc6b4"/>
+<rect x="1584.8" y="482" width="4.5" height="28" rx="0" fill="#89c5b2"/>
+<rect x="1589.2" y="482" width="4.5" height="28" rx="0" fill="#84c4b1"/>
+<rect x="1593.6" y="482" width="4.5" height="28" rx="0" fill="#80c2af"/>
+<rect x="1598.0" y="482" width="4.5" height="28" rx="0" fill="#7cc1ad"/>
+<rect x="1602.4" y="482" width="4.5" height="28" rx="0" fill="#78c0ac"/>
+<rect x="1606.8" y="482" width="4.5" height="28" rx="0" fill="#73beaa"/>
+<rect x="1611.2" y="482" width="4.5" height="28" rx="0" fill="#6fbda8"/>
+<rect x="1615.6" y="482" width="4.5" height="28" rx="0" fill="#6bbba7"/>
+<rect x="1620.0" y="482" width="4.5" height="28" rx="0" fill="#67baa5"/>
+<rect x="1624.4" y="482" width="4.5" height="28" rx="0" fill="#62b9a3"/>
+<rect x="1628.8" y="482" width="4.5" height="28" rx="0" fill="#5eb7a2"/>
+<rect x="1633.2" y="482" width="4.5" height="28" rx="0" fill="#5ab6a0"/>
+<rect x="1637.6" y="482" width="4.5" height="28" rx="0" fill="#56b59e"/>
+<rect x="1642.0" y="482" width="4.5" height="28" rx="0" fill="#51b39c"/>
+<rect x="1646.4" y="482" width="4.5" height="28" rx="0" fill="#4db29b"/>
+<rect x="1650.8" y="482" width="4.5" height="28" rx="0" fill="#49b099"/>
+<rect x="1655.2" y="482" width="4.5" height="28" rx="0" fill="#45af97"/>
+<rect x="1659.6" y="482" width="4.5" height="28" rx="0" fill="#40ae96"/>
+<rect x="1664.0" y="482" width="4.5" height="28" rx="0" fill="#3cac94"/>
+<rect x="1668.4" y="482" width="4.5" height="28" rx="0" fill="#38ab92"/>
+<rect x="1672.8" y="482" width="4.5" height="28" rx="0" fill="#34aa91"/>
+<rect x="1677.2" y="482" width="4.5" height="28" rx="0" fill="#2fa88f"/>
+<rect x="1681.6" y="482" width="4.5" height="28" rx="0" fill="#2ba78d"/>
+<rect x="1686.0" y="482" width="4.5" height="28" rx="0" fill="#27a58c"/>
+<rect x="1690.4" y="482" width="4.5" height="28" rx="0" fill="#23a48a"/>
+<rect x="1694.8" y="482" width="4.5" height="28" rx="0" fill="#1ea388"/>
+<rect x="1699.2" y="482" width="4.5" height="28" rx="0" fill="#1aa187"/>
+<rect x="1703.6" y="482" width="4.5" height="28" rx="0" fill="#16a085"/>
+<text x="1268" y="549" font-family="Arial" font-size="24" fill="#123e33" text-anchor="start">0</text>
+<text x="1708" y="549" font-family="Arial" font-size="24" fill="#123e33" text-anchor="end">1</text>
+<text x="1268" y="590" font-family="Arial" font-size="25" fill="#566b65" text-anchor="start">worse</text>
+<text x="1708" y="590" font-family="Arial" font-size="25" fill="#566b65" text-anchor="end">better</text>
+<rect x="1268" y="635" width="444" height="145" rx="22" fill="#0f4c3a"/>
+<text x="1490" y="702" font-family="Arial" font-size="57" fill="#ffffff" text-anchor="middle">0.31</text>
+<text x="1490" y="745" font-family="Arial" font-size="25" fill="#b5d0c4" text-anchor="middle">for this discourse</text>
+<text x="1268" y="855" font-family="Arial" font-size="21" fill="#566b65" text-anchor="start">Example display; value is illustrative.</text>
+<rect x="60" y="961" width="1680" height="1" rx="0" fill="#dce5df"/>
+<text x="60" y="1008" font-family="Arial" font-size="24" fill="#123e33" text-anchor="start">Language-model scores are indicators derived from public discourse.</text>
+<text x="60" y="1045" font-family="Arial" font-size="20" fill="#566b65" text-anchor="start">The diagram explains the calculation; it does not show a measured example or a population-wide survey estimate.</text>
 </svg>
