@@ -1,4 +1,4 @@
-Review proposal only. Not applied to the DigiÉire page.
+Approved by the user and applied to the DigiÉire page as images/digieire-workflow.svg.
 
 Workflow follows the user's description:
 Public discourse in Ireland -> language-model extraction of wellbeing indicators -> flood-wellbeing model -> agent-based simulation through 2100 -> adaptation assessment.
