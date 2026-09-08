@@ -254,7 +254,16 @@
   var sparkEl = document.getElementById('burden-spark');
   var speedOut = document.getElementById('burden-speed-out');
   var sparkOut = document.getElementById('burden-spark-out');
-  var speed = 1, sparkGain = 1;
+  var yearEl = document.getElementById('burden-year-range');
+  var tipEl = document.getElementById('burden-tip');
+  var speed = +(speedEl && speedEl.value || 200) / 100;
+  var sparkGain = 1;
+
+  if (yearEl) {
+    yearEl.min = Y0;
+    yearEl.max = Y1;
+    yearEl.value = Y0;
+  }
 
   /* THE RANKING IS A CHART, so it is drawn like one. Each row carries a
      proportional gradient fill behind the text and a saturated rule beneath it,
@@ -301,6 +310,40 @@
     rows.push({ li: li, nm: nm, nb: nb, bar: bar });
   }
 
+  /* HOVER TELLS YOU WHAT YOU ARE POINTING AT, and does not stop the clock.
+     The figure carries a county and a count per year, not a per-event record --
+     the landing page's bundle deliberately leaves out names, catchments and
+     sources -- so the tooltip answers at the level the figure actually works:
+     this county, this year, this many. It updates in place as the years turn,
+     which is the point of not pausing. */
+  var tipCounty = null;
+  function moveTip(ev) {
+    if (!tipEl || !tipCounty) return;
+    var r = svg.getBoundingClientRect();
+    var x = ev.clientX - r.left + 14, y = ev.clientY - r.top + 14;
+    if (x > r.width - 170) x = Math.max(4, x - 190);
+    if (y > r.height - 80) y = Math.max(4, y - 92);
+    tipEl.style.left = x + 'px';
+    tipEl.style.top = y + 'px';
+  }
+  function drawTip() {
+    if (!tipEl) return;
+    if (!tipCounty) { tipEl.hidden = true; return; }
+    var n = (curCounts && curCounts[tipCounty]) || 0;
+    tipEl.textContent = '';
+    var h = document.createElement('div');
+    h.className = 'tip-h';
+    h.textContent = tipCounty;
+    var b = document.createElement('div');
+    b.className = 'tip-r';
+    b.textContent = n
+      ? n + (n === 1 ? ' record in ' : ' records in ') + years[at]
+      : 'no records in ' + years[at];
+    tipEl.appendChild(h);
+    tipEl.appendChild(b);
+    tipEl.hidden = false;
+  }
+
   var lit = null;
   function hover(name) {
     if (lit && pathOf[lit]) pathOf[lit].classList.remove('on');
@@ -319,6 +362,8 @@
     } else {
       for (var nm2 in pathOf) pathOf[nm2].style.removeProperty('stroke');
     }
+    tipCounty = name;
+    drawTip();
   }
 
   // ---- rendering one year -------------------------------------------------
@@ -334,6 +379,8 @@
 
     whenEl.textContent = yr;
     recEl.textContent = ids.length === 1 ? '1 record' : ids.length + ' records';
+    if (yearEl && +yearEl.value !== yr) yearEl.value = yr;
+    drawTip();          // the count under the cursor belongs to THIS year
 
     // map: lit events
     for (var i = 0; i < LIVE; i++) {
@@ -432,20 +479,42 @@
     }
   }
 
-  /* HOVERING THE MAP HOLDS THE YEAR. The pause is scoped to the map and to the
-     ranking, and not to the sliders: dragging Speed while the years froze would
-     make the slider look broken. The ranking is included because linking a row
-     to its county is pointless if the row is replaced mid-hover. */
+  /* HOVER NO LONGER PAUSES. It used to: the reasoning was that a ranking row
+     replaced mid-hover is unreadable. The year slider makes that argument moot
+     -- a reader who wants to hold a year now has an obvious way to do it -- and
+     a map that stops the moment the cursor crosses it feels broken rather than
+     considerate. The only thing that pauses the clock is dragging the year
+     itself, because playback and a dragging hand fighting over the same value
+     is the one combination that cannot be resolved.
+
+     `held` survives for exactly that: it is set on pointer-down over the year
+     track and cleared on release. */
   var host = document.getElementById('burden');
   var onScreen = false, held = false;
   function sync() { if (onScreen && !held) play(); else stop(); }
-  function holdOn()  { held = true;  sync(); }
-  function holdOff() { held = false; sync(); }
-  [svg, listEl].forEach(function (n) {
-    if (!n) return;
-    n.addEventListener('mouseenter', holdOn);
-    n.addEventListener('mouseleave', holdOff);
-  });
+
+  if (svg) {
+    svg.addEventListener('mousemove', moveTip);
+    svg.addEventListener('mouseleave', function () { hover(null); });
+  }
+
+  if (yearEl) {
+    yearEl.addEventListener('input', function () {
+      var i = years.indexOf(+yearEl.value);
+      if (i >= 0 && i !== at) show(i);
+    });
+    // Hold while the handle is being dragged, and let go on release. Pointer
+    // events cover mouse, pen and touch in one path; the keyboard needs no
+    // hold, because an arrow key is a discrete step rather than a drag.
+    yearEl.addEventListener('pointerdown', function () { held = true; sync(); });
+    ['pointerup', 'pointercancel'].forEach(function (e) {
+      window.addEventListener(e, function () {
+        if (!held) return;
+        held = false;
+        sync();
+      });
+    });
+  }
 
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (es) {

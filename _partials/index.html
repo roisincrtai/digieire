@@ -52,8 +52,11 @@
   <div class="wrap">
     <div class="burden-split">
       <figure class="burden-fig">
-        <svg id="burden-map" viewBox="0 0 460 570"
-             aria-label="Recorded Irish flood events, year by year"></svg>
+        <div class="burden-maprap">
+          <svg id="burden-map" viewBox="0 0 460 570"
+               aria-label="Recorded Irish flood events, year by year"></svg>
+          <div class="burden-tip" id="burden-tip" hidden></div>
+        </div>
         <div class="burden-key" id="burden-key" aria-hidden="true"></div>
         <figcaption id="burden-cap" class="burden-cap"></figcaption>
       </figure>
@@ -63,8 +66,8 @@
           <label class="sl">
             <span>Speed</span>
             <input type="range" id="burden-speed" min="40" max="260" step="10"
-                   value="100" aria-label="playback speed">
-            <output id="burden-speed-out">1.0&times;</output>
+                   value="200" aria-label="playback speed">
+            <output id="burden-speed-out">2.0&times;</output>
           </label>
           <label class="sl">
             <span>Sparkle</span>
@@ -73,6 +76,17 @@
             <output id="burden-spark-out">1.0&times;</output>
           </label>
         </div>
+
+        <!-- The year, as a track rather than a transport control. It plays
+             itself and the handle rides along; dragging it takes the year
+             wherever you want and playback picks up from there. There is
+             still no play button: the point is that nobody has to operate
+             this to read it. -->
+        <label class="burden-scrub">
+          <span class="sr">Year</span>
+          <input type="range" id="burden-year-range" step="1"
+                 aria-label="year">
+        </label>
 
         <p class="burden-when">
           <span id="burden-when">2012</span>

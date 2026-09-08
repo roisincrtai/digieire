@@ -501,6 +501,35 @@
 }
 .sl input:disabled { opacity: .45; }
 
+/* The year track. Full width under the two feel sliders, so it reads as the
+   figure's timeline rather than as a third setting. */
+.burden-scrub { display: block; margin: 14px 0 2px; }
+.burden-scrub input[type=range] {
+  width: 100%; accent-color: var(--green-900); cursor: grab;
+}
+.burden-scrub input[type=range]:active { cursor: grabbing; }
+
+/* ---- the hover read-out -------------------------------------------------
+   The landing page's bundle carries a county and a count per year, not a
+   per-event record, so the tooltip answers at that level: this county, this
+   year, this many. It follows the cursor inside the figure and never escapes
+   it, and it updates in place as the years turn — which is the point of the
+   map no longer stopping when the cursor arrives. */
+.burden-maprap { position: relative; }
+.burden-tip {
+  position: absolute; z-index: 5; pointer-events: none;
+  min-width: 130px; max-width: 190px; padding: 8px 10px;
+  background: #fff; border: 1px solid var(--green-900); border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(15, 76, 58, .18);
+  font-size: .78rem; line-height: 1.45; color: var(--ink-700);
+}
+.burden-tip[hidden] { display: none; }
+.burden-tip .tip-h {
+  font-weight: 700; color: var(--green-900); font-size: .82rem;
+  margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1px solid var(--line);
+}
+.burden-tip .tip-r { font-variant-numeric: tabular-nums; }
+
 .burden-when {
   display: flex; align-items: baseline; gap: 10px;
   margin: 16px 0 12px;

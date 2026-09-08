@@ -126,8 +126,10 @@ const PAGES=[['index.html','Project DigiÉire'],
       ok(d.querySelectorAll('#burden-bars defs linearGradient').length===12,
          'each month has its own season gradient');
       ok(d.querySelectorAll('#burden-key .k-ramp i').length===5,'sparkle key has five steps');
-      ok(d.querySelector('#burden-when').textContent==='2012','starts at 2012',
-         d.querySelector('#burden-when').textContent);
+      const shownYear=+d.querySelector('#burden-when').textContent;
+      ok(shownYear>=B.year_min && shownYear<=B.year_max,'a year in range is shown',shownYear);
+      ok(+d.querySelector('#burden-year-range').value===shownYear,
+         'the year track follows the figure',d.querySelector('#burden-year-range').value);
       const brows=[...d.querySelectorAll('#burden-list li')].filter(l=>!l.hidden);
       ok(brows.length>0 && brows.length<=6,'ranking populated',brows.length);
       ok(brows.every(l=>l.querySelector('.track .bar')),'ranking rows are bars on a track');
@@ -137,6 +139,40 @@ const PAGES=[['index.html','Project DigiÉire'],
          'no transport controls');
       ok(d.querySelectorAll('.burden-sliders input[type=range]').length===2,
          'speed and sparkle sliders');
+      ok(d.querySelector('#burden-speed').value==='200','speed defaults to 2x',
+         d.querySelector('#burden-speed').value);
+      ok(d.querySelector('#burden-speed-out').textContent.trim()==='2.0×',
+         'and says so',d.querySelector('#burden-speed-out').textContent);
+      const yr=d.querySelector('#burden-year-range');
+      ok(yr && +yr.min===B.year_min && +yr.max===B.year_max,'year track spans the record',
+         yr&&(yr.min+'-'+yr.max));
+
+      // dragging the year takes the figure with it
+      yr.value=String(B.year_max);
+      yr.dispatchEvent(new w.Event('input'));
+      ok(d.querySelector('#burden-when').textContent===String(B.year_max),
+         'dragging the year moves the figure',d.querySelector('#burden-when').textContent);
+
+      // hovering a county reads out that county for the year on screen,
+      // and does NOT stop the clock
+      const cty=d.querySelector('#burden-map .cty path.c');
+      cty.dispatchEvent(new w.MouseEvent('mouseenter',{bubbles:false}));
+      const tip=d.querySelector('#burden-tip');
+      const name=cty.querySelector('title').textContent;
+      ok(!tip.hidden,'hovering a county opens a read-out');
+      ok(tip.querySelector('.tip-h').textContent===name,'named correctly',
+         tip.querySelector('.tip-h').textContent+' vs '+name);
+      const want=(B.evt.filter(e=>e[2]===B.year_max && B.counties[e[4]]===name)).length;
+      const said=tip.querySelector('.tip-r').textContent;
+      ok(want? said.indexOf(String(want))===0 : /^no records/.test(said),
+         'and counted correctly for the year on screen',said+' (expected '+want+')');
+      const before=d.querySelector('#burden-when').textContent;
+      await sleep(1100);          // longer than one 2x step
+      ok(d.querySelector('#burden-when').textContent!==before,
+         'hovering the map does not pause playback',
+         'stuck on '+before);
+      cty.dispatchEvent(new w.MouseEvent('mouseleave',{bubbles:false}));
+      ok(tip.hidden,'leaving the map closes the read-out');
 
       ok(secs[1].querySelectorAll('.ack-item').length===4,'four acknowledgements',
          secs[1].querySelectorAll('.ack-item').length);
