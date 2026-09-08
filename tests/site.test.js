@@ -55,10 +55,10 @@ const PAGES=[['index.html','Project DigiÉire'],
     ok(abad.length===0,assets.length+' assets resolve',abad.join(', '));
     ok(!/loading/i.test(d.body.textContent),'no loading text');
     const brand=d.querySelector('.brand .brand-text i');
-    ok(brand && brand.textContent.trim()==='Irish Flood-Wellbeing Digital Twin',
+    ok(brand && brand.textContent.trim()==='Irish Digital Twin',
        'logo uses the short form',brand&&brand.textContent.trim());
     const fb=d.querySelector('.foot-brand');
-    ok(fb && /Irish Flood-Wellbeing Digital Twin/.test(fb.textContent),
+    ok(fb && /Irish Digital Twin/.test(fb.textContent),
        'footer brand matches the logo',fb&&fb.textContent.replace(/\s+/g,' ').trim());
     ok(!/What is published, and what is not/.test(d.body.textContent),
        'publication notice dropped');
@@ -71,6 +71,11 @@ const PAGES=[['index.html','Project DigiÉire'],
        cta&&cta.textContent.trim());
     if (p==='index.html') {
       ok(d.querySelectorAll('.cards .card').length===0,'section cards dropped');
+      const h1=d.querySelector('.hero h1');
+      ok(h1 && h1.firstChild.textContent.trim()==='DigiÉire Research Lab',
+         'hero names the research lab',h1&&h1.firstChild.textContent.trim());
+      ok(/A digital twin of Ireland/i.test(d.querySelector('.hero .eyebrow').textContent),
+         'eyebrow unchanged');
       ok(!/Start anywhere|The project, in five parts/.test(d.body.textContent),'"start anywhere" block dropped');
       const ack=[...d.querySelectorAll('.ack')].pop();
       ok(!!ack,'acknowledgements section present');
