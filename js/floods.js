@@ -34,6 +34,13 @@
      These four readers are the only place that is unpacked. */
   function look(list, i) { return (D.lookups[list] || [])[i] || '—'; }
   function srcName(i) { return look('source_type', i); }
+
+  /* NO WINDOW IS TYPED IN HERE. The extractor counts against these thresholds
+     and publishes them beside the counts, so the caption and the arithmetic
+     cannot drift apart. The fallbacks only matter for a bundle written before
+     the fields existed. */
+  var SINCE = (D.stats && D.stats.since_year) || 2000;
+  var FROM  = (D.stats && D.stats.chart_year_from) || 1950;
   function colourOf(p) { return SRC_COLOUR[srcName(p[3])] || '#94a3b8'; }
 
   function elt(tag, cls, text) {
@@ -62,7 +69,8 @@
   [
     [s.n_total.toLocaleString(), 'recorded flood events', 'OPW floodinfo.ie'],
     [s.n_dated.toLocaleString(), 'carry a date', s.year_min + '–' + s.year_max],
-    [s.n_since_2000.toLocaleString(), 'dated since 2000', 'of ' + s.n_dated.toLocaleString() + ' dated'],
+    [s.n_since_2000.toLocaleString(), 'dated since ' + SINCE,
+     'of ' + s.n_dated.toLocaleString() + ' dated'],
     [String((D.stats.top_catchments[0] || ['—'])[0]), 'busiest catchment',
      ((D.stats.top_catchments[0] || ['', 0])[1]) + ' events'],
     [String(topCounty[0]), 'most recorded events',
@@ -128,8 +136,8 @@
   mapBody.appendChild(legend);
 
   // by year
-  var yrBody = figure(right, 'Recorded events per year, 1950 onwards');
-  var byYear = (D.by_year || []).filter(function (r) { return r[0] >= 1950; });
+  var yrBody = figure(right, 'Recorded events per year, ' + FROM + ' onwards');
+  var byYear = (D.by_year || []).filter(function (r) { return r[0] >= FROM; });
   DASH.bars(yrBody, { rows: byYear, colour: '#2874a6', height: 250,
                       yLabel: 'events' });
 

@@ -72,7 +72,13 @@
   var wet10 = series('wet_days_ge_10mm');
   var rx5 = series('rx5day_mm');
 
-  var base = [1961, 1990], now = [1995, 2024];
+  /* THE PERIODS COME FROM THE BUNDLE, not from this file. The extractor
+     computes the baseline against them, so a label typed here would be a second
+     copy able to drift away from the number it describes. */
+  var base = IE.baseline_period || [1961, 1990];
+  var now = IE.recent_period || [1995, 2024];
+  var BASE = base[0] + '–' + String(base[1]).slice(-2);
+  var NOW = now[0] + '–' + now[1];
   function delta(rows, dp, unit) {
     var a = meanOver(rows, base[0], base[1]), b = meanOver(rows, now[0], now[1]);
     if (a === null || b === null) return '—';
@@ -83,7 +89,7 @@
   // ---- headline numbers, all computed from the plotted data --------------
   var kpis = elt('div', 'kpis');
   [
-    [delta(temp, 2, ' °C'), 'warmer', 'mean temperature, 1995–2024 vs 1961–90'],
+    [delta(temp, 2, ' °C'), 'warmer', 'mean temperature, ' + NOW + ' vs ' + BASE],
     [delta(rain, 0, ' mm'), 'more rain a year', 'annual total, same comparison'],
     [delta(wet10, 1, ' days'), 'more very wet days', 'island-mean ≥ 10 mm'],
     [delta(rx5, 1, ' mm'), 'bigger 5-day maximum', 'the wettest run of each year']
@@ -106,19 +112,19 @@
            + 'over the island of Ireland';
 
   var b1 = figure(grid, 'Annual mean temperature',
-    'Dashed line: the 1961–1990 normal. Ireland has warmed with the world, and '
+    'Dashed line: the ' + base[0] + '–' + base[1] + ' normal. Ireland has warmed with the world, and '
     + 'a warmer atmosphere carries more water vapour — about 7% more per degree.',
     cite);
   DASH.line(b1, { rows: temp, colour: '#b03a2e', dp: 1, trend: true,
                   yLabel: '°C', baseline: (IE.baseline || {}).tg_mean_C,
-                  baselineLabel: '1961–90 normal' });
+                  baselineLabel: BASE + ' normal' });
 
   var b2 = figure(grid, 'Annual rainfall total',
     'Wetter, but noisily so: year-to-year variability in Irish rainfall is large '
     + 'enough that the trend matters more than any single year.', cite);
   DASH.line(b2, { rows: rain, colour: '#2874a6', dp: 0, trend: true,
                   yLabel: 'mm', baseline: (IE.baseline || {}).rr_total_mm,
-                  baselineLabel: '1961–90 normal' });
+                  baselineLabel: BASE + ' normal' });
 
   var b3 = figure(grid, 'Winter rainfall (December–February)',
     'The season that floods. Winter rain falls on ground that is already '

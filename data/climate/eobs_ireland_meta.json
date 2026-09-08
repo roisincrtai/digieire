@@ -1,6 +1,6 @@
 {
  "format": 1,
- "generated": "2026-09-07T12:37:14",
+ "generated": "2026-09-08T13:58:23",
  "source": "E-OBS v32.0e daily gridded observations (0.25\u00b0)",
  "publisher": "ECA&D / Copernicus C3S",
  "cite": "E-OBS v32.0e (ECA&D)",
@@ -41,6 +41,14 @@
   "rx5day_mm"
  ],
  "wet_day_note": "thresholds are on the ISLAND-MEAN daily rainfall, not on a station, so they are lower than the ETCCDI station indices of the same name and should not be compared with them",
+ "baseline_period": [
+  1961,
+  1990
+ ],
+ "recent_period": [
+  1995,
+  2024
+ ],
  "baseline_1961_1990": {
   "tg_mean_C": 9.109,
   "rr_total_mm": 1187.0

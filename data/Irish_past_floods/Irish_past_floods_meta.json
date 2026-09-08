@@ -1,6 +1,6 @@
 {
  "format": 1,
- "generated": "2026-09-08T10:33:29",
+ "generated": "2026-09-08T13:56:16",
  "source": "https://www.floodinfo.ie/geoserver/wfs?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=opw:past_flood_event_app_fhmfloods_point_view&outputFormat=application/json&maxFeatures=10000",
  "source_fetched": "2026-04-21T10:08:26.958233Z",
  "publisher": "Office of Public Works (OPW), floodinfo.ie",
@@ -329,6 +329,8 @@
   "dropped_bad_coords": 1,
   "year_min": 1763,
   "year_max": 2023,
+  "since_year": 2000,
+  "chart_year_from": 1950,
   "n_since_2000": 2142,
   "n_since_1950": 2731,
   "busiest_years": [

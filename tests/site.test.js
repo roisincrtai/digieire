@@ -60,6 +60,11 @@ const PAGES=[['index.html','Project DigiÉire'],
     }
     ok(abad.length===0,assets.length+' assets resolve',abad.join(', '));
     ok(!/loading/i.test(d.body.textContent),'no loading text');
+    // NOTHING THE PAGE STATES MAY BE TYPED IN. Every figure comes from a
+    // published manifest at build time, so an unresolved placeholder or a
+    // stale hand-written count is a failure, not a cosmetic slip.
+    const desc=(d.querySelector('meta[name=description]')||{}).content||'';
+    ok(!/[{}]/.test(desc),'no unresolved placeholder in the description',desc);
     const brand=d.querySelector('.brand .brand-text i');
     ok(brand && brand.textContent.trim()==='Research Lab',
        'logo uses the short form',brand&&brand.textContent.trim());
@@ -239,11 +244,27 @@ const PAGES=[['index.html','Project DigiÉire'],
       ok(cs.by_county.reduce((a,b)=>a+b[1],0)===cs.n_total,'county counts sum to the catalogue');
       ok(cs.n_county_unassigned===0,'no event left unassigned',cs.n_county_unassigned);
       ok(!d.querySelector('main.page > .wrap > p.small.muted.narrow'),'floods page-bottom source note dropped');
+      const F=w.DIGIEIRE_FLOODS, fdesc=d.querySelector('meta[name=description]').content;
+      ok(fdesc.indexOf(F.stats.n_total.toLocaleString())===0,
+         'the description quotes the published count',fdesc.slice(0,40));
+      ok(!/\b(1950|2000)\b/.test(d.querySelector('#floods-dash').textContent)
+         || (F.stats.chart_year_from===1950 && F.stats.since_year===2000),
+         'year windows on the page come from the bundle');
+      const yrTitle=[...d.querySelectorAll('.dash-title')]
+        .find(t=>/Recorded events per year/.test(t.textContent));
+      ok(yrTitle && yrTitle.textContent.indexOf(String(F.stats.chart_year_from))>=0,
+         'the per-year chart names the bundle\'s window',yrTitle&&yrTitle.textContent);
     }
     if (p.includes('climate-change')) {
       ok(d.querySelectorAll('#climate-dash svg').length>=6,'climate charts drawn');
       ok(d.querySelectorAll('#climate-dash .kpi').length===4,'climate KPIs');
       ok(!d.querySelector('main.page > .wrap > p.small.muted.narrow'),'climate page-bottom source note dropped');
+      const C=w.DIGIEIRE_CLIMATE.ireland;
+      ok(Array.isArray(C.baseline_period) && Array.isArray(C.recent_period),
+         'the climate bundle publishes its periods',JSON.stringify(C.baseline_period));
+      const kpi=[...d.querySelectorAll('#climate-dash .kpi-s')].map(n=>n.textContent).join(' | ');
+      ok(kpi.indexOf(C.recent_period[0]+'–'+C.recent_period[1])>=0,
+         'the KPI names the bundle\'s recent period',kpi.slice(0,90));
     }
     if (p.includes('about')) {
       ok(d.querySelectorAll('.avatar').length===0,'no team photos');
