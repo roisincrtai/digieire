@@ -76,6 +76,10 @@ const PAGES=[['index.html','Project DigiÉire'],
          'hero names the research lab',h1&&h1.firstChild.textContent.trim());
       ok(/A digital twin of Ireland/i.test(d.querySelector('.hero .eyebrow').textContent),
          'eyebrow unchanged');
+      const sub=d.querySelector('.hero .h1-sub').textContent.replace(/\s+/g,' ').trim();
+      ok(sub==='Wellbeing research · AI for climate adaptation',
+         'sub-line names the two research fields',sub);
+      ok(!/\|/.test(sub),'no pipe in the hero');
       ok(!/Start anywhere|The project, in five parts/.test(d.body.textContent),'"start anywhere" block dropped');
       const ack=[...d.querySelectorAll('.ack')].pop();
       ok(!!ack,'acknowledgements section present');
