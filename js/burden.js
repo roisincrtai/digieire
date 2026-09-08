@@ -479,23 +479,29 @@
     }
   }
 
-  /* HOVER NO LONGER PAUSES. It used to: the reasoning was that a ranking row
-     replaced mid-hover is unreadable. The year slider makes that argument moot
-     -- a reader who wants to hold a year now has an obvious way to do it -- and
-     a map that stops the moment the cursor crosses it feels broken rather than
-     considerate. The only thing that pauses the clock is dragging the year
-     itself, because playback and a dragging hand fighting over the same value
+  /* TWO INDEPENDENT HOLDS, not one flag. Playback pauses while the cursor is
+     over the map -- so a county's read-out can be read without the number
+     changing underneath it -- and separately while the year handle is being
+     dragged, because playback and a dragging hand fighting over the same value
      is the one combination that cannot be resolved.
 
-     `held` survives for exactly that: it is set on pointer-down over the year
-     track and cleared on release. */
+     They are separate booleans because they overlap: releasing the year handle
+     with the cursor still on the map must NOT restart the clock, and a single
+     `held` would do exactly that. */
   var host = document.getElementById('burden');
-  var onScreen = false, held = false;
-  function sync() { if (onScreen && !held) play(); else stop(); }
+  var onScreen = false, overMap = false, dragging = false;
+  function sync() {
+    if (onScreen && !overMap && !dragging) play(); else stop();
+  }
 
   if (svg) {
+    svg.addEventListener('mouseenter', function () { overMap = true; sync(); });
     svg.addEventListener('mousemove', moveTip);
-    svg.addEventListener('mouseleave', function () { hover(null); });
+    svg.addEventListener('mouseleave', function () {
+      overMap = false;
+      hover(null);
+      sync();
+    });
   }
 
   if (yearEl) {
@@ -503,14 +509,13 @@
       var i = years.indexOf(+yearEl.value);
       if (i >= 0 && i !== at) show(i);
     });
-    // Hold while the handle is being dragged, and let go on release. Pointer
-    // events cover mouse, pen and touch in one path; the keyboard needs no
-    // hold, because an arrow key is a discrete step rather than a drag.
-    yearEl.addEventListener('pointerdown', function () { held = true; sync(); });
+    // Pointer events cover mouse, pen and touch in one path. The keyboard needs
+    // no hold, because an arrow key is a discrete step rather than a drag.
+    yearEl.addEventListener('pointerdown', function () { dragging = true; sync(); });
     ['pointerup', 'pointercancel'].forEach(function (e) {
       window.addEventListener(e, function () {
-        if (!held) return;
-        held = false;
+        if (!dragging) return;
+        dragging = false;
         sync();
       });
     });

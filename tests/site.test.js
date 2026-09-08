@@ -166,13 +166,21 @@ const PAGES=[['index.html','Project DigiÉire'],
       const said=tip.querySelector('.tip-r').textContent;
       ok(want? said.indexOf(String(want))===0 : /^no records/.test(said),
          'and counted correctly for the year on screen',said+' (expected '+want+')');
-      const before=d.querySelector('#burden-when').textContent;
+      // the cursor over the map holds the year, so the read-out can be read
+      const mapSvg=d.querySelector('#burden-map');
+      mapSvg.dispatchEvent(new w.MouseEvent('mouseenter',{bubbles:false}));
+      const held=d.querySelector('#burden-when').textContent;
       await sleep(1100);          // longer than one 2x step
-      ok(d.querySelector('#burden-when').textContent!==before,
-         'hovering the map does not pause playback',
-         'stuck on '+before);
+      ok(d.querySelector('#burden-when').textContent===held,
+         'the cursor over the map holds the year',
+         'moved from '+held+' to '+d.querySelector('#burden-when').textContent);
+      // and leaving lets it go again
       cty.dispatchEvent(new w.MouseEvent('mouseleave',{bubbles:false}));
+      mapSvg.dispatchEvent(new w.MouseEvent('mouseleave',{bubbles:false}));
       ok(tip.hidden,'leaving the map closes the read-out');
+      await sleep(1100);
+      ok(d.querySelector('#burden-when').textContent!==held,
+         'and playback resumes on leave','still on '+held);
 
       ok(secs[1].querySelectorAll('.ack-item').length===4,'four acknowledgements',
          secs[1].querySelectorAll('.ack-item').length);
