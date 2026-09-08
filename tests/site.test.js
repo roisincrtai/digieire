@@ -39,6 +39,13 @@ const PAGES=[['index.html','Project DigiÉire'],
     const assets=[...d.querySelectorAll('link[href],script[src],img[src]')]
       .map(e=>e.getAttribute('href')||e.getAttribute('src'));
     ok(assets.every(s=>!/^https?:|^\/\//.test(s)),'all assets relative');
+    // Every stylesheet and script carries a content hash, so a new script can
+    // never be served beside a stale stylesheet. The query is all that is
+    // added — the path stays relative, so file:// is unaffected.
+    const stamped=assets.filter(x=>/\.(css|js)$/.test(x.split('?')[0]));
+    ok(stamped.length>0 && stamped.every(x=>/\?v=[0-9a-f]{12}$/.test(x)),
+       stamped.length+' css/js assets are content-stamped',
+       stamped.filter(x=>!/\?v=/.test(x)).join(', '));
     let abad=[];
     for (const a of [...new Set(assets)]) {
       const base=p.includes('/')?p.replace(/[^/]+$/,''):'';
