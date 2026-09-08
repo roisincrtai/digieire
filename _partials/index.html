@@ -27,6 +27,57 @@
   </div>
 </div>
 
+<!-- ============ THE PROPOSED SECTION ============
+     No heading and no transport controls: it plays itself, a year at a time,
+     and reads as an illustration following the hero rather than a chapter of
+     its own. The two sliders are the exception — they change how the figure
+     FEELS, never which year is shown or what it counts, so nobody has to touch
+     them to read it. Map, month bars and ranking all step together. -->
+<section class="section" id="burden">
+  <div class="wrap">
+    <div class="burden-split">
+      <figure class="burden-fig">
+        <svg id="burden-map" viewBox="0 0 460 570"
+             aria-label="Recorded Irish flood events, year by year"></svg>
+        <div class="burden-key" id="burden-key" aria-hidden="true"></div>
+        <figcaption id="burden-cap" class="burden-cap"></figcaption>
+      </figure>
+
+      <aside class="burden-panel">
+        <div class="burden-sliders">
+          <label class="sl">
+            <span>Speed</span>
+            <input type="range" id="burden-speed" min="40" max="260" step="10"
+                   value="100" aria-label="playback speed">
+            <output id="burden-speed-out">1.0&times;</output>
+          </label>
+          <label class="sl">
+            <span>Sparkle</span>
+            <input type="range" id="burden-spark" min="0" max="200" step="10"
+                   value="100" aria-label="sparkle intensity">
+            <output id="burden-spark-out">1.0&times;</output>
+          </label>
+        </div>
+
+        <p class="burden-when">
+          <span id="burden-when">2012</span>
+          <span id="burden-records" class="burden-records"></span>
+        </p>
+
+        <svg id="burden-bars" class="burden-bars"
+             aria-label="Records by month, January to December"></svg>
+
+        <h3 class="burden-h">Busiest areas</h3>
+        <ul class="burden-list" id="burden-list"></ul>
+        <p class="burden-note">
+          Counties are assigned here by position, not by the publisher &mdash;
+          hover the map or the list to link the two.
+        </p>
+      </aside>
+    </div>
+  </div>
+</section>
+
 <!-- Project collaborators and acknowledgements. -->
 <section class="section home-credits">
   <div class="wrap">

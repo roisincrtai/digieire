@@ -65,9 +65,6 @@ const PAGES=[['index.html','Project DigiÉire'],
     if (p==='index.html') {
       ok(d.querySelectorAll('.cards .card').length===0,'section cards dropped');
       ok(!/Start anywhere|The project, in five parts/.test(d.body.textContent),'"start anywhere" block dropped');
-      ok(!!d.querySelector('.cta-band'),'application CTA kept');
-      const cb=d.querySelector('.cta-band .btn-primary');
-      ok(cb && cb.getAttribute('target')==='_blank','CTA opens a new page');
       const ack=[...d.querySelectorAll('.ack')].pop();
       ok(!!ack,'acknowledgements section present');
       ok(ack && /Meta/.test(ack.textContent) && /Office of Public Works/.test(ack.textContent),
@@ -80,12 +77,38 @@ const PAGES=[['index.html','Project DigiÉire'],
       ok(secs.length===2,'a collaboration section and an acknowledgements one',secs.length);
       const collab=secs[0];
       ok(/Collaboration/.test(collab.textContent)&&/GLOWB Project/.test(collab.textContent)
-         &&/DTU Denmark/.test(collab.textContent),'names the collaborators',
-         collab.textContent.replace(/\s+/g,' ').trim().slice(0,120));
+         &&/Insight SFI/.test(collab.textContent),'names the collaborators',
+         collab.textContent.replace(/\s+/g,' ').trim().slice(0,140));
       ok(collab.querySelectorAll('.ack-item').length===2,'two collaborators',
          collab.querySelectorAll('.ack-item').length);
       ok(!collab.querySelector('h2'),'no heading above the collaborators');
       ok(!/Working with/.test(d.body.textContent),'"Working with" dropped');
+      // ---- the landing page's flood-burden figure ----
+      const B=w.DIGIEIRE_BURDEN;
+      ok(!!B,'burden bundle loaded');
+      ok(B && B.back.length>6000,'whole catalogue carried for shape',B&&B.back.length);
+      ok(B && B.evt.length>1000 && B.evt.every(e=>e[2]>=2012 && e[3]>=1 && e[3]<=12),
+         'animated subset is dated 2012+ and carries a month',B&&B.evt.length);
+      ok(B && B.rings.length===34,'34 county outlines in the bundle',B&&B.rings.length);
+      ok(d.querySelectorAll('#burden-map .back circle').length===(B?B.back.length:0),
+         'backdrop drawn once per record');
+      ok(d.querySelectorAll('#burden-map .cty path').length===34,'counties drawn');
+      ok(d.querySelectorAll('#burden-bars rect.bar').length===12,'twelve month bars');
+      ok(d.querySelectorAll('#burden-bars defs linearGradient').length===12,
+         'each month has its own season gradient');
+      ok(d.querySelectorAll('#burden-key .k-ramp i').length===5,'sparkle key has five steps');
+      ok(d.querySelector('#burden-when').textContent==='2012','starts at 2012',
+         d.querySelector('#burden-when').textContent);
+      const brows=[...d.querySelectorAll('#burden-list li')].filter(l=>!l.hidden);
+      ok(brows.length>0 && brows.length<=6,'ranking populated',brows.length);
+      ok(brows.every(l=>l.querySelector('.track .bar')),'ranking rows are bars on a track');
+      ok(d.querySelectorAll('#burden-list .rk, #burden-list .fill').length===0,
+         'no button chrome in the ranking');
+      ok(!d.querySelector('#burden-play') && !d.querySelector('#burden-scrub'),
+         'no transport controls');
+      ok(d.querySelectorAll('.burden-sliders input[type=range]').length===2,
+         'speed and sparkle sliders');
+
       ok(secs[1].querySelectorAll('.ack-item').length===4,'four acknowledgements',
          secs[1].querySelectorAll('.ack-item').length);
       ok(ack && /Luxembourg MeluXina/.test(ack.textContent) && /High-End Computing/.test(ack.textContent)

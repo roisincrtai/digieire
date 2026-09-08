@@ -1,6 +1,6 @@
 {
  "format": 1,
- "generated": "2026-09-07T13:09:41",
+ "generated": "2026-09-08T10:33:29",
  "source": "https://www.floodinfo.ie/geoserver/wfs?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=opw:past_flood_event_app_fhmfloods_point_view&outputFormat=application/json&maxFeatures=10000",
  "source_fetched": "2026-04-21T10:08:26.958233Z",
  "publisher": "Office of Public Works (OPW), floodinfo.ie",

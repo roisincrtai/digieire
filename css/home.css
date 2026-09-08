@@ -430,3 +430,160 @@
 .card--data { background: linear-gradient(180deg, #fff 0%, var(--blue-100) 100%); }
 .card--data .card-kind { color: var(--blue-500); }
 .card--data .card-go { color: var(--blue-700); }
+
+/* ---- the landing page's flood-burden figure ------------------------------
+   A map, a month bar chart and a ranking, stepping through one year at a
+   time. See homepage/js/burden.js for what each layer means; this file is
+   only how it looks. */
+
+
+
+#burden { padding-top: 30px; }
+.burden-split {
+  display: grid; grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
+  gap: 34px; align-items: start;
+}
+.burden-fig {
+  margin: 0; background: #fff; border: 1px solid var(--line);
+  border-radius: var(--radius, 12px); padding: 10px 10px 0;
+}
+#burden-map { display: block; width: 100%; height: auto; }
+.burden-key {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 6px 0; font: 500 10.5px var(--mono); color: var(--ink-500);
+}
+.burden-key .k-ramp { display: flex; gap: 2px; }
+.burden-key .k-ramp i {
+  width: 15px; height: 7px; border-radius: 1.5px; display: block;
+}
+.burden-key .k-lab { white-space: nowrap; }
+
+.burden-cap {
+  font-size: 12.5px; line-height: 1.5; color: var(--ink-500);
+  padding: 10px 6px; border-top: 1px solid #eef2f0; margin-top: 4px;
+}
+.burden-cap.warn { color: #8a5313; }
+
+/* ---- the map layers ---- */
+#burden-map .w { fill: var(--green-500); transition: fill-opacity .6s ease; }
+#burden-map .c {
+  fill: none; stroke: #c8d3cd; stroke-width: .7; stroke-linejoin: round;
+  cursor: crosshair; outline: none;
+}
+#burden-map .c.on { stroke: var(--green-900); stroke-width: 1.8; }
+#burden-map .c:focus-visible { stroke: var(--blue-500); stroke-width: 2; }
+/* The whole record: present enough to draw the island, faint enough that it
+   can never be mistaken for the selected year. */
+#burden-map .b { fill: #9fb3ab; fill-opacity: .30; }
+#burden-map .l {
+  fill: var(--blue-500); fill-opacity: .92; stroke: #fff; stroke-width: .5;
+  transition: r .35s ease;
+}
+#burden-map .s {
+  fill: #fff5cf; stroke: #f2c14e; stroke-width: .7; pointer-events: none;
+}
+
+/* ---- the panel ---- */
+.burden-panel { padding-top: 2px; }
+
+.burden-sliders {
+  display: flex; flex-wrap: wrap; gap: 10px 22px;
+  padding-bottom: 14px; border-bottom: 1px solid var(--line);
+}
+.sl { display: inline-flex; align-items: center; gap: 8px; }
+.sl > span {
+  font: 700 10px/1 var(--mono); letter-spacing: .09em; text-transform: uppercase;
+  color: var(--ink-500);
+}
+.sl input[type=range] { width: 96px; accent-color: var(--green-900); }
+.sl output {
+  font: 600 11px var(--mono); color: var(--ink-700); min-width: 2.6em;
+}
+.sl input:disabled { opacity: .45; }
+
+.burden-when {
+  display: flex; align-items: baseline; gap: 10px;
+  margin: 16px 0 12px;
+}
+#burden-when {
+  font: 700 40px/1 var(--serif); color: var(--green-900);
+  font-variant-numeric: tabular-nums; letter-spacing: -.02em;
+}
+.burden-when .dot { color: var(--line); }
+.burden-records { font: 600 14px var(--sans); color: var(--ink-500); }
+
+/* ---- month bars ---- */
+.burden-bars { display: block; width: 100%; height: auto; margin-bottom: 22px; }
+.burden-bars .ax { stroke: var(--line); stroke-width: 1; }
+.burden-bars .bt { font: 500 9px var(--mono); fill: var(--ink-500); }
+.burden-bars .bm { font: 600 9px var(--mono); fill: var(--ink-500); }
+.burden-bars .bar {
+  fill-opacity: .92;
+  transition: y .5s cubic-bezier(.22, .61, .36, 1),
+              height .5s cubic-bezier(.22, .61, .36, 1),
+              fill-opacity .2s ease;
+}
+.burden-bars .bar:hover { fill-opacity: 1; }
+/* A zero month is drawn as nothing, not as a sliver: a bar one pixel high
+   would read as "a few" when the answer is "none recorded". */
+.burden-bars .bar.zero { fill-opacity: 0; }
+
+/* ---- ranking -------------------------------------------------------------
+   NO BOXES. The previous version tinted each row as a rounded rectangle with a
+   numbered medallion, and six of those in a column read as a stack of buttons —
+   things that look pressable and are not. This is the same data with the chrome
+   removed: a name, a number, and a bar on a hairline track. The only colour is
+   in the bar, which is the part that carries the value; --c1/--c2 shade it by
+   rank, deep bog green through to Atlantic blue, as ordinal decoration over an
+   order the position already gave. */
+.burden-h {
+  font: 700 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-500); margin: 0 0 14px;
+}
+.burden-list { list-style: none; margin: 0; padding: 0; }
+.burden-list li {
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: baseline; column-gap: 14px; row-gap: 6px;
+  padding: 0 0 15px; margin: 0; background: none; border: 0;
+  cursor: default;
+}
+.burden-list li[hidden] { display: none; }
+
+.burden-list .nm {
+  font-size: 15px; font-weight: 500; color: var(--ink-700);
+  letter-spacing: -.005em;
+  transition: color .2s ease;
+}
+.burden-list b {
+  font: 600 15px var(--mono); color: var(--ink-500);
+  font-variant-numeric: tabular-nums;
+  transition: color .2s ease;
+}
+
+/* A hairline track behind every bar, so short bars still read as short rather
+   than as missing, and the six rows share one baseline the eye can measure
+   against. */
+.burden-list .track {
+  grid-column: 1 / -1;
+  height: 4px; border-radius: 2px; background: #edf1ef; overflow: hidden;
+}
+.burden-list .bar {
+  display: block; height: 100%; width: 0; border-radius: 2px;
+  background: linear-gradient(90deg, var(--c1), var(--c2));
+  transition: width .6s cubic-bezier(.22, .61, .36, 1);
+}
+
+.burden-list li.on .nm,
+.burden-list li:hover .nm { color: var(--c1); font-weight: 600; }
+.burden-list li.on b,
+.burden-list li:hover b { color: var(--c1); }
+
+.burden-note { font-size: 12.5px; color: var(--ink-500); margin: 16px 0 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  #burden-map .w, #burden-map .l,
+  .burden-bars .bar, .burden-list .bar { transition: none; }
+}
+@media (max-width: 900px) {
+  .burden-split { grid-template-columns: 1fr; }
+}
