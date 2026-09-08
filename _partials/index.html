@@ -77,16 +77,24 @@
           </label>
         </div>
 
-        <!-- The year, as a track rather than a transport control. It plays
-             itself and the handle rides along; dragging it takes the year
-             wherever you want and playback picks up from there. There is
-             still no play button: the point is that nobody has to operate
-             this to read it. -->
-        <label class="burden-scrub">
-          <span class="sr">Year</span>
-          <input type="range" id="burden-year-range" step="1"
-                 aria-label="year">
-        </label>
+        <!-- The year, as a track rather than a transport control: the same
+             shape the analysis dashboard uses, so a reader who meets both
+             recognises the second one. Bars are the annual record, the handle
+             rides along as it plays, and dragging takes the year wherever you
+             want. Still no play button — nobody has to operate this to read
+             it. -->
+        <section class="burden-timeline" aria-label="Year timeline">
+          <div class="burden-track">
+            <svg id="burden-history" viewBox="0 0 1000 48"
+                 preserveAspectRatio="none" aria-hidden="true"></svg>
+            <label class="sr" for="burden-year-range">Year shown on the map</label>
+            <input id="burden-year-range" type="range" step="1">
+            <div class="burden-years" id="burden-years"></div>
+          </div>
+          <p class="burden-track-note">
+            Annual OPW records &middot; bars show recorded floods
+          </p>
+        </section>
 
         <p class="burden-when">
           <span id="burden-when">2012</span>

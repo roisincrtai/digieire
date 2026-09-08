@@ -122,6 +122,28 @@ const PAGES=[['index.html','Project DigiÉire'],
       ok(d.querySelectorAll('#burden-map .back circle').length===(B?B.back.length:0),
          'backdrop drawn once per record');
       ok(d.querySelectorAll('#burden-map .cty path').length===34,'counties drawn');
+      // fill:none paths are only hoverable on their stroke unless this is set,
+      // which is what made hovering appear not to work at all
+      const c0=d.querySelector('#burden-map .cty path.c');
+      ok(w.getComputedStyle(c0).pointerEvents==='all','county outlines are hittable',
+         w.getComputedStyle(c0).pointerEvents);
+      ['.back circle','.live circle'].forEach(sel=>{
+        const n=d.querySelector('#burden-map '+sel);
+        ok(n && w.getComputedStyle(n).pointerEvents==='none',
+           sel+' does not intercept the cursor',n&&w.getComputedStyle(n).pointerEvents);
+      });
+
+      // the year timeline, built like the dashboard's
+      ok(d.querySelectorAll('#burden-history rect').length===B.year_max-B.year_min+1,
+         'a bar per year',d.querySelectorAll('#burden-history rect').length);
+      ok(d.querySelectorAll('#burden-years span').length===B.year_max-B.year_min+1,
+         'a label per year');
+      ok(d.querySelector('#burden-years span').textContent===String(B.year_min),
+         'labels start at the first year');
+      const darkNow=[...d.querySelectorAll('#burden-history rect')]
+        .filter(r=>r.getAttribute('fill')==='#0f4c3a').length;
+      ok(darkNow===1,'exactly one bar marks the current year',darkNow);
+      ok(!!d.querySelector('.burden-track-note'),'the track is captioned');
       ok(d.querySelectorAll('#burden-bars rect.bar').length===12,'twelve month bars');
       ok(d.querySelectorAll('#burden-bars defs linearGradient').length===12,
          'each month has its own season gradient');
@@ -167,8 +189,8 @@ const PAGES=[['index.html','Project DigiÉire'],
       ok(want? said.indexOf(String(want))===0 : /^no records/.test(said),
          'and counted correctly for the year on screen',said+' (expected '+want+')');
       // the cursor over the map holds the year, so the read-out can be read
-      const mapSvg=d.querySelector('#burden-map');
-      mapSvg.dispatchEvent(new w.MouseEvent('mouseenter',{bubbles:false}));
+      const mapBox=d.querySelector('.burden-maprap');
+      mapBox.dispatchEvent(new w.MouseEvent('mouseenter',{bubbles:false}));
       const held=d.querySelector('#burden-when').textContent;
       await sleep(1100);          // longer than one 2x step
       ok(d.querySelector('#burden-when').textContent===held,
@@ -176,7 +198,7 @@ const PAGES=[['index.html','Project DigiÉire'],
          'moved from '+held+' to '+d.querySelector('#burden-when').textContent);
       // and leaving lets it go again
       cty.dispatchEvent(new w.MouseEvent('mouseleave',{bubbles:false}));
-      mapSvg.dispatchEvent(new w.MouseEvent('mouseleave',{bubbles:false}));
+      mapBox.dispatchEvent(new w.MouseEvent('mouseleave',{bubbles:false}));
       ok(tip.hidden,'leaving the map closes the read-out');
       await sleep(1100);
       ok(d.querySelector('#burden-when').textContent!==held,

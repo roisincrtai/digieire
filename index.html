@@ -14,7 +14,7 @@
      stylesheets and small scripts, so it renders identically from a web server
      and from a double-clicked file:// folder. -->
 <link rel="stylesheet" href="css/base.css?v=6f84e44408f7">
-<link rel="stylesheet" href="css/home.css?v=f0db6ea0273b">
+<link rel="stylesheet" href="css/home.css?v=60f630615ff0">
 <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -128,16 +128,24 @@
           </label>
         </div>
 
-        <!-- The year, as a track rather than a transport control. It plays
-             itself and the handle rides along; dragging it takes the year
-             wherever you want and playback picks up from there. There is
-             still no play button: the point is that nobody has to operate
-             this to read it. -->
-        <label class="burden-scrub">
-          <span class="sr">Year</span>
-          <input type="range" id="burden-year-range" step="1"
-                 aria-label="year">
-        </label>
+        <!-- The year, as a track rather than a transport control: the same
+             shape the analysis dashboard uses, so a reader who meets both
+             recognises the second one. Bars are the annual record, the handle
+             rides along as it plays, and dragging takes the year wherever you
+             want. Still no play button — nobody has to operate this to read
+             it. -->
+        <section class="burden-timeline" aria-label="Year timeline">
+          <div class="burden-track">
+            <svg id="burden-history" viewBox="0 0 1000 48"
+                 preserveAspectRatio="none" aria-hidden="true"></svg>
+            <label class="sr" for="burden-year-range">Year shown on the map</label>
+            <input id="burden-year-range" type="range" step="1">
+            <div class="burden-years" id="burden-years"></div>
+          </div>
+          <p class="burden-track-note">
+            Annual OPW records &middot; bars show recorded floods
+          </p>
+        </section>
 
         <p class="burden-when">
           <span id="burden-when">2012</span>
@@ -250,7 +258,7 @@
      mechanism browsers allow over file://, and it means no page has a loading
      state. Prose pages load none of it. -->
 <script src="data/Irish_past_floods/burden_page.js?v=bc68c42e58bb"></script>
-<script src="js/burden.js?v=1df76edc7fe9"></script>
+<script src="js/burden.js?v=3d090ae382ab"></script>
 <script src="js/home.js?v=f094ce34149a"></script>
 </body>
 </html>

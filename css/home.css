@@ -465,19 +465,36 @@
 .burden-cap.warn { color: #8a5313; }
 
 /* ---- the map layers ---- */
-#burden-map .w { fill: var(--green-500); transition: fill-opacity .6s ease; }
+#burden-map .w {
+  fill: var(--green-500); transition: fill-opacity .6s ease;
+  pointer-events: none;
+}
+/* THE COUNTY OUTLINES ARE THE HIT LAYER, and `fill: none` nearly broke that.
+   An SVG path with no fill is only hoverable on its STROKE under the default
+   `visiblePainted` rule -- 0.7 px of boundary line -- so the interior of every
+   county was dead to the cursor and hovering appeared not to work at all.
+   `pointer-events: all` makes the whole enclosed area hittable while still
+   painting nothing; the wash underneath remains what you actually see. */
 #burden-map .c {
   fill: none; stroke: #c8d3cd; stroke-width: .7; stroke-linejoin: round;
   cursor: crosshair; outline: none;
+  pointer-events: all;
 }
 #burden-map .c.on { stroke: var(--green-900); stroke-width: 1.8; }
 #burden-map .c:focus-visible { stroke: var(--blue-500); stroke-width: 2; }
 /* The whole record: present enough to draw the island, faint enough that it
    can never be mistaken for the selected year. */
-#burden-map .b { fill: #9fb3ab; fill-opacity: .30; }
+/* The three point layers are drawn ABOVE the outlines, so without this they
+   intercept the cursor before it ever reaches a county. They are pictures, not
+   targets: nothing about a single dot is readable at this size. */
+#burden-map .b {
+  fill: #9fb3ab; fill-opacity: .30;
+  pointer-events: none;
+}
 #burden-map .l {
   fill: var(--blue-500); fill-opacity: .92; stroke: #fff; stroke-width: .5;
   transition: r .35s ease;
+  pointer-events: none;
 }
 #burden-map .s {
   fill: #fff5cf; stroke: #f2c14e; stroke-width: .7; pointer-events: none;
@@ -501,13 +518,39 @@
 }
 .sl input:disabled { opacity: .45; }
 
-/* The year track. Full width under the two feel sliders, so it reads as the
-   figure's timeline rather than as a third setting. */
-.burden-scrub { display: block; margin: 14px 0 2px; }
-.burden-scrub input[type=range] {
-  width: 100%; accent-color: var(--green-900); cursor: grab;
+/* ---- the year timeline --------------------------------------------------
+   Deliberately the same shape as the analysis dashboard's: a tinted panel, a
+   bar per year above the track, the year labels beneath, and a one-line note.
+   Someone who meets both should recognise the second one rather than have to
+   learn it twice. */
+.burden-timeline {
+  border: 1px solid #d6e3dc; background: #eef4f0; border-radius: 12px;
+  padding: 14px 18px 11px; margin: 14px 0 4px;
 }
-.burden-scrub input[type=range]:active { cursor: grabbing; }
+.burden-track { min-width: 0; }
+#burden-history { display: block; width: 100%; height: 36px; }
+#burden-history rect { transition: fill .35s ease; }
+#burden-year-range {
+  display: block; width: 100%; margin: 3px 0;
+  accent-color: var(--green-900); cursor: ew-resize;
+}
+/* Absolutely positioned rather than space-between, so each label sits under
+   its own bar instead of being distributed evenly and drifting out of line. */
+.burden-years {
+  display: block; position: relative; height: 14px;
+  color: var(--ink-500); font: 500 10px/1.4 var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+.burden-years span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.burden-years span:first-child { transform: none; }
+.burden-years span:last-child { transform: translateX(-100%); }
+.burden-years span.on { color: var(--green-900); font-weight: 700; }
+.burden-track-note {
+  margin: 7px 0 0; color: var(--ink-500); font-size: 10px;
+}
+@media (max-width: 620px) {
+  .burden-years span:nth-child(even):not(:last-child) { visibility: hidden; }
+}
 
 /* ---- the hover read-out -------------------------------------------------
    The landing page's bundle carries a county and a count per year, not a

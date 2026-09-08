@@ -259,10 +259,42 @@
   var speed = +(speedEl && speedEl.value || 200) / 100;
   var sparkGain = 1;
 
+  /* THE YEAR TRACK, built the way the analysis dashboard builds its own: a bar
+     per year across a 1000-unit viewBox, the labels absolutely positioned under
+     their bars, and the current year's bar recoloured rather than redrawn. The
+     bar heights use the year's own total, on a linear scale -- there are only
+     twelve of them and the tallest is four times the median, so nothing needs
+     compressing here. */
+  var histEl = document.getElementById('burden-history');
+  var yearsEl = document.getElementById('burden-years');
+  var histBar = {}, yearTick = {};
+
   if (yearEl) {
     yearEl.min = Y0;
     yearEl.max = Y1;
     yearEl.value = Y0;
+  }
+  if (histEl && yearsEl) {
+    var histMax = 0;
+    years.forEach(function (yy) {
+      if (perYear[yy].length > histMax) histMax = perYear[yy].length;
+    });
+    var span = Math.max(1, years.length - 1);
+    years.forEach(function (yy, i) {
+      var h = histMax ? perYear[yy].length / histMax * 44 : 0;
+      var r = el('rect', {
+        x: (10 + i * 980 / span - 10).toFixed(1), y: (48 - h).toFixed(1),
+        width: 20, height: h.toFixed(1), rx: 2, fill: '#aecabc'
+      });
+      histEl.appendChild(r);
+      histBar[yy] = r;
+
+      var tick = document.createElement('span');
+      tick.textContent = yy;
+      tick.style.left = (i * 100 / span) + '%';
+      yearsEl.appendChild(tick);
+      yearTick[yy] = tick;
+    });
   }
 
   /* THE RANKING IS A CHART, so it is drawn like one. Each row carries a
@@ -380,6 +412,10 @@
     whenEl.textContent = yr;
     recEl.textContent = ids.length === 1 ? '1 record' : ids.length + ' records';
     if (yearEl && +yearEl.value !== yr) yearEl.value = yr;
+    years.forEach(function (yy) {
+      if (histBar[yy]) histBar[yy].setAttribute('fill', yy === yr ? '#0f4c3a' : '#aecabc');
+      if (yearTick[yy]) yearTick[yy].classList.toggle('on', yy === yr);
+    });
     drawTip();          // the count under the cursor belongs to THIS year
 
     // map: lit events
@@ -494,10 +530,16 @@
     if (onScreen && !overMap && !dragging) play(); else stop();
   }
 
-  if (svg) {
-    svg.addEventListener('mouseenter', function () { overMap = true; sync(); });
-    svg.addEventListener('mousemove', moveTip);
-    svg.addEventListener('mouseleave', function () {
+  /* The hold is bound to the WRAPPER, not to the <svg>. An svg root only
+     reports enter/leave over painted content in some engines, so binding there
+     made the pause depend on whether the cursor happened to be over a dot. The
+     wrapper is a plain box and has no such ambiguity. */
+  var maprap = svg && (svg.closest ? svg.closest('.burden-maprap') : null);
+  var hitbox = maprap || svg;
+  if (hitbox) {
+    hitbox.addEventListener('mouseenter', function () { overMap = true; sync(); });
+    hitbox.addEventListener('mousemove', moveTip);
+    hitbox.addEventListener('mouseleave', function () {
       overMap = false;
       hover(null);
       sync();
