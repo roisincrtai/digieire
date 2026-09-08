@@ -20,11 +20,17 @@ const PAGES=[['index.html','Project DigiÉire'],
     console.log('\n— '+p);
     ok(!!d.querySelector('h1'),'has an h1');
     const nav=[...d.querySelectorAll('.nav a')].map(a=>a.textContent.trim());
-    ok(JSON.stringify(nav.slice(0,6))===JSON.stringify(['Mission','DigiÉire','Data','Irish Floods','Climate Change','About us']),
+    ok(JSON.stringify(nav.slice(0,7))===JSON.stringify(['Home','Mission','DigiÉire','Data','Irish Floods','Climate Change','About us']),
        'nav complete and in order',nav.join(' | '));
-    if (label!=='Project DigiÉire' || p!=='index.html') {
+    const home=[...d.querySelectorAll('.nav a')].find(a=>a.textContent.trim()==='Home');
+    const brandA=d.querySelector('a.brand');
+    ok(home && brandA && home.getAttribute('href')===brandA.getAttribute('href'),
+       'Home and the wordmark point to the same place',
+       (home&&home.getAttribute('href'))+' vs '+(brandA&&brandA.getAttribute('href')));
+    {
       const cur=[...d.querySelectorAll('.nav a.is-current')].map(a=>a.textContent.trim());
-      if (p!=='index.html') ok(cur.length===1 && cur[0]===label,'current page marked in nav',cur.join(','));
+      const want=p==='index.html'?'Home':label;
+      ok(cur.length===1 && cur[0]===want,'current page marked in nav',cur.join(','));
     }
     // every local link resolves
     const links=[...d.querySelectorAll('a[href]')].map(a=>a.getAttribute('href'))
