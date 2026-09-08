@@ -80,6 +80,13 @@ const PAGES=[['index.html','Project DigiÉire'],
       ok(sub==='Wellbeing research · AI for climate adaptation',
          'sub-line names the two research fields',sub);
       ok(!/\|/.test(sub),'no pipe in the hero');
+      const lede=d.querySelector('.hero .lede').textContent.replace(/\s+/g,' ').trim();
+      ok(/DigiÉire aims to develop a digital twin of Ireland, underpinned by AI/.test(lede),
+         'lede frames AI as the approach',lede.slice(0,200));
+      ok(/puts AI to work on a public good/.test(lede),'lede ties AI to its purpose');
+      ok(!/agent-based/.test(lede),'no method name in the hero');
+      ok(!/flooding due to climate change/.test(lede),'no repeated "climate change"');
+      ok(/coastal and inland flooding/.test(lede),'both flood mechanisms named');
       ok(!/Start anywhere|The project, in five parts/.test(d.body.textContent),'"start anywhere" block dropped');
       const ack=[...d.querySelectorAll('.ack')].pop();
       ok(!!ack,'acknowledgements section present');
