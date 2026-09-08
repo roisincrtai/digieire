@@ -55,10 +55,10 @@ const PAGES=[['index.html','Project DigiÉire'],
     ok(abad.length===0,assets.length+' assets resolve',abad.join(', '));
     ok(!/loading/i.test(d.body.textContent),'no loading text');
     const brand=d.querySelector('.brand .brand-text i');
-    ok(brand && brand.textContent.trim()==='Irish Digital Twin',
+    ok(brand && brand.textContent.trim()==='Research Lab',
        'logo uses the short form',brand&&brand.textContent.trim());
     const fb=d.querySelector('.foot-brand');
-    ok(fb && /Irish Digital Twin/.test(fb.textContent),
+    ok(fb && /Research Lab/.test(fb.textContent),
        'footer brand matches the logo',fb&&fb.textContent.replace(/\s+/g,' ').trim());
     ok(!/What is published, and what is not/.test(d.body.textContent),
        'publication notice dropped');
