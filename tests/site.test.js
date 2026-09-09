@@ -155,6 +155,19 @@ const PAGES=[['index.html','Project DigiÉire'],
       ok(d.querySelectorAll('#burden-bars rect.bar').length===12,'twelve month bars');
       ok(d.querySelectorAll('#burden-bars defs linearGradient').length===12,
          'each month has its own season gradient');
+      // The shared axis maximum is a fixed number on an animated figure, which
+      // reads as a bug unless it says what it is. It must be derived, and
+      // labelled with the month that set it.
+      const axLabels=[...d.querySelectorAll('#burden-bars text.bt')].map(t=>t.textContent);
+      const peak=Math.max(...Array.from({length:B.year_max-B.year_min+1},(_,i)=>{
+        const y=B.year_min+i, m=new Array(12).fill(0);
+        B.evt.forEach(e=>{ if(e[2]===y) m[e[3]-1]++; });
+        return Math.max(...m);
+      }));
+      ok(axLabels.indexOf(String(peak))>=0,'the axis maximum comes from the data',
+         axLabels.join(' | ')+' (expected '+peak+')');
+      const when=axLabels.find(t=>/scale fixed/.test(t));
+      ok(when && /\b(19|20)\d{2}\b/.test(when),'and names the month that set it',when);
       ok(d.querySelectorAll('#burden-key .k-ramp i').length===5,'sparkle key has five steps');
       const shownYear=+d.querySelector('#burden-when').textContent;
       ok(shownYear>=B.year_min && shownYear<=B.year_max,'a year in range is shown',shownYear);

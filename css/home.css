@@ -596,6 +596,10 @@
 .burden-bars { display: block; width: 100%; height: auto; margin-bottom: 22px; }
 .burden-bars .ax { stroke: var(--line); stroke-width: 1; }
 .burden-bars .bt { font: 500 9px var(--mono); fill: var(--ink-500); }
+.burden-bars .bt-when { font-size: 8.5px; fill: #9aa5a0; }
+.burden-bars .axmax {
+  stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 3;
+}
 .burden-bars .bm { font: 600 9px var(--mono); fill: var(--ink-500); }
 .burden-bars .bar {
   fill-opacity: .92;

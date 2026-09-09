@@ -84,10 +84,16 @@
     if (p[3] >= 1 && p[3] <= 12) byMonth[yr][p[3] - 1] += 1;
   });
 
-  var washMax = 0, barMax = 0;
+  /* The month bars share one axis across every year, so its maximum is a fixed
+     number on an animated figure -- and an unlabelled fixed number reads as a
+     bug rather than as an axis. Remember WHICH month set it, so the label can
+     say so: "294 · Dec 2015" is a reference point, "294" alone is a mystery. */
+  var washMax = 0, barMax = 0, barMaxWhen = '';
   years.forEach(function (yy) {
     for (var c in byCounty[yy]) if (byCounty[yy][c] > washMax) washMax = byCounty[yy][c];
-    byMonth[yy].forEach(function (n) { if (n > barMax) barMax = n; });
+    byMonth[yy].forEach(function (n, mi) {
+      if (n > barMax) { barMax = n; barMaxWhen = MI[mi] + ' ' + yy; }
+    });
   });
 
   // ---- map layers ---------------------------------------------------------
@@ -165,10 +171,19 @@
   bars.appendChild(el('line', {
     x1: bpad.l, x2: bw - bpad.r, y1: bpad.t + bIH, y2: bpad.t + bIH, class: 'ax'
   }));
-  bars.appendChild(el('text', { x: bpad.l - 6, y: bpad.t + 7, class: 'bt',
+  // A rule at the ceiling, so the maximum reads as part of an axis rather than
+  // as a number someone left on the page.
+  bars.appendChild(el('line', {
+    x1: bpad.l, x2: bw - bpad.r, y1: bpad.t + 2, y2: bpad.t + 2, class: 'axmax'
+  }));
+  bars.appendChild(el('text', { x: bpad.l - 6, y: bpad.t + 6, class: 'bt',
                                 'text-anchor': 'end' }, String(barMax)));
   bars.appendChild(el('text', { x: bpad.l - 6, y: bpad.t + bIH, class: 'bt',
                                 'text-anchor': 'end' }, '0'));
+  // and it says when it happened, which is the whole reason it never moves
+  bars.appendChild(el('text', {
+    x: bw - bpad.r, y: bpad.t + 6, class: 'bt bt-when', 'text-anchor': 'end'
+  }, 'scale fixed to the record’s busiest month · ' + barMaxWhen));
 
   /* THE MONTH BARS ARE COLOURED BY SEASON, not by value. Irish flooding is a
      winter story — the Atlantic storm track, saturated ground and the highest
