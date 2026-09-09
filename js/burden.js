@@ -57,6 +57,9 @@
 
   // ---- index the record ---------------------------------------------------
   var Y0 = D.year_min, Y1 = D.year_max;
+  // The last year the OPW's own catalogue reaches. Everything after it comes
+  // from the curated supplement, and the caption says so.
+  var OPW_MAX = D.opw_year_max || null;
   var years = [];
   for (var y = Y0; y <= Y1; y++) years.push(y);
 
@@ -463,10 +466,21 @@
       r.bar.style.width = (100 * t[1] / hi) + '%';
     });
 
-    // caption: honest about the thin tail, rather than letting an empty map
-    // assert that Ireland stopped flooding
-    var thin = ids.length < 12;
-    capEl.textContent = thin
+    /* THE CAPTION NAMES THE SOURCE OF THE YEAR ON SCREEN. Two different things
+       can make a year look quiet, and a reader cannot tell them apart from the
+       map: the OPW's own record thinning as it catches up, and the years after
+       its record simply ends, which are covered here by a curated handful of
+       named storms rather than by a data-collection programme. Saying which is
+       the whole reason the supplement can be shown at all. */
+    var afterOPW = OPW_MAX && yr > OPW_MAX;
+    var thin = !afterOPW && ids.length < 12;
+    capEl.textContent = afterOPW
+      ? yr + ': ' + ids.length + ' curated event'
+        + (ids.length === 1 ? '' : 's') + '. The OPW catalogue ends in '
+        + OPW_MAX + ' — it publishes years in arrears — so ' + yr + ' is our '
+        + 'own record of named storms, not a survey. It shows where flooding '
+        + 'was reported nationally, and nothing about the counties it misses.'
+      : thin
       ? yr + ' carries only ' + ids.length + ' dated record'
         + (ids.length === 1 ? '' : 's') + '. The OPW catalogue thins towards '
         + 'the present — that is record-keeping catching up, not a year '
@@ -475,7 +489,7 @@
         + 'them is the whole recorded catalogue, drawn for shape. County '
         + 'shading uses a square-root scale; the month bars share one axis '
         + 'across every year, so their heights are comparable.';
-    capEl.classList.toggle('warn', thin);
+    capEl.classList.toggle('warn', thin || afterOPW);
   }
 
   // ---- the loop -----------------------------------------------------------

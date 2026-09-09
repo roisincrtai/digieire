@@ -218,6 +218,14 @@
   font-weight: 700; color: var(--blue-700);
 }
 .m-affil { color: var(--ink-500); font-size: .92rem; }
+.m-affil a { color: inherit; }
+/* What the person works on, under the three columns rather than beside them:
+   it is a sentence, and a sentence in a narrow column becomes a paragraph. */
+.m-research {
+  grid-column: 1 / -1;
+  color: var(--ink-700); font-size: .92rem;
+  padding-left: 12px; border-left: 2px solid var(--green-100);
+}
 @media (max-width: 760px) {
   .member { grid-template-columns: 1fr; gap: 3px; }
 }

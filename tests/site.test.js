@@ -69,6 +69,9 @@ const PAGES=[['index.html','Project DigiÉire'],
     ok(brand && brand.textContent.trim()==='Research Lab',
        'logo uses the short form',brand&&brand.textContent.trim());
     const fb=d.querySelector('.foot-brand');
+    ok(fb && fb.textContent.trim()==='DigiÉire Research Lab',
+       'the footer names the lab in one line',fb&&fb.textContent.trim());
+    ok(fb && !/Project/.test(fb.textContent),'and does not call it a project');
     ok(fb && /Research Lab/.test(fb.textContent),
        'footer brand matches the logo',fb&&fb.textContent.replace(/\s+/g,' ').trim());
     ok(!/What is published, and what is not/.test(d.body.textContent),
@@ -237,12 +240,35 @@ const PAGES=[['index.html','Project DigiÉire'],
       ok(!!d.querySelector('#floods-dash .dash-tip'),'tooltip element present');
       ok(!!d.querySelector('#floods-dash circle.dash-halo'),'hover halo present');
       const pt=w.DIGIEIRE_FLOODS.points[0], lk=w.DIGIEIRE_FLOODS.lookups;
-      ok(pt.length===8,'points carry the tooltip fields',pt.length);
+      ok(pt.length===w.DIGIEIRE_FLOODS.point_format.length,
+         'points match their declared format',
+         pt.length+' vs '+w.DIGIEIRE_FLOODS.point_format.length);
+      ok(w.DIGIEIRE_FLOODS.point_format.indexOf('dataset')>=0,
+         'points name their source dataset');
       ok(typeof lk.name[pt[7]]==='string' && lk.name[pt[7]].length>0,'point resolves a name',lk.name[pt[7]]);
       ok(typeof lk.county[pt[6]]==='string','point resolves a county',lk.county[pt[6]]);
       const cs=w.DIGIEIRE_FLOODS.stats;
       ok(cs.by_county.reduce((a,b)=>a+b[1],0)===cs.n_total,'county counts sum to the catalogue');
       ok(cs.n_county_unassigned===0,'no event left unassigned',cs.n_county_unassigned);
+
+      // THE CURATED SUPPLEMENT. Two sources, one figure, and the split stated:
+      // the totals must add up, the OPW record must stop where it says it
+      // stops, and every curated row must be reachable back to a citation.
+      const ds=Object.fromEntries(cs.by_dataset);
+      ok(ds.opw>0 && ds.curated>0,'both datasets present',JSON.stringify(cs.by_dataset));
+      ok(ds.opw+ds.curated===cs.n_total,'the two sources sum to the total',
+         ds.opw+'+'+ds.curated+' vs '+cs.n_total);
+      ok(cs.opw_year_max<cs.year_max,'the curated rows extend past the OPW record',
+         cs.opw_year_max+' -> '+cs.year_max);
+      const cur=cs.curated;
+      ok(cur && cur.n===ds.curated,'the provenance block counts what was merged');
+      ok(cur.places.every(p=>/^https:\/\//.test(p.url)),'every curated event cites a source');
+      ok(cur.places.every(p=>p.opw_records_matched>0),
+         'every curated point was located from OPW records');
+      const dsIx=w.DIGIEIRE_FLOODS.lookups.dataset.indexOf('curated');
+      const curPts=w.DIGIEIRE_FLOODS.points.filter(p=>p[8]===dsIx);
+      ok(curPts.length===ds.curated,'the map carries every curated point',curPts.length);
+      ok(curPts.every(p=>p[2]>cs.opw_year_max),'and all of them post-date the OPW record');
       ok(!d.querySelector('main.page > .wrap > p.small.muted.narrow'),'floods page-bottom source note dropped');
       const F=w.DIGIEIRE_FLOODS, fdesc=d.querySelector('meta[name=description]').content;
       ok(fdesc.indexOf(F.stats.n_total.toLocaleString())===0,
@@ -267,6 +293,22 @@ const PAGES=[['index.html','Project DigiÉire'],
          'the KPI names the bundle\'s recent period',kpi.slice(0,90));
     }
     if (p.includes('about')) {
+      ok(d.querySelector('h1').textContent.trim()==='Research','About page is titled Research',
+         d.querySelector('h1').textContent);
+      const pi=d.querySelectorAll('.team-rows .member')[0];
+      const flat=n=>n.textContent.replace(/\s+/g,' ').trim();
+      ok(/Prof\. Karyn Morrissey/.test(flat(pi)),'the PI is Prof.',flat(pi).slice(0,50));
+      const piLink=pi.querySelector('.m-name a');
+      ok(piLink && /karyn-marie-morrissey/.test(piLink.getAttribute('href')),
+         'and links to her profile',piLink&&piLink.getAttribute('href'));
+      ok(/Ryan Institute/.test(flat(pi)),'her affiliations include the Ryan Institute');
+      const pd=d.querySelectorAll('.team-rows .member')[1];
+      ok(pd.querySelector('.m-research'),'the postdoc row states a research focus');
+      ok(/large language models/i.test(flat(pd.querySelector('.m-research'))),
+         'and names it',flat(pd.querySelector('.m-research')));
+      const lede=d.querySelector('.lede').textContent.replace(/\s+/g,' ');
+      ok(!/^Project DigiÉire/.test(lede.trim()),'the lede does not say "Project"',lede.slice(0,40));
+      ok(/large language models \(LLMs\)/.test(lede),'and names the lab\'s methods');
       ok(d.querySelectorAll('.avatar').length===0,'no team photos');
       ok(!/Get in touch/.test(d.body.textContent),'"Get in touch" aside dropped');
       ok(!/TO BE COMPLETED/.test(d.body.textContent),'no unfilled placeholders left');

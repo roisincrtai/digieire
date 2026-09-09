@@ -1,6 +1,6 @@
 {
  "format": 1,
- "generated": "2026-09-08T13:56:16",
+ "generated": "2026-09-09T10:07:12",
  "source": "https://www.floodinfo.ie/geoserver/wfs?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=opw:past_flood_event_app_fhmfloods_point_view&outputFormat=application/json&maxFeatures=10000",
  "source_fetched": "2026-04-21T10:08:26.958233Z",
  "publisher": "Office of Public Works (OPW), floodinfo.ie",
@@ -16,7 +16,8 @@
   "severity",
   "no_reports",
   "name",
-  "county"
+  "county",
+  "dataset"
  ],
  "row_note": "year and month are null for undated records; source_type, record_type, catchment and county index the lists below",
  "county_note": "county is DERIVED, not published: the grid position tested against simplified local-authority boundaries (tools/homepage/extract_ireland_counties.py), with a 3 km nearest-boundary fallback for coastal records",
@@ -320,19 +321,23 @@
    "Wicklow County",
    "Cork City",
    "Waterford City"
+  ],
+  "dataset": [
+   "opw",
+   "curated"
   ]
  },
  "stats": {
-  "n_total": 6494,
-  "n_dated": 2796,
+  "n_total": 6506,
+  "n_dated": 2808,
   "n_undated": 3698,
   "dropped_bad_coords": 1,
   "year_min": 1763,
-  "year_max": 2023,
+  "year_max": 2026,
   "since_year": 2000,
   "chart_year_from": 1950,
-  "n_since_2000": 2142,
-  "n_since_1950": 2731,
+  "n_since_2000": 2154,
+  "n_since_1950": 2743,
   "busiest_years": [
    [
     2015,
@@ -362,7 +367,7 @@
   "by_source": [
    [
     "River",
-    3096
+    3104
    ],
    [
     "—",
@@ -374,11 +379,11 @@
    ],
    [
     "Coastal/Estuarine Waters",
-    582
+    584
    ],
    [
     "Runoff",
-    409
+    411
    ],
    [
     "Turlough",
@@ -400,7 +405,7 @@
    ],
    [
     "Dated Flood",
-    2698
+    2710
    ],
    [
     "Undated Flood",
@@ -453,18 +458,186 @@
     135
    ]
   ],
+  "by_dataset": [
+   [
+    "opw",
+    6494
+   ],
+   [
+    "curated",
+    12
+   ]
+  ],
+  "opw_year_max": 2023,
+  "curated": {
+   "n": 12,
+   "by_year": {
+    "2024": 4,
+    "2025": 2,
+    "2026": 6
+   },
+   "places": [
+    {
+     "date": "2024-11-23",
+     "place": "Killybegs",
+     "county": "Donegal County",
+     "storm": "Storm Bert",
+     "confidence": "confirmed",
+     "opw_match": "Killybegs",
+     "opw_records_matched": 1,
+     "url": "https://www.rte.ie/news/ireland/2024/1123/1482525-storm-bert/"
+    },
+    {
+     "date": "2024-11-23",
+     "place": "Ballingeary (Béal Átha an Ghaorthaidh)",
+     "county": "Cork County",
+     "storm": "Storm Bert",
+     "confidence": "confirmed",
+     "opw_match": "Ballingeary",
+     "opw_records_matched": 7,
+     "url": "https://www.irishexaminer.com/news/munster/arid-41522570.html"
+    },
+    {
+     "date": "2024-11-23",
+     "place": "Riverstick",
+     "county": "Cork County",
+     "storm": "Storm Bert",
+     "confidence": "confirmed",
+     "opw_match": "Riverstick",
+     "opw_records_matched": 6,
+     "url": "https://www.irishexaminer.com/news/munster/arid-41522570.html"
+    },
+    {
+     "date": "2024-11-23",
+     "place": "Clifden",
+     "county": "Galway County",
+     "storm": "Storm Bert",
+     "confidence": "confirmed",
+     "opw_match": "Clifden",
+     "opw_records_matched": 11,
+     "url": "https://www.irishtimes.com/ireland/2024/11/23/storm-bert-live-updates-11000-homes-and-businesses-remain-without-power-in-counties-worst-affected/"
+    },
+    {
+     "date": "2025-01-24",
+     "place": "Salthill, Galway",
+     "county": "Galway City",
+     "storm": "Storm Éowyn",
+     "confidence": "confirmed",
+     "opw_match": "Salthill",
+     "opw_records_matched": 10,
+     "url": "https://yaleclimateconnections.org/2025/01/storm-eowyn-brings-hurricane-level-destruction-to-ireland/"
+    },
+    {
+     "date": "2025-11-14",
+     "place": "Boyne valley, Meath",
+     "county": "Meath County",
+     "storm": "Storm Claudia",
+     "confidence": "approximate",
+     "opw_match": "Boyne",
+     "opw_records_matched": 68,
+     "url": "https://www.irishtimes.com/ireland/2025/11/15/weather-ireland-storm-claudia-triggers-significant-flooding-and-impassible-roads/"
+    },
+    {
+     "date": "2026-01-27",
+     "place": "Enniscorthy",
+     "county": "Wexford County",
+     "storm": "Storm Chandra",
+     "confidence": "confirmed",
+     "opw_match": "Enniscorthy",
+     "opw_records_matched": 16,
+     "url": "https://www.irishtimes.com/ireland/2026/01/27/homes-and-businesses-in-wexford-dublin-and-wicklow-flooded-after-storm-chandra-deluge/"
+    },
+    {
+     "date": "2026-01-27",
+     "place": "Dodder valley, south Dublin",
+     "county": "Dublin City",
+     "storm": "Storm Chandra",
+     "confidence": "confirmed",
+     "opw_match": "Dodder",
+     "opw_records_matched": 30,
+     "url": "https://www.irishtimes.com/ireland/2026/01/27/homes-and-businesses-in-wexford-dublin-and-wicklow-flooded-after-storm-chandra-deluge/"
+    },
+    {
+     "date": "2026-01-27",
+     "place": "Wicklow",
+     "county": "Wicklow County",
+     "storm": "Storm Chandra",
+     "confidence": "reported",
+     "opw_match": "Wicklow",
+     "opw_records_matched": 27,
+     "url": "https://www.irishtimes.com/ireland/2026/01/27/homes-and-businesses-in-wexford-dublin-and-wicklow-flooded-after-storm-chandra-deluge/"
+    },
+    {
+     "date": "2026-02-06",
+     "place": "Clontarf, Dublin",
+     "county": "Dublin City",
+     "storm": "February 2026 rainfall",
+     "confidence": "confirmed",
+     "opw_match": "Clontarf",
+     "opw_records_matched": 9,
+     "url": "https://www.irishtimes.com/environment/2026/02/06/live-weather-updates-rain-warnings/"
+    },
+    {
+     "date": "2026-02-06",
+     "place": "Waterford",
+     "county": "Waterford City",
+     "storm": "February 2026 rainfall",
+     "confidence": "confirmed",
+     "opw_match": "Waterford",
+     "opw_records_matched": 21,
+     "url": "https://www.irishtimes.com/environment/2026/02/06/live-weather-updates-rain-warnings/"
+    },
+    {
+     "date": "2026-02-05",
+     "place": "Bunclody",
+     "county": "Wexford County",
+     "storm": "February 2026 rainfall",
+     "confidence": "reported",
+     "opw_match": "Bunclody",
+     "opw_records_matched": 3,
+     "url": "https://www.irishtimes.com/environment/2026/02/05/live-weather-warnings-ireland-met-eireann-dublin-flooding/"
+    }
+   ],
+   "curated_at": "2026-09-09",
+   "rules": [
+    "One record per PLACE per EVENT, never per storm: a storm that flooded four",
+    "towns is four records, so the map shows four points.",
+    "A record is admitted only when a cited source states that flooding OCCURRED",
+    "at a named place. Warnings, forecasts and 'risk of flooding' are excluded --",
+    "they are the single easiest way to inflate a flood record.",
+    "Dates are the date of the FLOODING, not of the article reporting it.",
+    "Every record carries the URL it came from, so any figure drawn from it can",
+    "be checked back to a source."
+   ],
+   "geocoding": {
+    "method": "opw_place_median",
+    "note": [
+     "No external geocoder is used. Each place is located at the MEDIAN of the",
+     "Irish Grid coordinates of every OPW record whose flood name contains that",
+     "place -- so a curated point sits exactly where the OPW itself has already",
+     "put that town, in the same coordinate system, reproducibly, and with no",
+     "new dependency. `opw_match` is the string matched; the resolver fails",
+     "loudly if it matches nothing rather than guessing."
+    ]
+   },
+   "excluded_deliberately": [
+    "Storm Darragh (6-7 December 2024): severe wind and power loss, but no named place was reported flooded.",
+    "Storm Amy (3 October 2025): wind and marine warnings; no named place reported flooded.",
+    "Every 'risk of flooding' and warning-area listing. A county under an orange rain warning is not a flooded county, and treating it as one would roughly triple this file with events that may not have happened."
+   ]
+  },
   "by_county": [
    [
     "Cork County",
-    731
+    733
    ],
    [
     "Galway County",
-    723
+    724
    ],
    [
     "Donegal County",
-    400
+    401
    ],
    [
     "South Tipperary",
@@ -484,7 +657,7 @@
    ],
    [
     "Meath County",
-    245
+    246
    ],
    [
     "Cavan County",
@@ -516,7 +689,7 @@
    ],
    [
     "Wexford County",
-    177
+    179
    ],
    [
     "Monaghan County",
@@ -528,11 +701,11 @@
    ],
    [
     "Dublin City",
-    133
+    135
    ],
    [
     "Wicklow County",
-    125
+    126
    ],
    [
     "Fingal",
@@ -584,11 +757,11 @@
    ],
    [
     "Galway City",
-    23
+    24
    ],
    [
     "Waterford City",
-    10
+    11
    ]
   ],
   "n_county_unassigned": 0,
@@ -598,7 +771,7 @@
  },
  "caveats": [
   "A record of REPORTED events, not a census of floods and not a hazard map.",
-  "Only 2,796 of 6,494 records carry a date, so every figure over time describes the dated subset.",
+  "Only 2,808 of 6,506 records carry a date, so every figure over time describes the dated subset.",
   "Reporting density rises steeply with time — recent floods are better recorded, so part of any upward trend is observational.",
   "Positions are approximate for most records (OPW marks the majority as 'Approximate Point').",
   "County is derived here by point-in-polygon against simplified boundaries — near a boundary or a shoreline it can be wrong by one area, and it is not an official attribution."
@@ -606,59 +779,59 @@
  "shards": [
   {
    "file": "Irish_past_floods_0000.json",
-   "n": 915,
+   "n": 890,
    "year_min": 1763,
-   "year_max": 2002,
-   "bytes": 65379
+   "year_max": 2001,
+   "bytes": 65388
   },
   {
    "file": "Irish_past_floods_0001.json",
-   "n": 792,
-   "year_min": 2002,
+   "n": 785,
+   "year_min": 2001,
    "year_max": 2011,
-   "bytes": 65407
+   "bytes": 65336
   },
   {
    "file": "Irish_past_floods_0002.json",
-   "n": 796,
+   "n": 764,
    "year_min": 2011,
-   "year_max": 2017,
-   "bytes": 65420
+   "year_max": 2015,
+   "bytes": 65375
   },
   {
    "file": "Irish_past_floods_0003.json",
-   "n": 841,
-   "year_min": 2017,
-   "year_max": 2023,
-   "bytes": 65438
+   "n": 821,
+   "year_min": 2015,
+   "year_max": 2026,
+   "bytes": 65429
   },
   {
    "file": "Irish_past_floods_0004.json",
-   "n": 859,
+   "n": 844,
    "year_min": null,
    "year_max": null,
-   "bytes": 65416
+   "bytes": 65402
   },
   {
    "file": "Irish_past_floods_0005.json",
-   "n": 886,
+   "n": 853,
    "year_min": null,
    "year_max": null,
-   "bytes": 65399
+   "bytes": 65367
   },
   {
    "file": "Irish_past_floods_0006.json",
-   "n": 891,
+   "n": 867,
    "year_min": null,
    "year_max": null,
-   "bytes": 65423
+   "bytes": 65425
   },
   {
    "file": "Irish_past_floods_0007.json",
-   "n": 514,
+   "n": 682,
    "year_min": null,
    "year_max": null,
-   "bytes": 40199
+   "bytes": 54267
   }
  ]
 }

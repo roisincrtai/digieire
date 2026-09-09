@@ -111,6 +111,10 @@
     if (cat !== '—') rows.push(['Catchment', cat]);
     var cty = look('county', p[6]);
     if (cty !== '—') rows.push(['County', cty]);
+    // Only the curated rows are named: saying "OPW" on six thousand points
+    // would be noise, and saying nothing on the twelve that are ours would be
+    // worse than noise.
+    if (look('dataset', p[8]) === 'curated') rows.push(['Source', 'curated']);
     return rows;
   }
   function areaOf(p) {
