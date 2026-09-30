@@ -9,10 +9,19 @@
 
        A RASTER INSIDE AN SVG, embedded as a data URI. The artwork is a smooth
        green gradient, so tracing it to paths would approximate the mark rather
-       than reproduce it. Quantised to 256 colours -- the PNG8 maximum, and
-       invisible on a single-hue gradient -- which takes the file from 34 KiB to
-       about 7. One self-contained file that loads identically from file:// and
-       from a web server, so the <link rel="icon"> in the page is unchanged.
+       than reproduce it. Quantised to 256 colours (the PNG8 maximum, and
+       invisible on a single hue), which takes the file from 34 KiB to about 7.
+       One self-contained file that loads identically from file:// and from a
+       web server, so the link rel="icon" in the page is unchanged.
+
+       ONE REFERENCE, xlink:href. Carrying both the SVG 1.1 xlink:href and the
+       SVG 2 href would embed the base64 payload twice and double the file for
+       nothing: every engine that renders SVG favicons still honours xlink.
+
+       NO DOUBLE HYPHEN IN THIS COMMENT. SVG is XML, so a double hyphen inside
+       a comment is a fatal parse error and the icon renders as nothing at all.
+       An earlier draft of this file had several and was caught by running an
+       XML parser over every SVG in this directory.
 
        Replaces the earlier placeholder: a gradient tile with a sun and two
        waves, drawn before there was a logo and matching nothing once there
