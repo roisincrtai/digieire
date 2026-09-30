@@ -33,18 +33,28 @@
   display: flex; align-items: center; justify-content: space-between;
   gap: 20px; min-height: 62px;
 }
-.brand { display: flex; align-items: center; gap: 11px; text-decoration: none; }
-.brand-mark {
-  width: 26px; height: 26px; border-radius: 7px; flex: none;
-  background:
-    radial-gradient(circle at 30% 30%, var(--green-300) 0 38%, transparent 39%),
-    linear-gradient(135deg, var(--green-700), var(--blue-500));
+/* A COLUMN, NOT A ROW. The logo is a wordmark, so "Research Lab" belongs under
+   it on the same left edge — the way a lab name sits under its mark — rather
+   than beside it, where two pieces of text at the same height read as two
+   separate labels.
+
+   The height is set and the width left to follow, because the file's aspect
+   ratio (2.5625) is the one thing about it CSS must not contradict; the width
+   and height attributes on the <img> are the real pixel dimensions, so the
+   browser reserves the right box before the image arrives and the nav does not
+   jump. The asset is drawn at 160 px tall and shown at 26, which covers 2x and
+   3x displays without a second file. */
+.brand {
+  display: inline-flex; flex-direction: column; align-items: flex-start;
+  gap: 3px; text-decoration: none;
 }
+.brand-logo { display: block; height: 26px; width: auto; }
 .brand-text { line-height: 1.15; }
-.brand-text b { display: block; color: var(--green-900); font-size: 15px;
-                letter-spacing: .01em; }
 .brand-text i {
   display: block; font-style: normal; font-size: 11px; color: var(--ink-500);
+  /* Optically aligned with the D, not with the image box: the wordmark carries
+     a hair of bearing on its left edge. */
+  padding-left: 2px;
 }
 
 .nav { display: flex; align-items: center; gap: 2px; flex-wrap: nowrap; }

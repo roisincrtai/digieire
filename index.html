@@ -14,7 +14,7 @@
      stylesheets and small scripts, so it renders identically from a web server
      and from a double-clicked file:// folder. -->
 <link rel="stylesheet" href="css/base.css?v=6f84e44408f7">
-<link rel="stylesheet" href="css/home.css?v=06b9d6fba561">
+<link rel="stylesheet" href="css/home.css?v=7aa773f853db">
 <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
 </head>
 <body>
@@ -23,10 +23,16 @@
 
 <header class="topbar" id="topbar">
   <div class="wrap topbar-inner">
+    <!-- THE LOGO IS A WORDMARK, so it takes the wordmark's place rather than
+         sitting beside it. The gradient square and the typeset "DigiÉire" it
+         used to stand next to are both gone: keeping the text would have
+         printed the name twice, once drawn and once set. The alt text carries
+         the name for anyone who cannot see the image, and Research Lab stays
+         beneath as the descriptor the mark itself does not say. -->
     <a class="brand" href="index.html">
-      <span class="brand-mark" aria-hidden="true"></span>
+      <img class="brand-logo" src="images/digieire-logo.png"
+           width="410" height="160" alt="DigiÉire">
       <span class="brand-text">
-        <b>DigiÉire</b>
         <i>Research Lab</i>
       </span>
     </a>
