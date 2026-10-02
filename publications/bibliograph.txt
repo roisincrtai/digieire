@@ -1,0 +1,107 @@
+# DigiÉire Research Lab — publications, talks and outputs
+# =============================================================================
+# This file is the SOURCE OF TRUTH for the Publications page. It is meant to be
+# edited by hand; nothing generates it.
+#
+# FORMAT
+#   One record per block. Blocks are separated by one or more blank lines.
+#   Each line inside a block is  key: value.
+#   Lines beginning with # are comments and are ignored, anywhere in the file.
+#   A value may be continued onto the next line by indenting the continuation
+#   by two or more spaces.
+#   Keys are case-insensitive. Unknown keys are ignored rather than fatal, so a
+#   new field can be added here before the renderer knows about it.
+#
+# KEYS
+#   id       required, unique, lowercase, no spaces. Used as the anchor in the
+#            page URL (#pub-<id>), so changing one breaks existing links.
+#   type     required. One of:
+#              journal     peer-reviewed journal article
+#              preprint    submitted or posted, not yet accepted
+#              conference  full paper in conference proceedings
+#              workshop    workshop paper or extended abstract
+#              talk        invited talk, seminar, conference presentation
+#              poster      poster presentation
+#              book        book or edited volume
+#              chapter     chapter in an edited volume
+#              dataset     published dataset
+#              software    released code or model
+#              report      technical or policy report
+#            The renderer groups by type, so a value not in this list will be
+#            grouped on its own under its own name.
+#   title    required.
+#   authors  required. Semicolon-separated, in publication order. Write each
+#            name the way it appears on the work.
+#   year     required. Four digits. The renderer sorts newest first.
+#   venue    journal, conference, workshop, publisher or host. Blank for
+#            something with no venue.
+#   status   optional, and only when the work is not simply published:
+#            "Under review", "In press", "Accepted", "Submitted", "In
+#            preparation". Shown as a badge.
+#   pdf      filename inside publications/pdfs/. MAY BE EMPTY — a talk, a book,
+#            or a link-only entry has no PDF here, and the renderer simply omits
+#            the download link. Do not write a path, only the filename.
+#   url      external link (DOI landing page, publisher, repository, slides,
+#            recording). May be empty.
+#   doi      bare DOI, no https:// and no doi: prefix. May be empty.
+#   note     one short line of context. Optional.
+#   tags     semicolon-separated keywords. Optional.
+#
+# EVERY OPTIONAL KEY MAY BE OMITTED ENTIRELY or left with an empty value; the
+# two are equivalent. Only id, type, title, authors and year are required.
+#
+# ORDERING IN THIS FILE DOES NOT MATTER. The renderer sorts by year descending,
+# then by the order records appear here, so adding a new work at the top or the
+# bottom gives the same page.
+#
+# A WORKED EXAMPLE OF AN ENTRY WITH NO PDF — uncomment and edit, or copy:
+#
+#   id: galway-seminar-2026
+#   type: talk
+#   title: Measuring flood-related wellbeing from public discourse
+#   authors: Róisín Luo
+#   year: 2026
+#   venue: Ryan Institute seminar series, University of Galway
+#   pdf:
+#   url: https://example.org/recording
+#   note: Invited seminar.
+#
+# =============================================================================
+
+
+id: resilience-discourse-2026
+type: preprint
+title: Social–ecological resilience in Irish flood-related wellbeing discourse:
+  a population-level analysis
+authors: Róisín Luo; Karyn Morrissey
+year: 2026
+venue: Preprint submitted to Elsevier
+status: Under review
+pdf: elsevier_flood_wellbeing.pdf
+url:
+doi:
+note: Flood-related wellbeing in Ireland, 2012–2025, from large-scale
+  unobtrusive public discourse in the Meta Content Library. Develops a bespoke
+  three-domain instrument and identifies stressor-activation and resilience
+  mediation pathways.
+tags: subjective wellbeing; flood vulnerability; flood risk management;
+  unobtrusive discourse analysis; climate adaptation; Ireland
+
+
+id: ceris-assessment-framework-2026
+type: workshop
+title: A population-level assessment framework for flood-related wellbeing from
+  public discourse in Ireland
+authors: Róisín Luo; Karyn Morrissey
+year: 2026
+venue: CERIS Workshop, J.E. Cairnes School of Business & Economics, University
+  of Galway
+status:
+pdf: ceris_digieire.pdf
+url:
+doi:
+note: Extended abstract. Presents the wellbeing instrument and Wellbeing-Former,
+  a rationale-based Bayesian reasoning model, applied to roughly 120,000 public
+  posts concerning Ireland.
+tags: flood-related wellbeing; wellbeing assessment; public discourse;
+  population-level analysis; Ireland

@@ -1,0 +1,6 @@
+# Editor scratch files. A .swp committed once is a file nobody can delete
+# without wondering whether it mattered.
+*.swp
+*.swo
+*~
+.*.swp

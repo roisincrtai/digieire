@@ -677,3 +677,112 @@
 @media (max-width: 900px) {
   .burden-split { grid-template-columns: 1fr; }
 }
+
+/* ---- publications ---------------------------------------------------------
+   A reading list, not a table and not a grid of cards. Each entry is a title,
+   a line of authors, a line of metadata and whatever links it happens to have,
+   separated by rules rather than boxed — six boxed cards in a column read as a
+   stack of buttons, the same mistake the burden ranking made and had to undo.
+
+   The left rule is the only ornament. It carries the entry's kind through
+   colour, so journal articles and talks are distinguishable while scanning
+   without a badge on every row repeating what the section heading just said. */
+.pubs { margin-top: 26px; }
+
+.pub-sum {
+  font: 500 13px var(--mono); color: var(--ink-500);
+  padding-bottom: 14px; border-bottom: 1px solid var(--line); margin: 0 0 28px;
+}
+.pub-sum b { color: var(--green-900); font-weight: 700; }
+
+.pub-group { margin: 0 0 40px; }
+.pub-gh {
+  display: flex; align-items: baseline; gap: 10px;
+  font: 700 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-500); margin: 0 0 18px;
+}
+/* The count comes from the data; it is never written in the markup. */
+.pub-gn {
+  font-size: 10px; font-weight: 600; color: var(--green-500);
+  background: var(--green-100); border-radius: 20px; padding: 2px 7px;
+  letter-spacing: .04em;
+}
+
+.pub-list { list-style: none; margin: 0; padding: 0; }
+.pub {
+  padding: 0 0 22px 16px; margin: 0 0 22px;
+  border-bottom: 1px solid var(--line);
+  border-left: 2px solid var(--green-300);
+}
+.pub:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+
+.pub-head { margin-bottom: 7px; }
+.pub-t {
+  font-family: var(--serif); font-size: 1.12rem; font-weight: 600;
+  line-height: 1.32; color: var(--ink-900); margin: 0 0 4px;
+  letter-spacing: -.005em;
+}
+.pub-a { font-size: .92rem; color: var(--ink-700); margin: 0; }
+
+.pub-m {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0 10px;
+  font-size: .85rem; color: var(--ink-500); margin: 0 0 8px;
+}
+.pub-v { font-style: italic; }
+.pub-y { font-family: var(--mono); font-size: .8rem; }
+/* "Under review" and the like: present, and not shouting. */
+.pub-s {
+  font: 600 10px var(--mono); letter-spacing: .06em; text-transform: uppercase;
+  color: var(--amber-500); background: var(--amber-100);
+  border-radius: 4px; padding: 2px 6px;
+}
+
+.pub-n {
+  font-size: .92rem; line-height: 1.55; color: var(--ink-700);
+  margin: 0 0 10px; max-width: 76ch;
+}
+
+.pub-l { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+.pub-link {
+  font: 600 11px var(--mono); letter-spacing: .06em; text-decoration: none;
+  color: var(--blue-500); border: 1px solid var(--line);
+  border-radius: 6px; padding: 4px 10px; background: #fff;
+  transition: border-color .15s ease, color .15s ease, background .15s ease;
+}
+.pub-link:hover {
+  color: #fff; background: var(--blue-500); border-color: var(--blue-500);
+}
+
+.pub-tags {
+  list-style: none; display: flex; flex-wrap: wrap; gap: 6px;
+  margin: 10px 0 0; padding: 0;
+}
+.pub-tags li {
+  font-size: 11px; color: var(--ink-500);
+  background: #f3f6f4; border-radius: 4px; padding: 2px 7px;
+}
+
+/* Arriving on a #pub-<id> link: the entry did not exist when the browser tried
+   to scroll, so the renderer scrolls to it and marks it. Without the mark the
+   reader lands mid-list with no idea which entry they were sent to. */
+.pub-jumped { border-left-color: var(--blue-500); background: var(--blue-100); }
+
+.pub-loading { color: var(--ink-500); font-size: .92rem; }
+
+/* A list that fails to load says so, at the size of a real message. A silent
+   empty page would read as a lab with no publications. */
+.pub-error {
+  border: 1px solid #e6c48e; background: var(--amber-100);
+  border-radius: var(--radius); padding: 18px 20px; max-width: 72ch;
+}
+.pub-error-t { font-weight: 600; color: #6b4310; margin: 0 0 8px; }
+.pub-error-d { font-size: .92rem; color: #6b4310; margin: 0 0 8px; }
+.pub-error-h {
+  font: 500 12px var(--mono); color: #6b4310; margin: 0;
+  background: rgba(255, 255, 255, .6); border-radius: 6px; padding: 8px 10px;
+}
+
+@media (max-width: 640px) {
+  .pub { padding-left: 12px; }
+  .pub-t { font-size: 1.04rem; }
+}

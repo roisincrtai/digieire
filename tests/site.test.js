@@ -9,6 +9,7 @@ const PAGES=[['index.html','Project DigiÉire'],
              ['pages/data-source.html','Data'],
              ['pages/irish-floods.html','Irish Floods'],
              ['pages/climate-change.html','Climate Change'],
+             ['pages/publications.html','Publications'],
              ['pages/about.html','About us']];
 (async()=>{
   for (const [p, label] of PAGES) {
@@ -20,7 +21,7 @@ const PAGES=[['index.html','Project DigiÉire'],
     console.log('\n— '+p);
     ok(!!d.querySelector('h1'),'has an h1');
     const nav=[...d.querySelectorAll('.nav a')].map(a=>a.textContent.trim());
-    ok(JSON.stringify(nav.slice(0,7))===JSON.stringify(['Home','Mission','DigiÉire','Data','Irish Floods','Climate Change','About us']),
+    ok(JSON.stringify(nav.slice(0,8))===JSON.stringify(['Home','Mission','DigiÉire','Data','Irish Floods','Climate Change','Publications','About us']),
        'nav complete and in order',nav.join(' | '));
     const home=[...d.querySelectorAll('.nav a')].find(a=>a.textContent.trim()==='Home');
     const brandA=d.querySelector('a.brand');
@@ -311,6 +312,78 @@ const PAGES=[['index.html','Project DigiÉire'],
       const kpi=[...d.querySelectorAll('#climate-dash .kpi-s')].map(n=>n.textContent).join(' | ');
       ok(kpi.indexOf(C.recent_period[0]+'–'+C.recent_period[1])>=0,
          'the KPI names the bundle\'s recent period',kpi.slice(0,90));
+    }
+    if (p.includes('publications')) {
+      /* THE POINT OF THESE ASSERTIONS is that nothing on this page is written
+         into the page. So the test does not check for any particular paper: it
+         re-reads bibliograph.txt itself, parses it independently, and requires
+         the DOM to agree with the file. Add a work to the text file and this
+         test follows it; hard-code a title in the renderer and it would still
+         pass, which is why the last assertion looks for the opposite. */
+      const raw = await (await fetch(B + '/publications/bibliograph.txt')).text();
+      const recs = []; let cur=null, key=null;
+      for (const line of raw.split(/\r?\n/)) {
+        if (/^\s*#/.test(line)) continue;
+        if (!line.trim()) { if (cur) recs.push(cur); cur=null; key=null; continue; }
+        if (/^[ \t]{2,}\S/.test(line) && cur && key) { cur[key]+=' '+line.trim(); continue; }
+        const m=line.match(/^([A-Za-z_]+)\s*:\s*(.*)$/);
+        if (m) { cur=cur||{}; key=m[1].toLowerCase(); cur[key]=m[2].trim(); }
+      }
+      if (cur) recs.push(cur);
+
+      ok(!d.querySelector('.pub-error'),'no error panel',
+         (d.querySelector('.pub-error')||{textContent:''}).textContent.slice(0,140));
+      ok(!d.querySelector('.pub-loading'),'the loading line was replaced');
+      ok(d.querySelectorAll('.pub').length===recs.length,
+         recs.length+' records in the file, '+recs.length+' entries on the page',
+         d.querySelectorAll('.pub').length);
+
+      // every record reached the page, by id, and nothing extra appeared
+      const domIds=[...d.querySelectorAll('.pub')].map(n=>n.id.replace(/^pub-/,'')).sort();
+      const fileIds=recs.map(r=>r.id).sort();
+      ok(JSON.stringify(domIds)===JSON.stringify(fileIds),
+         'the page lists exactly the ids in the file',
+         domIds.join(',')+'  vs  '+fileIds.join(','));
+
+      // the summary is counted, not typed
+      const sum=d.querySelector('.pub-sum').textContent;
+      const yrs=recs.map(r=>+r.year);
+      ok(sum.startsWith(String(recs.length)),'the summary counts the records',sum);
+      ok(sum.includes(String(Math.min(...yrs))),'and spans the real year range',sum);
+
+      // group counts add up to the whole, so nothing is silently dropped
+      const inGroups=[...d.querySelectorAll('.pub-group')]
+        .reduce((n,g)=>n+g.querySelectorAll('.pub').length,0);
+      ok(inGroups===recs.length,'every entry sits in a group',inGroups);
+      const badges=[...d.querySelectorAll('.pub-gn')].map(n=>+n.textContent);
+      const real=[...d.querySelectorAll('.pub-group')].map(g=>g.querySelectorAll('.pub').length);
+      ok(JSON.stringify(badges)===JSON.stringify(real),
+         'each heading count matches its section',badges+' vs '+real);
+
+      // a PDF link appears exactly when the record names one, and resolves
+      let linkBad=[];
+      for (const r of recs) {
+        const li=d.getElementById('pub-'+r.id);
+        const pdf=li.querySelector('.pub-link[href$=".pdf"]');
+        if (!!r.pdf !== !!pdf) { linkBad.push(r.id+': pdf="'+(r.pdf||'')+'" link='+!!pdf); continue; }
+        if (pdf) {
+          const res=await fetch(B+'/publications/'+pdf.getAttribute('href').replace('../publications/',''));
+          if (!res.ok) linkBad.push(r.id+': '+res.status);
+        }
+      }
+      ok(linkBad.length===0,'PDF links appear only where there is a PDF, and resolve',
+         linkBad.join(' | '));
+
+      // a record with no pdf must not render a dead control
+      const noPdf=recs.filter(r=>!r.pdf);
+      ok(noPdf.every(r=>!d.getElementById('pub-'+r.id).querySelector('.pub-link[href$=".pdf"]')),
+         noPdf.length+' record(s) without a PDF show no PDF link');
+
+      // and the renderer must not contain the content
+      const js=await (await fetch(B+'/js/publications.js')).text();
+      const leaked=recs.filter(r=>js.includes(r.title.slice(0,24)) || js.includes(r.id));
+      ok(leaked.length===0,'no publication is hard-coded in the renderer',
+         leaked.map(r=>r.id).join(','));
     }
     if (p.includes('about')) {
       ok(d.querySelector('h1').textContent.trim()==='Research','About page is titled Research',
