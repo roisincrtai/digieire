@@ -876,3 +876,24 @@
 @media (prefers-reduced-motion: reduce) {
   .pub-fmt-b { transition: none; }
 }
+
+/* The kind of output, as a label on the entry rather than a heading above a
+   group of them. The page is one list in date order, so type is an attribute
+   of the work, not the organising principle — and a reader scanning for "the
+   talks" can still find them without the order lying about chronology. */
+.pub-kind {
+  display: inline-block; margin-bottom: 7px;
+  font: 700 9.5px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-500); background: #f1f4f2;
+  border: 1px solid var(--line); border-radius: 4px; padding: 3px 7px;
+}
+/* Peer-reviewed work is marked in the brand green; everything else stays
+   neutral. The distinction a reader cares about first is whether a thing has
+   been through review, and this is the cheapest way to show it without a
+   second badge. */
+.pub-kind[data-kind="journal"],
+.pub-kind[data-kind="conference"],
+.pub-kind[data-kind="book"],
+.pub-kind[data-kind="chapter"] {
+  color: var(--green-700); background: var(--green-100); border-color: var(--green-300);
+}

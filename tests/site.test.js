@@ -351,14 +351,41 @@ const PAGES=[['index.html','Project DigiÉire'],
       ok(sum.startsWith(String(recs.length)),'the summary counts the records',sum);
       ok(sum.includes(String(Math.min(...yrs))),'and spans the real year range',sum);
 
-      // group counts add up to the whole, so nothing is silently dropped
-      const inGroups=[...d.querySelectorAll('.pub-group')]
-        .reduce((n,g)=>n+g.querySelectorAll('.pub').length,0);
-      ok(inGroups===recs.length,'every entry sits in a group',inGroups);
-      const badges=[...d.querySelectorAll('.pub-gn')].map(n=>+n.textContent);
-      const real=[...d.querySelectorAll('.pub-group')].map(g=>g.querySelectorAll('.pub').length);
-      ok(JSON.stringify(badges)===JSON.stringify(real),
-         'each heading count matches its section',badges+' vs '+real);
+      /* ONE LIST, NEWEST FIRST. The order is the presentation now, so it is
+         asserted against a key recomputed here from the text file rather than
+         against a remembered sequence of titles — which would pass even if the
+         renderer stopped sorting and simply echoed the file. */
+      ok(d.querySelectorAll('.pub-group').length===0,'no type groups remain');
+      ok(d.querySelectorAll('.pub-list').length===1,'a single list',
+         d.querySelectorAll('.pub-list').length);
+      ok(d.querySelectorAll('.pub-kind').length===recs.length,
+         'every entry carries its kind as a label');
+
+      const sortKey=r=>{
+        const m=(r.date||'').match(/^(\d{4})(?:-(\d{1,2}))?(?:-(\d{1,2}))?$/);
+        const y=m?m[1]:(r.year||'0000');
+        return y+'-'+('0'+(m&&m[2]?m[2]:'12')).slice(-2)
+                 +'-'+('0'+(m&&m[3]?m[3]:'31')).slice(-2);
+      };
+      const want=recs.map((r,i)=>({r,i}))
+        .sort((a,b)=>{const ka=sortKey(a.r),kb=sortKey(b.r);
+                      return ka<kb?1:ka>kb?-1:a.i-b.i;})
+        .map(x=>x.r.id);
+      const have=[...d.querySelectorAll('.pub')].map(n=>n.id.replace(/^pub-/,''));
+      ok(JSON.stringify(have)===JSON.stringify(want),
+         'entries are in strict newest-first order',have.join(' > ')+'  want  '+want.join(' > '));
+
+      // the keys really are descending on the page, which catches a sort that
+      // happens to agree with the file order by luck
+      const byId={}; recs.forEach(r=>{byId[r.id]=r;});
+      let desc=true;
+      for (let i=1;i<have.length;i++) if (sortKey(byId[have[i-1]])<sortKey(byId[have[i]])) desc=false;
+      ok(desc,'and their sort keys descend',have.map(h=>sortKey(byId[h])).join(' '));
+
+      // a record dated finer than the year must sort by the date, not the year
+      const dated=recs.filter(r=>r.date);
+      ok(dated.length===0 || dated.every(r=>r.date.slice(0,4)===r.year),
+         dated.length+' dated record(s) agree with their year');
 
       // a PDF link appears exactly when the record names one, and resolves
       let linkBad=[];

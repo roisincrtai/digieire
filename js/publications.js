@@ -59,6 +59,28 @@
   ];
   var REQUIRED = ['id', 'type', 'title', 'authors', 'year'];
 
+  /* THE SORT KEY. The page is one list, newest first, so ordering is the whole
+     presentation and it has to be exact. `year` alone is not enough: four
+     works published in the same year sort identically and then fall back to
+     whatever order they happen to sit in the file, which is not an order at
+     all. An optional `date:` — YYYY, YYYY-MM or YYYY-MM-DD — fixes that.
+
+     A MISSING MONTH OR DAY IS FILLED WITH THE LATEST IT COULD BE, so an entry
+     known only to the year sorts above one known to be from June of that year.
+     That is the useful reading rather than an arbitrary one: a record left at
+     year precision is usually the recent thing nobody has pinned down yet, and
+     the alternative convention would quietly bury it at the bottom of the
+     page. The file header states the rule, because a sort the author cannot
+     predict is a sort they will fight. */
+  function sortKey(r) {
+    var d = (r.date || '').trim();
+    var m = d.match(/^(\d{4})(?:-(\d{1,2}))?(?:-(\d{1,2}))?$/);
+    var y = m ? m[1] : (r.year || '0000');
+    var mo = m && m[2] ? m[2] : '12';
+    var da = m && m[3] ? m[3] : '31';
+    return y + '-' + ('0' + mo).slice(-2) + '-' + ('0' + da).slice(-2);
+  }
+
   function el(tag, cls, text) {
     var n = document.createElement(tag);
     if (cls) n.className = cls;
@@ -120,6 +142,27 @@
       });
       if (r.year && !/^\d{4}$/.test(r.year)) {
         errors.push(where + ': year should be four digits, got "' + r.year + '"');
+      }
+      if (r.date) {
+        var dm = r.date.match(/^(\d{4})(?:-(\d{1,2}))?(?:-(\d{1,2}))?$/);
+        if (!dm) {
+          errors.push(where + ': date should be YYYY, YYYY-MM or YYYY-MM-DD, '
+                      + 'got "' + r.date + '"');
+        } else {
+          // A date that disagrees with the year is exactly the drift this
+          // format exists to prevent, so it stops the page rather than
+          // quietly sorting by one and printing the other.
+          if (r.year && dm[1] !== r.year) {
+            errors.push(where + ': date "' + r.date + '" and year "' + r.year
+                        + '" disagree');
+          }
+          if (dm[2] && (+dm[2] < 1 || +dm[2] > 12)) {
+            errors.push(where + ': month ' + dm[2] + ' is not a month');
+          }
+          if (dm[3] && (+dm[3] < 1 || +dm[3] > 31)) {
+            errors.push(where + ': day ' + dm[3] + ' is not a day');
+          }
+        }
       }
       if (r.pdf && r.pdf.indexOf('/') >= 0) {
         errors.push(where + ': pdf must be a bare filename, not a path');
@@ -749,22 +792,6 @@
 
     // Group by type, in KINDS order, then anything unrecognised, in the order
     // it first appeared. Newest first inside each group.
-    var order = KINDS.map(function (k) { return k[0]; });
-    var label = {};
-    KINDS.forEach(function (k) { label[k[0]] = [k[1], k[2]]; });
-
-    var groups = {}, extras = [];
-    recs.forEach(function (r) {
-      var t = (r.type || '').toLowerCase();
-      if (!groups[t]) {
-        groups[t] = [];
-        if (order.indexOf(t) < 0) extras.push(t);
-      }
-      groups[t].push(r);
-    });
-
-    var seq = order.filter(function (t) { return groups[t]; }).concat(extras);
-
     // The summary line is counted, never typed.
     var years = recs.map(function (r) { return +r.year; })
                     .filter(function (y) { return y; });
@@ -779,24 +806,39 @@
           : '')));
     host.appendChild(sum);
 
-    seq.forEach(function (t) {
-      var list = groups[t].slice().sort(function (a, b) {
-        return (+b.year || 0) - (+a.year || 0);
-      });
-      var pair = label[t];
-      var name = pair ? (list.length === 1 ? pair[0] : pair[1])
-                      : t.charAt(0).toUpperCase() + t.slice(1);
+    /* ONE LIST, NEWEST FIRST, ACROSS EVERY KIND OF OUTPUT. Grouping by type
+       used to come first, which meant the page had several orders running at
+       once and no single reading of "what came after what" — a talk given
+       between two papers appeared below both of them. Now position means one
+       thing only. The kind is still visible, as a label on each entry, which
+       is where it belongs when it is an attribute of the work rather than the
+       organising principle of the page.
 
-      var sec = el('section', 'pub-group');
-      var h = el('h2', 'pub-gh', name);
-      h.appendChild(el('span', 'pub-gn', String(list.length)));
-      sec.appendChild(h);
+       Ties keep the order the file gives them: `sort` is stable in every
+       engine that matters since ES2019, so two works with the same key stay as
+       the author arranged them instead of swapping about between loads. */
+    var kindLabel = {};
+    KINDS.forEach(function (k) { kindLabel[k[0]] = k[1]; });
 
-      var ul = el('ul', 'pub-list');
-      list.forEach(function (r) { ul.appendChild(entry(r)); });
-      sec.appendChild(ul);
-      host.appendChild(sec);
+    var list = recs.slice().sort(function (a, b) {
+      var ka = sortKey(a), kb = sortKey(b);
+      return ka < kb ? 1 : ka > kb ? -1 : 0;
     });
+
+    var ul = el('ul', 'pub-list');
+    list.forEach(function (r) {
+      var li = entry(r);
+      var t = (r.type || '').toLowerCase();
+      // An unrecognised type still gets a label, made from its own name.
+      var name = kindLabel[t] || (t ? t.charAt(0).toUpperCase() + t.slice(1) : '');
+      if (name) {
+        var chip = el('span', 'pub-kind', name);
+        chip.setAttribute('data-kind', t);
+        li.insertBefore(chip, li.firstChild);
+      }
+      ul.appendChild(li);
+    });
+    host.appendChild(ul);
 
     /* If the reader arrived on a #pub-<id> link, the entry was not in the
        document when the browser tried to scroll to it. Do it now. */
