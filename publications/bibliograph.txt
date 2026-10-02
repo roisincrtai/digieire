@@ -76,7 +76,7 @@ title: Social–ecological resilience in Irish flood-related wellbeing discourse
 authors: Róisín Luo; Karyn Morrissey
 year: 2026
 venue: Preprint submitted to Elsevier
-status: Under review
+status:
 pdf: elsevier_flood_wellbeing.pdf
 url:
 doi:
