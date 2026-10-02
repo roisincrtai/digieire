@@ -136,3 +136,24 @@ note: Characterises a shell–core topology of the reachable solution space
   coefficient through a stopping-time analysis.
 tags: grokking; delayed generalization; scaling laws; optimization dynamics;
   stochastic differential equations; deep learning theory
+
+
+id: zetagpt-2026
+type: preprint
+title: ZetaGPT: A Reference Implementation of Positional–Encoding–Free
+  State–Space–Attention Language Models
+authors: Róisín Luo
+year: 2026
+venue: arXiv
+status:
+pdf:
+url: https://arxiv.org/abs/2608.09432
+doi:
+note: A compact hybrid language model that applies a causal state-space
+  equation before self-attention, so attention operates on position-aware
+  representations without explicit positional encodings. Ships an end-to-end
+  open-source pipeline covering dataset construction, tokenizer training,
+  pretraining, supervised fine-tuning, RLHF and chain-of-thought reasoning
+  through pure reinforcement learning.
+tags: language models; positional encoding; state-space models; attention;
+  RLHF; chain-of-thought; open source
