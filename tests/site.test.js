@@ -384,6 +384,59 @@ const PAGES=[['index.html','Project DigiÉire'],
       const leaked=recs.filter(r=>js.includes(r.title.slice(0,24)) || js.includes(r.id));
       ok(leaked.length===0,'no publication is hard-coded in the renderer',
          leaked.map(r=>r.id).join(','));
+
+      // ---- the citation block and its format chooser ----
+      ok(d.querySelectorAll('.pub-cite').length===recs.length,
+         'every entry carries a citation block',d.querySelectorAll('.pub-cite').length);
+      const first=d.querySelector('.pub');
+      ok(first.querySelector('.pub-cite-l').textContent==='Cite:','labelled Cite:');
+      const fmts=[...first.querySelectorAll('.pub-fmt-b')].map(b=>b.textContent);
+      ok(fmts.length>=5,'a format chooser with '+fmts.length+' styles',fmts.join(' '));
+      ok(first.querySelector('.pub-fmt-b.on').textContent==='APA',
+         'APA is the default',first.querySelector('.pub-fmt-b.on').textContent);
+      // the chooser is a radiogroup, so only the chosen one is tabbable
+      ok([...first.querySelectorAll('.pub-fmt-b')].filter(b=>b.tabIndex===0).length===1,
+         'exactly one format button is in the tab order');
+
+      // the APA citation is derived from the record, not stored
+      const apa=first.querySelector('.pub-cite-t').textContent;
+      const r0=recs.find(r=>'pub-'+r.id===first.id);
+      const fam=r0.authors.split(';')[0].trim().split(/\s+/).pop();
+      ok(apa.startsWith(fam+','),'the citation opens with the first author, inverted',apa.slice(0,40));
+      ok(apa.includes('('+r0.year+')'),'and carries the record\'s year',apa.slice(0,70));
+      ok(apa.includes(r0.title.slice(0,30)),'and the record\'s title');
+
+      // click-to-copy, with the clipboard stubbed
+      let copied=null;
+      Object.defineProperty(w.navigator,'clipboard',
+        {value:{writeText:t=>{copied=t;return Promise.resolve();}},configurable:true});
+      first.querySelector('.pub-cite').dispatchEvent(new w.MouseEvent('click',{bubbles:true}));
+      await sleep(40);
+      ok(copied===first.querySelector('.pub-cite-t').textContent,
+         'clicking the block copies exactly what it shows');
+      ok(first.querySelector('.pub-copy').textContent==='Copied','the button confirms');
+      ok(first.querySelector('.pub-cite .sr').textContent.length>0,
+         'and the confirmation is announced');
+
+      // changing the style on one entry changes every entry, and the copy follows
+      let switched=0;
+      for (const b of first.querySelectorAll('.pub-fmt-b')) {
+        b.dispatchEvent(new w.MouseEvent('click',{bubbles:true}));
+        await sleep(15);
+        const onAll=[...d.querySelectorAll('.pub')].every(
+          p=>p.querySelector('.pub-fmt-b.on').textContent===b.textContent);
+        const body=first.querySelector('.pub-cite-t').textContent;
+        if (onAll && body.length>20) switched++;
+      }
+      ok(switched===fmts.length,'every style renders and applies to all entries',switched+'/'+fmts.length);
+      ok(first.querySelector('.pub-cite-t').classList.contains('is-mono'),
+         'BibTeX renders as code');
+      copied=null;
+      first.querySelector('.pub-copy').dispatchEvent(new w.MouseEvent('click',{bubbles:true}));
+      await sleep(40);
+      ok(copied===first.querySelector('.pub-cite-t').textContent,
+         'copy follows the chosen style, not the default');
+      ok(/^@\w+\{/.test(copied||''),'and that is a BibTeX entry',(copied||'').slice(0,30));
     }
     if (p.includes('about')) {
       ok(d.querySelector('h1').textContent.trim()==='Research','About page is titled Research',

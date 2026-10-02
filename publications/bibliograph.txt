@@ -47,6 +47,19 @@
 #   note     one short line of context. Optional.
 #   tags     semicolon-separated keywords. Optional.
 #
+# THE APA CITATION UNDER EACH ENTRY IS BUILT FROM THE KEYS ABOVE. Nothing has
+# to be written twice, so a year fixed here is fixed in the citation too. Three
+# optional keys exist only to feed it, and are used when present and skipped
+# when absent — an entry without them simply produces a shorter citation:
+#   volume   journal volume
+#   issue    journal issue
+#   pages    page range, e.g. 105-128 or e26752
+# And one key overrides it entirely:
+#   cite     a complete citation string, used verbatim. For a work whose
+#            publisher issues an exact form of words, or a kind of output APA
+#            handles in a way this code does not. Leave it out and the
+#            citation is derived.
+#
 # EVERY OPTIONAL KEY MAY BE OMITTED ENTIRELY or left with an empty value; the
 # two are equivalent. Only id, type, title, authors and year are required.
 #

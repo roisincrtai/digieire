@@ -786,3 +786,93 @@
   .pub { padding-left: 12px; }
   .pub-t { font-size: 1.04rem; }
 }
+
+/* ---- the citation block ---------------------------------------------------
+   A tinted panel inside each entry, with a bar down the left in the brand
+   green. It is the one coloured region in an otherwise rule-and-type list, and
+   that is the point: it marks the one piece of an entry a reader comes to this
+   page to take away. */
+.pub-cite {
+  margin: 12px 0 0; padding: 9px 12px 10px;
+  background: var(--green-100);
+  border-left: 3px solid var(--green-500);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  cursor: pointer;
+  transition: background .16s ease, border-color .16s ease;
+}
+.pub-cite:hover { background: #d7ebe2; }
+
+.pub-cite-h {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; margin-bottom: 5px;
+}
+.pub-cite-l {
+  font: 700 10px/1 var(--mono); letter-spacing: .11em; text-transform: uppercase;
+  color: var(--green-700);
+}
+.pub-copy {
+  font: 600 10px var(--mono); letter-spacing: .06em;
+  color: var(--green-700); background: #fff;
+  border: 1px solid var(--green-300); border-radius: 5px;
+  padding: 3px 9px; cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.pub-copy:hover { background: var(--green-700); color: #fff; border-color: var(--green-700); }
+.pub-copy:focus-visible { outline: 2px solid var(--blue-500); outline-offset: 2px; }
+
+/* The citation itself: selectable, in the serif the titles use, at a size that
+   says "this is a quotation to take" rather than "this is body copy". */
+.pub-cite-t {
+  margin: 0; font-family: var(--serif); font-size: .9rem; line-height: 1.55;
+  color: var(--ink-900); user-select: text; word-break: break-word;
+}
+.pub-cite-t i { font-style: italic; }
+
+/* Confirmation is a state on the panel, not a toast: it appears where the
+   click happened, so there is nothing to look for. */
+.pub-cite.is-copied { background: #cdeadd; border-left-color: var(--green-900); }
+.pub-cite.is-copied .pub-copy {
+  background: var(--green-700); color: #fff; border-color: var(--green-700);
+}
+/* When the clipboard is refused — a plain-http origin that is not localhost,
+   or an old browser — the panel says what to press instead of pretending. */
+.pub-cite.is-failed { background: var(--amber-100); border-left-color: var(--amber-500); }
+.pub-cite.is-failed .pub-copy { color: #6b4310; border-color: #e6c48e; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pub-cite, .pub-copy { transition: none; }
+}
+
+/* The format chooser, under the citation it changes. A segmented control, not
+   a <select>: six short labels are faster to compare side by side than behind
+   a menu, and the current choice stays visible rather than needing to be
+   opened to be read. */
+.pub-fmt {
+  display: flex; flex-wrap: wrap; gap: 3px;
+  margin-top: 9px; padding-top: 8px;
+  border-top: 1px solid rgba(15, 76, 58, .14);
+}
+.pub-fmt-b {
+  font: 600 10px var(--mono); letter-spacing: .05em;
+  color: var(--ink-500); background: transparent;
+  border: 1px solid transparent; border-radius: 5px;
+  padding: 3px 8px; cursor: pointer;
+  transition: background .14s ease, color .14s ease, border-color .14s ease;
+}
+.pub-fmt-b:hover { color: var(--green-900); background: rgba(255, 255, 255, .7); }
+.pub-fmt-b.on {
+  color: var(--green-900); background: #fff; border-color: var(--green-300);
+}
+.pub-fmt-b:focus-visible { outline: 2px solid var(--blue-500); outline-offset: 1px; }
+
+/* BibTeX is not prose. It is shown as code, with its newlines kept, because a
+   BibTeX entry reflowed into a paragraph is useless to the person who wants
+   it. */
+.pub-cite-t.is-mono {
+  font-family: var(--mono); font-size: .78rem; line-height: 1.5;
+  white-space: pre; overflow-x: auto; letter-spacing: -.01em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pub-fmt-b { transition: none; }
+}
