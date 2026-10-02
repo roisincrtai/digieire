@@ -477,6 +477,15 @@
       if (r.year) f.push(['year', r.year]);
       if (r.doi) f.push(['doi', r.doi]);
       if (r.url && !r.doi) f.push(['url', r.url]);
+      /* An arXiv preprint gets eprint/archivePrefix, which is what every LaTeX
+         style expects and what turns the entry into a proper arXiv reference
+         rather than a bare URL. Derived from the url, so nothing is declared
+         twice. */
+      var ax = (r.url || '').match(/arxiv\.org\/(?:abs|pdf)\/([0-9]{4}\.[0-9]{4,5})/i);
+      if (ax) {
+        f.push(['eprint', ax[1]]);
+        f.push(['archivePrefix', 'arXiv']);
+      }
       if (type === 'preprint') f.push(['note', 'Preprint']);
 
       var pad = f.reduce(function (m, p) { return Math.max(m, p[0].length); }, 0);

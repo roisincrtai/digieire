@@ -118,3 +118,21 @@ note: Extended abstract. Presents the wellbeing instrument and Wellbeing-Former,
   posts concerning Ireland.
 tags: flood-related wellbeing; wellbeing assessment; public discourse;
   population-level analysis; Ireland
+
+
+id: grokking-scaling-laws-2026
+type: preprint
+title: A Stochastic–Geometric Theory of Scaling Laws in Grokking
+authors: Róisín Luo; Christian Gagné; Jonas Ngnawé; Ihsan Ullah; Karyn Morrissey
+year: 2026
+venue: arXiv
+status:
+pdf:
+url: https://arxiv.org/abs/2606.30388
+doi:
+note: Characterises a shell–core topology of the reachable solution space
+  induced by Adam with weight-shrinkage regularisation, and derives grokking
+  scaling laws for the learning rate, batch size and l2 regularisation
+  coefficient through a stopping-time analysis.
+tags: grokking; delayed generalization; scaling laws; optimization dynamics;
+  stochastic differential equations; deep learning theory
