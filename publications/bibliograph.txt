@@ -98,8 +98,8 @@
 
 id: resilience-discourse-2026
 type: preprint
-title: Social–ecological resilience in Irish flood-related wellbeing discourse:
-  a population-level analysis
+title: Assessing flood-related wellbeing from public discourse in Ireland using
+  large language model as judge, 2012–2025
 authors: Róisín Luo; Karyn Morrissey
 year: 2026
 venue:
