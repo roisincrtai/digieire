@@ -125,7 +125,7 @@ venue: CERIS Workshop, J.E. Cairnes School of Business & Economics, University
   of Galway
 status:
 pdf: ceris_digieire.pdf
-url:
+url: https://arxiv.org/abs/2610.03334
 doi:
 note: Extended abstract. Presents the wellbeing instrument and Wellbeing-Former,
   a rationale-based Bayesian reasoning model, applied to roughly 120,000 public
