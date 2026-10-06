@@ -105,7 +105,7 @@ year: 2026
 venue:
 status:
 pdf: elsevier_flood_wellbeing.pdf
-url:
+url: https://arxiv.org/abs/2610.06330
 doi:
 note: Flood-related wellbeing in Ireland, 2012–2025, from large-scale
   unobtrusive public discourse in the Meta Content Library. Develops a bespoke
